@@ -1,7 +1,7 @@
 # Uniswap v4 TVL on BSC: one mispriced token
 
 **Report:** [DefiLlama/DefiLlama-Adapters#20659](https://github.com/DefiLlama/DefiLlama-Adapters/issues/20659), posted 2026-08-24 03:57 UTC, closed 2026-08-25.
-**Outcome, as of 2026-10-21:** `coins.llama.fi` returns no price for the token, and [PR #20690](https://github.com/DefiLlama/DefiLlama-Adapters/pull/20690) (merged 2026-08-25) adds it to the BSC blacklist of the `uniswap-v4` adapter. DefiLlama has also revised the published BSC history for 2026-08-22 to 08-24 to about $40M per day.
+**Outcome, as of 2026-10-21:** `coins.llama.fi` returns no price for the token, and [PR #20690](https://github.com/DefiLlama/DefiLlama-Adapters/pull/20690) (merged 2026-08-25) adds it to the BSC blacklist of the `uniswap-v4` adapter. DefiLlama has also revised the published uniswap-v4 TVL on BSC for 2026-08-22 to 08-24 to about $40M per day.
 
 ## What the report showed
 
@@ -50,7 +50,7 @@ The reproduction found five places where the report's text is not supported by t
 
 ## Limits
 
-- **The DefiLlama figures rest on the author's statement.** They are an extract; the three complete responses are not published (see Data). The protocol endpoint now serves the corrected BSC TVL (O3), so R1–R3 cannot be fetched again; the volume and chain-TVL endpoints were not re-checked. `MANIFEST.json` lists each response's SHA-256 and size, and `python3 reproduce.py --check-extract <dir>` rebuilds `data/extract.json` from responses with those hashes and compares it byte for byte; the author's copies pass. The original run's log, which is private, records the same SHA-256 at fetch time. Public support: the report, posted the same morning, cites the same figures.
+- **The DefiLlama figures rest on the author's statement.** They are an extract; the three complete responses are not published (see Data). The protocol endpoint now serves the corrected BSC TVL (O3), so R1–R3 cannot be fetched again; the volume and chain-TVL endpoints were not re-checked, nor was R7. `MANIFEST.json` lists each response's SHA-256 and size, and `python3 reproduce.py --check-extract <dir>` rebuilds `data/extract.json` from responses with those hashes and compares it byte for byte; the author's copies pass. The original run's log, which is private, records the same SHA-256 at fetch time. Public support: the report, posted the same morning, cites the same figures.
 - **Timing.** The "2026-08-24" TVL point carries the timestamp 00:51:59Z, about three hours before block 117,739,591 (03:55:26Z); the report's opening sentence sets the two side by side. The volume response was fetched before 03:12Z on 08-24, so its "08-24" point cannot be a full day. The report's "over those same three dates" pairs volume and TVL by DefiLlama's day labels only.
 - **No raw RPC responses from August.** The original run read balances with the `latest` tag and stored the head block read just before (117,733,791). Its result file is timestamped 03:11:53Z because that timestamp is taken when the run starts; the head block itself is from 03:11:56Z. The L rows were re-read at fixed blocks on 2026-10-21 instead.
 - **The enumeration cannot be re-run from saved data.** Only its totals were kept.
@@ -74,6 +74,6 @@ The reproduction found five places where the report's text is not supported by t
 - [`api.llama.fi/summary/dexs/uniswap-v4?dataType=dailyVolume&excludeTotalDataChartBreakdown=false`](https://api.llama.fi/summary/dexs/uniswap-v4?dataType=dailyVolume&excludeTotalDataChartBreakdown=false) (R4)
 - [`api.llama.fi/v2/historicalChainTvl/BSC`](https://api.llama.fi/v2/historicalChainTvl/BSC) (R5)
 
-DefiLlama has since corrected this history. On 2026-10-21 the first endpoint served about $40M a day of uniswap-v4 TVL on BSC for 2026-08-22 to 08-24 (O3), not the figures above; the other two endpoints were not re-checked. Rights in the data remain with DefiLlama; the MIT license covers the code only.
+DefiLlama has since corrected this history. On 2026-10-21 the first endpoint served about $40M a day of uniswap-v4 TVL on BSC for 2026-08-22 to 08-24 (O3), not the figures above; the other two endpoints were not re-checked, nor was R7. Rights in the data remain with DefiLlama; the MIT license covers the code only.
 
-**Other sources.** The price, FDV and 24-hour volume in C2 are [GeckoTerminal](https://www.geckoterminal.com)'s, read from `api.geckoterminal.com` during the original run. C5 is [CoinGecko](https://www.coingecko.com)'s price for The Sandbox, cited in the report as `coingecko:the-sandbox`. The request that returned it was not recorded; that key format is the one `coins.llama.fi` uses, so C5 may be a sixteenth figure served by DefiLlama.
+**Other sources.** The price, FDV and 24-hour volume in C2 are [GeckoTerminal](https://www.geckoterminal.com)'s, read from `api.geckoterminal.com` during the original run. C5 is the price of The Sandbox under the [CoinGecko](https://www.coingecko.com) id `the-sandbox`, cited in the report as `coingecko:the-sandbox`. The request that returned it was not recorded; that key format is the one `coins.llama.fi` uses, so C5 may be a sixteenth figure served by DefiLlama.

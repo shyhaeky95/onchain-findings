@@ -71,7 +71,7 @@ ABOUT = {
             "API responses served on 2026-08-24. The complete responses are not included.",
     "corrected": "DefiLlama has since corrected this history. On 2026-10-21 the protocol endpoint served about $40M a "
                  "day of uniswap-v4 TVL on BSC for 2026-08-22 to 08-24 (row O3); the volume and chain-TVL endpoints "
-                 "were not re-checked.",
+                 "were not re-checked, nor was R7.",
     "permission": "Included with DefiLlama's permission, given by email on 2026-10-21, for an extract of the "
                   "figures used in the report, credited and linked.",
 }
