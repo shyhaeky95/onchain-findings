@@ -29,8 +29,19 @@ CASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(CASE.parent.parent / "lib"))
 import evm  # noqa: E402
 
-HEAD, PAY, ACTIVATION = "25772201", "25772216", 24479994
+HEAD, PAY, ACTIVATION, SCAN_FROM = "25772201", "25772216", 24479994, 24416500
 WEI = 10 ** 18
+ROCKET_STORAGE = "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46"
+CONTRACTS = ("rocketTokenRETH", "rocketMinipoolManager", "rocketDAOProtocolSettingsNetwork",
+             "rocketNetworkRevenues", "rocketVault", "rocketRewardsPool")
+SATURN_CONTRACTS = ("rocketMegapoolFactory", "rocketMegapoolManager")
+CONTROL_INDEXES = (0, 21158, 42316)
+T_RETH_DEPOSIT = evm.topic("EtherDeposited(address,uint256,uint256)")
+T_REWARDS = evm.topic("RewardsDistributed(uint256,uint256,uint256,uint256,uint256)")
+T_VAULT_DEPOSIT = evm.topic("EtherDeposited(string,uint256,uint256)")
+T_VAULT_WITHDRAW = evm.topic("EtherWithdrawn(string,uint256,uint256)")
+REWARDS_POOL_TOPIC = evm.hex32(evm.keccak256(b"rocketRewardsPool"))
+RD = "RewardsDistributed, any emitter"
 
 # Figures exactly as written in the issue text.
 REPORT = {
@@ -59,6 +70,14 @@ REPORT = {
     "activation_date": "2026-02-17",
     "pr_2765_merged": "2025-04-03",
     "pr_3519_merged": "2025-06-22",
+    "storage": ROCKET_STORAGE,
+    "settings_address": "0x67fd03a5095197d1ad1f932bc55e022c420b1153",
+    "revenues_address": "0x9d9708da8e0200dd8dd9ad09e0aaf184ad260842",
+    "deposit_topic0": "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "measured_day": "2026-08-17",
+    "supply_side_text": "Total ETH staking rewards are distributed to rETH stakers and minipool depositors",
+    "revenue_text": "Rocket Pool protocol doesn't take any fees or rewards cut.",
+    "api_strings": {"UserFees": "Percentage of rewards paid to protocol", "ProtocolRevenue": "Fee from users rewards"},
 }
 
 REREAD = "Re-read at block, 2026-10-22 snapshot"
@@ -129,6 +148,75 @@ class Snapshot:
         return evm.address_of(self.calls[label]["result"])
 
 
+def expected_reads(s):
+    """Every call and log query the snapshot must hold, rebuilt from the report's blocks and the
+    addresses the snapshot itself resolved: {label: (to, calldata, block)}, {label: (address, topics, from, to)}."""
+    calls, queries = {}, {}
+
+    def get_address(name, block):
+        key = evm.storage_key("contract.address", name.encode())
+        calls[f"getAddress(contract.address{name})@{block}"] = (ROCKET_STORAGE, evm.calldata("getAddress(bytes32)", key[2:]), int(block))
+    for name in CONTRACTS:
+        get_address(name, HEAD)
+    for name in ("rocketVault", "rocketRewardsPool"):
+        get_address(name, PAY)
+    for name in SATURN_CONTRACTS:
+        get_address(name, ACTIVATION - 1)
+        get_address(name, ACTIVATION)
+    addr = {name: s.address(f"getAddress(contract.address{name})@{HEAD}") for name in CONTRACTS}
+    head, pay = int(HEAD), int(PAY)
+    queries[RD] = (None, [T_REWARDS], SCAN_FROM, pay)
+    emitters = sorted({l["address"] for l in s.logs[RD]})
+    for e in emitters:
+        key = evm.storage_key("megapool.exists", bytes.fromhex(e[2:]))
+        calls[f"megapool.exists({e})"] = (ROCKET_STORAGE, evm.calldata("getBool(bytes32)", key[2:]), head)
+    for mp in (e for e in emitters if s.word(f"megapool.exists({e})") == 1):
+        for fn in ("getNodeDepositBalance()", "getNodeFee()"):
+            calls[f"{fn}@{mp}"] = (mp, evm.selector(fn), head)
+        calls[f"getMinipoolExists({mp})"] = (addr["rocketMinipoolManager"],
+                                             evm.calldata("getMinipoolExists(address)", evm.word_address(mp)[2:]), head)
+        queries[f"rETH EtherDeposited from {mp}"] = (addr["rocketTokenRETH"], [T_RETH_DEPOSIT, evm.word_address(mp)], 0, pay)
+    calls["getMinipoolCount()"] = (addr["rocketMinipoolManager"], evm.selector("getMinipoolCount()"), head)
+    for i in CONTROL_INDEXES:
+        calls[f"getMinipoolAt({i})"] = (addr["rocketMinipoolManager"], evm.calldata("getMinipoolAt(uint256)", evm.enc_uint(i)), head)
+        mp = s.address(f"getMinipoolAt({i})")
+        for fn in ("getNodeDepositBalance()", "getNodeFee()"):
+            calls[f"{fn}@minipool {i}"] = (mp, evm.selector(fn), head)
+        if i == CONTROL_INDEXES[-1]:
+            queries[f"rETH EtherDeposited from minipool {i}"] = (addr["rocketTokenRETH"], [T_RETH_DEPOSIT, evm.word_address(mp)], 0, pay)
+    for fn in ("getVoterShare()", "getNodeShare()", "getProtocolDAOShare()"):
+        calls[fn] = (addr["rocketDAOProtocolSettingsNetwork"], evm.selector(fn), head)
+    calls["getCurrentVoterShare()"] = (addr["rocketNetworkRevenues"], evm.selector("getCurrentVoterShare()"), head)
+    calls["rocketVault.balanceOf(rocketRewardsPool)"] = (addr["rocketVault"], evm.calldata("balanceOf(string)", evm.enc_string("rocketRewardsPool")), pay)
+    calls["getPendingVoterShare()"] = (addr["rocketRewardsPool"], evm.selector("getPendingVoterShare()"), pay)
+    queries["rocketVault EtherDeposited by rocketRewardsPool"] = (addr["rocketVault"], [T_VAULT_DEPOSIT, REWARDS_POOL_TOPIC], 0, pay)
+    queries["rocketVault EtherWithdrawn by rocketRewardsPool"] = (addr["rocketVault"], [T_VAULT_WITHDRAW, REWARDS_POOL_TOPIC], 0, pay)
+    return calls, queries
+
+
+def check_structure(s):
+    """Each call is the call its label names (target, calldata, block), and each log query has the filter and
+    block range its label names, so a row cannot rest on a read of something else."""
+    for label in ("getAddress(contract.addressrocketVault)", "getAddress(contract.addressrocketRewardsPool)"):
+        if s.address(f"{label}@{HEAD}") != s.address(f"{label}@{PAY}"):
+            raise DataError(f"{label} differs between {HEAD} and {PAY}")
+    calls, queries = expected_reads(s)
+    if set(calls) != set(s.calls) or set(queries) != set(s.logs):
+        raise DataError(f"reads differ from the expected set: {sorted(set(calls) ^ set(s.calls) | set(queries) ^ set(s.logs))[:5]}")
+    for label, (to, data, block) in calls.items():
+        c = s.calls[label]
+        if (c["to"], c["data"], c["block"]) != (to, data, block):
+            raise DataError(f"{label} is not the call its label names")
+        if str(block) not in s.data["blocks"]:
+            raise DataError(f"no header for block {block}")
+    for q in s.data["logs"]:
+        if (q["address"], q["topics"], q["from"], q["to"]) != queries[q["label"]]:
+            raise DataError(f"{q['label']} is not the query its label names")
+        for l in evm.unpack(q):
+            if not evm.matches_filter(l, q["address"], q["topics"]) or not q["from"] <= l["blockNumber"] <= q["to"]:
+                raise DataError(f"{q['label']}: a log outside its filter")
+
+
 class Rows:
     def __init__(self):
         self.rows = []
@@ -144,6 +232,10 @@ class Rows:
             note = f"does not hold: {', '.join(broken)}. " + note
         self._add(cid, claim, stated, computed, level, "FAIL" if broken else "MATCH", note)
 
+    def record(self, cid, claim, stated, computed, level, note):
+        """A statement nothing here re-derives: kept only as the report wrote it."""
+        self._add(cid, claim, stated, computed, level, "RECORDED", note)
+
     def observe(self, cid, claim, stated, computed, level, conditions, note=""):
         broken = [name for name, ok in conditions.items() if not ok]
         if broken:
@@ -154,6 +246,7 @@ class Rows:
 def results(case=CASE):
     verify_data(case)
     s = Snapshot(json.loads((case / "data" / "live_snapshot.json").read_text(encoding="utf-8")))
+    check_structure(s)
     blocks = s.data["blocks"]
     rewards = s.logs["RewardsDistributed, any emitter"]
     emitters = sorted({l["address"] for l in rewards})
@@ -163,6 +256,7 @@ def results(case=CASE):
     # RewardsDistributed(nodeAmount, voterAmount, rethAmount, protocolDaoAmount, time)
     node, voter, reth, pdao = (sum(evm.words(l["data"])[i] for l in mega) for i in range(4))
     deposits = [l for m in flagged for l in s.logs[f"rETH EtherDeposited from {m}"]]
+    big = sorted(a for a in (evm.words(l["data"])[0] for l in deposits) if a >= 16 * WEI)
     skipped = sum(evm.words(l["data"])[0] for l in deposits)
     per_address = max((len(s.logs[f"rETH EtherDeposited from {m}"]) for m in flagged), default=0)
     r = Rows()
@@ -209,16 +303,32 @@ def results(case=CASE):
     pairs_dep = sorted((evm.address_of(l["topics"][1]), l["transactionHash"], evm.words(l["data"])[0]) for l in deposits)
     pairs_rd = sorted((l["address"], l["transactionHash"], evm.words(l["data"])[2]) for l in mega)
     matched = len(set(pairs_dep) & set(pairs_rd))
+    dep_time = {(evm.address_of(l["topics"][1]), l["transactionHash"], evm.words(l["data"])[0]): evm.words(l["data"])[1] for l in deposits}
+    rd_time = {(l["address"], l["transactionHash"], evm.words(l["data"])[2]): evm.words(l["data"])[4] for l in mega}
+    same_time = sum(dep_time[k] == rd_time[k] for k in set(dep_time) & set(rd_time))
     r.check("L9", "deposits pair one-to-one with RewardsDistributed on (address, transactionHash, amount)",
             "53 of 53, none unmatched on either side",
             f"{matched} matched; {len(pairs_dep) - matched} deposits and {len(pairs_rd) - matched} distributions unmatched",
             REREAD, {"53 matched": matched == REPORT["deposits"], "no unmatched deposit": len(pairs_dep) == matched,
-                     "no unmatched distribution": len(pairs_rd) == matched})
+                     "no unmatched distribution": len(pairs_rd) == matched,
+                     "the time fields agree in every matched pair": same_time == matched},
+            f"The time field (RewardsDistributed's fifth word, EtherDeposited's second) agrees in {same_time} pairs, which "
+            "also confirms the field order taken from RocketMegapoolDelegate.sol. "
+            f"{len(big)} of the deposits are 16 ETH or more ({', '.join(f'{a / WEI:.2f}' for a in big)} ETH, "
+            f"{float(Fraction(sum(big), skipped or 1)) * 100:.0f}% of the total): through the minipool branch they would "
+            "have lost 16 or 24 ETH to the capital-repayment subtraction.")
     shares = {k: s.word(k) for k in REPORT["shares"]}
-    r.check("L10", "voter / node / protocol DAO shares at block 25,772,201, and the current voter share",
-            "9% / 5% / 0 · 9%", f"{shares['getVoterShare()'] / 1e16:g}% / {shares['getNodeShare()'] / 1e16:g}% / "
-            f"{shares['getProtocolDAOShare()']} · {shares['getCurrentVoterShare()'] / 1e16:g}%", REREAD,
-            {k: shares[k] == v for k, v in REPORT["shares"].items()})
+    settings = s.address(f"getAddress(contract.addressrocketDAOProtocolSettingsNetwork)@{HEAD}")
+    revenues = s.address(f"getAddress(contract.addressrocketNetworkRevenues)@{HEAD}")
+    head_day = utc_day(blocks[HEAD]["timestamp"])
+    r.check("L10", "voter / node / protocol DAO shares and the current voter share, read via RocketStorage at head 25,772,201 on 2026-08-17",
+            f"9% / 5% / 0 · 9%; settings {REPORT['settings_address'][:10]}…, revenues {REPORT['revenues_address'][:10]}…",
+            f"{shares['getVoterShare()'] / 1e16:g}% / {shares['getNodeShare()'] / 1e16:g}% / "
+            f"{shares['getProtocolDAOShare()']} · {shares['getCurrentVoterShare()'] / 1e16:g}%; settings {settings[:10]}…, "
+            f"revenues {revenues[:10]}…; block date {head_day}", REREAD,
+            {**{k: shares[k] == v for k, v in REPORT["shares"].items()},
+             "settings contract": settings == REPORT["settings_address"], "revenues contract": revenues == REPORT["revenues_address"],
+             "measured on 2026-08-17": head_day == REPORT["measured_day"]})
     r.check("L11", "Σ voterAmount / nodeAmount / protocolDaoAmount over the same 53 distributions",
             f"{eth(REPORT['voter_wei'])} / {eth(REPORT['node_wei'])} / {REPORT['pdao_wei']}",
             f"{eth(voter)} / {eth(node)} / {pdao}", REREAD,
@@ -255,7 +365,8 @@ def results(case=CASE):
             {**{f"{n} unset before": a == zero for n, (a, b) in act.items()},
              **{f"{n} set at the block": b != zero for n, (a, b) in act.items()},
              "date": day == REPORT["activation_date"]},
-            "Checked for rocketMegapoolFactory and rocketMegapoolManager.")
+            f"Checked for rocketMegapoolFactory and rocketMegapoolManager. The block's time is "
+            f"{datetime.datetime.fromtimestamp(blocks[str(ACTIVATION)]['timestamp'], datetime.timezone.utc):%H:%M:%S} UTC.")
 
     # A: arithmetic on the rows above.
     ratio = Fraction(voter, reth) if reth else Fraction(0)
@@ -272,6 +383,10 @@ def results(case=CASE):
             "A 4 ETH bond in a 32 ETH validator borrows 28/32 = 87.5%.")
     r.check("A3", "the unfiltered sum overstates the voter share", f"{REPORT['overstatement']}x", f"{float(over):.1f}x",
             f"{ARITH} on L11 and L13", {"53.1x": f"{float(over):.1f}" == REPORT["overstatement"]})
+    r.check("A4", "the EtherDeposited topic0 the report prints is keccak256 of the rETH event signature",
+            REPORT["deposit_topic0"][:18] + "…", T_RETH_DEPOSIT[:18] + "…", f"{ARITH} (Keccak-256 of EtherDeposited(address,uint256,uint256))",
+            {"topic0": T_RETH_DEPOSIT == REPORT["deposit_topic0"]},
+            "The L6 queries use this topic (checked when the snapshot is loaded).")
 
     # P: the adapter and its history, as published.
     pub = s.data["public"]
@@ -294,6 +409,19 @@ def results(case=CASE):
              "#3519 merged 2025-06-22": (p2["merged_at"] or "").startswith(REPORT["pr_3519_merged"]),
              "#3519 adds dailyRevenue: 0": p2["adds_zero_revenue"]},
             "Both predate the Saturn 1 activation (L14).")
+
+    r.check("P4", "the methodology strings in fees/rocketpool.ts: SupplySideRevenue still describes the pre-Saturn split; "
+            "only Fees, Revenue and SupplySideRevenue appear",
+            f"'{REPORT['supply_side_text']}'; no UserFees, no ProtocolRevenue",
+            f"SupplySideRevenue text {pre['supply_side_text_pre_saturn']}, Revenue text {pre['revenue_text_no_cut']}, "
+            f"UserFees {pre['has_user_fees_label']}, ProtocolRevenue {pre['has_protocol_revenue_label']}", PUBLIC,
+            {"SupplySideRevenue text": pre["supply_side_text_pre_saturn"], "Revenue text": pre["revenue_text_no_cut"],
+             "no UserFees": not pre["has_user_fees_label"], "no ProtocolRevenue": not pre["has_protocol_revenue_label"]},
+            "Same file as P1.")
+    r.record("R1", "two further methodology strings in DefiLlama's API response of 2026-08-17",
+             "; ".join(f"{k}: '{v}'" for k, v in REPORT["api_strings"].items()), "not re-read", "Recorded (report text)",
+             "They come from api.llama.fi, not from the adapter, and the report says it does not rely on them. This case "
+             "keeps no DefiLlama data, so they stand only as the report quoted them.")
 
     # O: what happened after the report. Observations, not statements of the report.
     pr, post, issue = pub["pr_8833"], pub["adapter_after_fix"], pub["issue_8812"]

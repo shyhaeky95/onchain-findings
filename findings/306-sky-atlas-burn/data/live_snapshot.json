@@ -1,6 +1,6 @@
 {
  "case": "sky-ecosystem/next-gen-atlas#306",
- "checked_at_utc": "2026-10-22T04:01:37Z",
+ "checked_at_utc": "2026-10-22T05:02:40Z",
  "readers": {
   "calls": "archive JSON-RPC (endpoint not recorded)",
   "logs": "Etherscan API v2 getLogs"
@@ -10,7 +10,7 @@
   "splitter_unset_at_18000000": true,
   "pass": true
  },
- "pinned_head": 26245549,
+ "pinned_head": 26245852,
  "end_of_august_block": 25878704,
  "end_of_september_block": 26093737,
  "addresses": {
@@ -26,17 +26,21 @@
    "hash": "0xca53cabbddde66c023d405213ee53ea08aa4d1fe513d2d80e66b43c9de32ecc4",
    "timestamp": 1787040347
   },
-  "25775271": {
-   "hash": "0xa337d10ecd45444b3387be13d059dc842d6dff3d429fed9f43e60b7e70b983f6",
-   "timestamp": 1786975343
-  },
   "22950000": {
    "hash": "0x9ab15e91f5c3cfbcb5837dcc89409217f68ff93aeb887a414748acce65f2921e",
    "timestamp": 1752888815
   },
-  "26245549": {
-   "hash": "0x8d28e96be67eead56ee66dabed8fa74cc5b68a54fa022ce61965db0d1b8577b5",
-   "timestamp": 1792640699
+  "25578353": {
+   "hash": "0xd733f3dfc890a6c436c570c2df20644d85cbf9f296dbfac09a5d77a38360f682",
+   "timestamp": 1784603855
+  },
+  "25775271": {
+   "hash": "0xa337d10ecd45444b3387be13d059dc842d6dff3d429fed9f43e60b7e70b983f6",
+   "timestamp": 1786975343
+  },
+  "26245852": {
+   "hash": "0xd74f21f228ac0a4e312cf316f60e1ba56d1dc22b899e6ad3809e317503248f32",
+   "timestamp": 1792644359
   },
   "24246077": {
    "hash": "0x33b9a4b2415fe37e061ff3bbc380a5f6044d9840402ef038686e8ea4059443e3",
@@ -49,10 +53,6 @@
   "24246170": {
    "hash": "0x07561286cfb90056dbda025122b9a3003389c214ed12cd842a10ebceb031a51b",
    "timestamp": 1768553039
-  },
-  "25578353": {
-   "hash": "0xd733f3dfc890a6c436c570c2df20644d85cbf9f296dbfac09a5d77a38360f682",
-   "timestamp": 1784603855
   },
   "25968583": {
    "hash": "0xbe6d5f9a66373912f5c156d5be4b687dc7f1127a33a4fde60394a5b7313e4ba8",
@@ -116,6 +116,34 @@
    "result": "0x000000000000000000000000bf7111f13386d23cb2fba5a538107a73f6872bcf"
   },
   {
+   "label": "chainlog MCD_FLAP@22950000",
+   "block": 22950000,
+   "to": "0xda0ab1e0017debcd72be8599041a2aa3ba7e740f",
+   "data": "0x21f8a7214d43445f464c4150000000000000000000000000000000000000000000000000",
+   "result": "0x000000000000000000000000374d9c3d5134052bc558f432afa1df6575f07407"
+  },
+  {
+   "label": "chainlog MCD_FLAP@25578353",
+   "block": 25578353,
+   "to": "0xda0ab1e0017debcd72be8599041a2aa3ba7e740f",
+   "data": "0x21f8a7214d43445f464c4150000000000000000000000000000000000000000000000000",
+   "result": "0x000000000000000000000000374d9c3d5134052bc558f432afa1df6575f07407"
+  },
+  {
+   "label": "MCD_FLAP.pair()@22950000",
+   "block": 22950000,
+   "to": "0x374d9c3d5134052bc558f432afa1df6575f07407",
+   "data": "0xa8aa1b31",
+   "result": "0x0000000000000000000000002621cc0b3f3c079c1db0e80794aa24976f0b9e3c"
+  },
+  {
+   "label": "MCD_FLAP.pair()@25578353",
+   "block": 25578353,
+   "to": "0x374d9c3d5134052bc558f432afa1df6575f07407",
+   "data": "0xa8aa1b31",
+   "result": "0x0000000000000000000000002621cc0b3f3c079c1db0e80794aa24976f0b9e3c"
+  },
+  {
    "label": "MCD_FLAP.pair()@25775271",
    "block": 25775271,
    "to": "0x374d9c3d5134052bc558f432afa1df6575f07407",
@@ -151,8 +179,8 @@
    "result": "0x00000000000000000000000000000000000000004bcfdc9a40f2d71fc4e9599b"
   },
   {
-   "label": "SKY.totalSupply()@26245549",
-   "block": 26245549,
+   "label": "SKY.totalSupply()@26245852",
+   "block": 26245852,
    "to": "0x56072c95faa701256059aa122697b133aded9279",
    "data": "0x18160ddd",
    "result": "0x00000000000000000000000000000000000000004bc765a1a5fec0aaa2c1599b"
@@ -519,7 +547,7 @@
     "0x0000000000000000000000000000000000000000000000000000000000000000"
    ],
    "from": 25775271,
-   "to": 26245549,
+   "to": 26245852,
    "fields": [
     "blockNumber",
     "logIndex",
@@ -561,7 +589,7 @@
     null
    ],
    "from": 25775271,
-   "to": 26245549,
+   "to": 26245852,
    "fields": [
     "blockNumber",
     "logIndex",
@@ -14541,7 +14569,8 @@
    "author": "0xldr",
    "association": "COLLABORATOR",
    "created_at": "2026-08-18T20:20:43Z",
-   "says_burned_in_future_executive_vote": true
+   "says_burned_in_future_executive_vote": true,
+   "says_no_atlas_change": true
   },
   "atlas_at_report": {
    "commit": "0580b70cf20fd0ea0b6fef68985819c595fc842d",
@@ -14549,15 +14578,24 @@
    "clauses": {
     "A.2.3.1.2.4": {
      "document_number": "A.2.3.1.2.4",
+     "name": "Step 3: Smart Burn Engine",
+     "type": "Core",
      "quotes_present": [
       true
-     ]
+     ],
+     "refers_to": []
     },
     "A.4.1.2.2.3": {
      "document_number": "A.4.1.2.2.3",
+     "name": "Burning Of Existing Tokens",
+     "type": "Core",
      "quotes_present": [
       true,
+      true,
       true
+     ],
+     "refers_to": [
+      "A.2.3.1.2.4"
      ]
     }
    },
@@ -14579,15 +14617,24 @@
    "clauses": {
     "A.2.3.1.2.4": {
      "document_number": "A.2.3.1.2.4",
+     "name": "Step 3: Smart Burn Engine",
+     "type": "Core",
      "quotes_present": [
       true
-     ]
+     ],
+     "refers_to": []
     },
     "A.4.1.2.2.3": {
      "document_number": "A.4.1.2.2.3",
+     "name": "Burning Of Existing Tokens",
+     "type": "Core",
      "quotes_present": [
       true,
+      true,
       true
+     ],
+     "refers_to": [
+      "A.2.3.1.2.4"
      ]
     }
    },
@@ -14602,6 +14649,45 @@
     "USDS": 1734
    }
   },
+  "atlas_mid_july": {
+   "commit": "2683f3435d6095a204a0fca0f44066ec5b8d9d31",
+   "content_files": 14489,
+   "clauses": {
+    "A.2.3.1.2.4": {
+     "document_number": "A.2.3.1.2.4",
+     "name": "Step 3: Smart Burn Engine",
+     "type": "Core",
+     "quotes_present": [
+      true
+     ],
+     "refers_to": []
+    },
+    "A.4.1.2.2.3": {
+     "document_number": "A.4.1.2.2.3",
+     "name": "Burning Of Existing Tokens",
+     "type": "Core",
+     "quotes_present": [
+      true,
+      true,
+      true
+     ],
+     "refers_to": [
+      "A.2.3.1.2.4"
+     ]
+    }
+   },
+   "absent_phrase_counts": {
+    "non-issuance": 0,
+    "not issued": 0,
+    "no explicit burn": 0,
+    "reduce the supply": 0
+   },
+   "present_phrase_counts": {
+    "Smart Burn Engine": 45,
+    "USDS": 1953
+   },
+   "committed_at": "2026-07-13T15:29:06Z"
+  },
   "forum_28153_post_1": {
    "author": "BALabs",
    "created_at": "2026-08-07T15:53:10.671Z",
@@ -14612,6 +14698,14 @@
   },
   "sky_sol": {
    "sha256": "84c7a1cb929c045daeee5568afa993ef42cb28e3c1b774745c90d9e060869dab",
+   "source_files": [
+    "src/Sky.sol"
+   ],
+   "sourcify_match": {
+    "match": "match",
+    "runtimeMatch": "match",
+    "creationMatch": "match"
+   },
    "totalSupply_writes": [
     "totalSupply = totalSupply + value;",
     "totalSupply     = totalSupply - value;"

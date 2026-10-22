@@ -4,6 +4,7 @@ Standard library only. Endpoints and keys are read from the environment by the c
 never written to disk; nothing here prints them.
 """
 import json
+import socket
 import time
 import urllib.error
 import urllib.parse
@@ -97,7 +98,7 @@ def storage_key(prefix, tail=b""):
 
 def normalize_log(x):
     """Keep only on-chain fields, in one shape whichever reader returned the log."""
-    as_int = lambda v: int(v, 16) if isinstance(v, str) else int(v)
+    as_int = lambda v: (int(v, 16) if v not in ("0x", "") else 0) if isinstance(v, str) else int(v)  # Etherscan writes index 0 as "0x"
     return {"blockNumber": as_int(x["blockNumber"]), "logIndex": as_int(x["logIndex"]),
             "transactionHash": x["transactionHash"].lower(), "address": x["address"].lower(),
             "topics": [t.lower() for t in x["topics"]], "data": x["data"].lower()}
@@ -117,12 +118,21 @@ def _implied(address, topics):
     return out
 
 
+def matches_filter(log, address, topics):
+    """True if a log satisfies the query it came from: the address, and every topic position the query fixes."""
+    if address and log["address"] != address.lower():
+        return False
+    if all(t is not None for t in topics) and len(log["topics"]) != len(topics):
+        return False
+    return len(log["topics"]) >= len(topics) and all(t is None or log["topics"][i] == t.lower() for i, t in enumerate(topics))
+
+
 def pack(label, address, topics, lo, hi, logs):
     """A log query as stored in a snapshot: the filter, then one row per log without the fields the filter fixes."""
     implied = _implied(address, topics)
     fields = ["blockNumber", "logIndex", "transactionHash"] + [f for f in ("address", "topics") if f not in implied] + ["data"]
     for l in logs:
-        if any(l[k] != v for k, v in implied.items()):
+        if not matches_filter(l, address, topics) or not lo <= l["blockNumber"] <= hi:
             raise ReaderError(f"{label}: a log does not match its own filter")
     return {"label": label, "address": address and address.lower(), "topics": [t and t.lower() for t in topics],
             "from": lo, "to": hi, "fields": fields, "rows": [[l[f] for f in fields] for l in sort_logs(logs)]}
@@ -136,6 +146,15 @@ def unpack(query):
 
 class ReaderError(Exception):
     """A read that did not give an answer (as opposed to a call that reverted)."""
+
+
+TRANSPORT_ERRORS = (urllib.error.URLError, socket.timeout, TimeoutError, ConnectionError, json.JSONDecodeError)
+
+
+def _throttled(error):
+    """A JSON-RPC error that means "slow down", as opposed to an answer or a refused request."""
+    msg = str(error.get("message", "")).lower()
+    return error.get("code") in (429, -32005) or "rate" in msg or "too many" in msg or "capacity" in msg or "timeout" in msg
 
 
 def _post(url, body, timeout=60):
@@ -155,7 +174,7 @@ class Rpc:
         for i in range(self.tries):
             try:
                 return _post(self.url, {"jsonrpc": "2.0", "id": 1, "method": method, "params": params})
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+            except TRANSPORT_ERRORS as e:
                 last = e
                 time.sleep(self.pause * (i + 1))
         raise ReaderError(f"{method}: {type(last).__name__}")
@@ -165,11 +184,11 @@ class Rpc:
             reply = self.raw(method, params)
             if "result" in reply:
                 return reply["result"]
-            msg = str(reply.get("error", {}).get("message", "")).lower()
-            if "rate" in msg or "limit" in msg or "timeout" in msg:
+            error = reply.get("error") or {}
+            if _throttled(error):
                 time.sleep(self.pause * (i + 1))
                 continue
-            raise ReaderError(f"{method}: {msg[:120]}")
+            raise ReaderError(f"{method}: {str(error.get('message', ''))[:120]}")
         raise ReaderError(f"{method}: rate limited")
 
     def block(self, number):
@@ -184,27 +203,32 @@ class Rpc:
             reply = self.raw("eth_call", [{"to": to, "data": data}, hex(block)])
             if "result" in reply:
                 return {"result": reply["result"].lower()}
-            msg = str(reply.get("error", {}).get("message", "")).lower()
-            if "revert" in msg:
+            error = reply.get("error") or {}
+            if "revert" in str(error.get("message", "")).lower():
                 return {"reverted": True}
-            if "rate" in msg or "limit" in msg or "timeout" in msg:
+            if _throttled(error):
                 time.sleep(self.pause * (i + 1))
                 continue
-            raise ReaderError(f"eth_call {to}: {msg[:120]}")
+            raise ReaderError(f"eth_call {to}: {str(error.get('message', ''))[:120]}")
         raise ReaderError(f"eth_call {to}: rate limited")
 
+    CAP = 10000  # many endpoints truncate at this many results; treat a full answer as possibly cut
+
     def logs(self, address, topics, lo, hi):
-        """eth_getLogs over [lo, hi], halving the range whenever the endpoint refuses it."""
+        """eth_getLogs over [lo, hi], halving the range whenever the endpoint refuses it or returns a full page."""
         flt = {"fromBlock": hex(lo), "toBlock": hex(hi), "topics": topics}
         if address:
             flt["address"] = address
         try:
-            return [normalize_log(x) for x in self.request("eth_getLogs", [flt])]
+            rows = self.request("eth_getLogs", [flt])
         except ReaderError:
-            if lo == hi:
-                raise
-            mid = (lo + hi) // 2
-            return self.logs(address, topics, lo, mid) + self.logs(address, topics, mid + 1, hi)
+            rows = None
+        if rows is not None and len(rows) < self.CAP:
+            return [normalize_log(x) for x in rows]
+        if lo == hi:
+            raise ReaderError(f"eth_getLogs refused or capped at block {lo}")
+        mid = (lo + hi) // 2
+        return self.logs(address, topics, lo, mid) + self.logs(address, topics, mid + 1, hi)
 
 
 class Etherscan:
@@ -223,11 +247,15 @@ class Etherscan:
             time.sleep(self.pause)
             try:
                 r = json.loads(urllib.request.urlopen(req, timeout=60).read())
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            except TRANSPORT_ERRORS:
                 time.sleep(1 + i)
                 continue
-            if r.get("status") == "1" or r.get("message") == "No records found":
-                return r["result"] if isinstance(r["result"], list) else []
+            # Only two answers count: a list of logs, or "No records found" with an empty list.
+            # Anything else is an error, never an empty result.
+            if r.get("status") == "1" and isinstance(r.get("result"), list):
+                return r["result"]
+            if r.get("status") == "0" and r.get("message") == "No records found" and r.get("result") == []:
+                return []
             if "rate limit" in str(r.get("result", "")).lower():
                 time.sleep(1 + i)
                 continue

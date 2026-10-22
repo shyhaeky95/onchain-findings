@@ -77,6 +77,19 @@ class TestPack(unittest.TestCase):
         with self.assertRaises(evm.ReaderError):
             evm.pack("q", "0xaa", ["0xt0"], 0, 9, self.LOGS)
 
+    def test_fixed_position_is_checked_when_another_is_free(self):
+        with self.assertRaises(evm.ReaderError):
+            evm.pack("q", "0xaa", [None, "0xother"], 0, 9, self.LOGS)
+
+    def test_log_outside_the_block_range_is_refused(self):
+        with self.assertRaises(evm.ReaderError):
+            evm.pack("q", "0xaa", ["0xt0", "0xt1"], 0, 1, self.LOGS)
+
+    def test_etherscan_writes_index_zero_as_0x(self):
+        log = evm.normalize_log({"blockNumber": "0x10", "logIndex": "0x", "transactionHash": "0xAB", "address": "0xAA",
+                                 "topics": ["0xT0"], "data": "0x"})
+        self.assertEqual((log["blockNumber"], log["logIndex"]), (16, 0))
+
 
 def raw_log(block, index=0):
     return {"blockNumber": hex(block), "logIndex": hex(index), "transactionHash": "0x" + format(block, "064x"),
@@ -110,6 +123,36 @@ class TestEtherscanSplitting(unittest.TestCase):
         self.assertNotIn("topic1", seen)
 
 
+class TestEtherscanAnswers(unittest.TestCase):
+    """Etherscan._get must never turn a malformed or failed answer into an empty list of logs."""
+
+    def answer(self, payload):
+        es = evm.Etherscan("k", pause=0, tries=1)
+        body = mock.Mock()
+        body.read.return_value = __import__("json").dumps(payload).encode()
+        with mock.patch("urllib.request.urlopen", return_value=body):
+            return es._get({"module": "logs"})
+
+    def test_logs(self):
+        self.assertEqual(self.answer({"status": "1", "message": "OK", "result": [{"a": 1}]}), [{"a": 1}])
+
+    def test_no_records(self):
+        self.assertEqual(self.answer({"status": "0", "message": "No records found", "result": []}), [])
+
+    def test_ok_with_a_non_list_result_is_an_error(self):
+        with self.assertRaises(evm.ReaderError):
+            self.answer({"status": "1", "message": "OK", "result": "this-is-not-a-list"})
+
+    def test_no_records_with_a_non_empty_result_is_an_error(self):
+        with self.assertRaises(evm.ReaderError):
+            self.answer({"status": "0", "message": "No records found", "result": "x"})
+
+    def test_other_failures_are_errors(self):
+        for payload in ({"status": "0", "message": "NOTOK", "result": "Invalid API Key"}, {"message": "OK"}, {}):
+            with self.subTest(payload=payload), self.assertRaises(evm.ReaderError):
+                self.answer(payload)
+
+
 class TestRpc(unittest.TestCase):
     def test_revert_is_an_answer(self):
         rpc = evm.Rpc("http://x", pause=0)
@@ -127,6 +170,28 @@ class TestRpc(unittest.TestCase):
         with mock.patch.object(rpc, "raw", return_value={"error": {"message": "missing trie node"}}):
             with self.assertRaises(evm.ReaderError):
                 rpc.call("0xaa", "0x", 1)
+
+    def test_a_range_error_is_not_read_as_throttling(self):
+        self.assertFalse(evm._throttled({"code": -32600, "message": "query exceeds max block range limit"}))
+        self.assertTrue(evm._throttled({"code": 429, "message": "Too many requests"}))
+        self.assertTrue(evm._throttled({"code": -32005, "message": "slow down"}))
+
+    def test_socket_timeout_is_retried(self):
+        import socket
+        rpc = evm.Rpc("http://x", pause=0)
+        with mock.patch.object(evm, "_post", side_effect=[socket.timeout("t"), {"result": "0x1"}]):
+            self.assertEqual(rpc.request("eth_blockNumber", []), "0x1")
+
+    def test_full_page_from_rpc_is_split(self):
+        rpc = evm.Rpc("http://x", pause=0)
+        rpc.CAP = 10
+
+        def fake(method, params):
+            lo, hi = int(params[0]["fromBlock"], 16), int(params[0]["toBlock"], 16)
+            return [raw_log(b) for b in range(lo, hi + 1)][:rpc.CAP]
+        with mock.patch.object(rpc, "request", side_effect=fake):
+            logs = rpc.logs(None, ["0xt0"], 0, 99)
+        self.assertEqual([l["blockNumber"] for l in logs], list(range(100)))
 
     def test_refused_range_is_halved(self):
         rpc = evm.Rpc("http://x", pause=0)

@@ -94,8 +94,8 @@ class CaseCopy(unittest.TestCase):
                     self.assertIn("correction no longer holds", row["note"])
                 self.assertEqual(silent(self.MODULE.main, [], case=case), 1)
 
-    def check_coverage(self, mutations, conditions, errata=()):
-        ids = {r["id"] for r in self.MODULE.results(self.case)}
+    def check_coverage(self, mutations, conditions, errata=(), not_data=()):
+        ids = {r["id"] for r in self.MODULE.results(self.case)} - set(not_data)
         self.assertEqual({m[0] for m in mutations}, ids)
         for cid in ids:
             with self.subTest(claim=cid):

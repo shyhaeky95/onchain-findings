@@ -17,7 +17,7 @@ the pinned block, so a later check compares like with like.
 --check compares a fresh read with the files in data/:
     exit 0  identical
     exit 1  a historical read differs (blocks, calls or logs)
-    exit 2  no usable endpoint, or the endpoint does not serve history
+    exit 2  no usable endpoint, the endpoint does not serve history, or a read failed
     exit 3  only the public sources differ (GitHub, Atlas, forum, Sourcify)
     exit 4  a public source could not be read (the historical check still ran)
 --write replaces the files, and refuses to write a partial snapshot.
@@ -56,11 +56,13 @@ T_TRANSFER = evm.topic("Transfer(address,address,uint256)")
 
 ATLAS_REPO = "sky-ecosystem/next-gen-atlas"
 ATLAS_AT_REPORT = "2026-08-18T12:00:21Z"   # the report was posted at this time
+ATLAS_MID_JULY = "2026-07-16T00:00:00Z"    # the report: the A.4.1.2.2.3 wording was checked back to a 2026-07-15 snapshot
 CLAUSES = {"A.2.3.1.2.4": "5ce73730-4d5d-479c-b01e-40e87f072121", "A.4.1.2.2.3": "5b94d42a-28fa-40fa-8948-ba3113a4d5b8"}
 QUOTES = {
     "A.2.3.1.2.4": ["Ten percent (10%) of Step 3 Capital is used by the Smart Burn Engine to buy back SKY, and the SKY "
                     "tokens acquired through these buybacks are burned."],
-    "A.4.1.2.2.3": ["SKY tokens are bought back and burned on a regular basis",
+    "A.4.1.2.2.3": ["At the same time that no new SKY tokens are issued",
+                    "SKY tokens are bought back and burned on a regular basis",
                     "As a result, the total supply of SKY tokens will continue to decrease over time."],
 }
 ABSENT = ("non-issuance", "not issued", "no explicit burn", "reduce the supply")
@@ -68,7 +70,7 @@ PRESENT = ("Smart Burn Engine", "USDS")
 FORUM_TOPIC = "https://forum.skyeco.com/t/28153.json"
 FORUM_QUOTES = ("There is no explicit burn function invoked in this process.",
                 "The ten percent (10%) allocation is therefore implemented through non-issuance")
-SOURCIFY = "https://sourcify.dev/server/v2/contract/1/0x56072C95FAA701256059aa122697B133aDEd9279?fields=sources"
+SOURCIFY = "https://sourcify.dev/server/v2/contract/1/0x56072C95FAA701256059aa122697B133aDEd9279"
 
 
 class Reads:
@@ -114,7 +116,11 @@ def read_chain(r, now):
         key = name.encode().ljust(32, b"\0").hex()
         a[name] = evm.address_of(r.word(f"chainlog {name}", CHAINLOG, evm.calldata("getAddress(bytes32)", key), WINDOW_A_END))
     sky, usds, flap, proxy = a["SKY"], a["USDS"], a["MCD_FLAP"], a["MCD_PAUSE_PROXY"]
-    pair = {b: evm.address_of(r.word(f"MCD_FLAP.pair()@{b}", flap, evm.selector("pair()"), b)) for b in (CAST, WINDOW_A_END)}
+    flap_key = evm.calldata("getAddress(bytes32)", b"MCD_FLAP".ljust(32, b"\0").hex())
+    for b in (WINDOW_B_START, SCALE_END):  # the long ranges reuse today's flapper and pair; check they held then
+        r.word(f"chainlog MCD_FLAP@{b}", CHAINLOG, flap_key, b)
+    pair = {b: evm.address_of(r.word(f"MCD_FLAP.pair()@{b}", flap, evm.selector("pair()"), b))
+            for b in (WINDOW_B_START, SCALE_END, CAST, WINDOW_A_END)}
     if pair[CAST] != pair[WINDOW_A_END]:
         raise evm.ReaderError("the flapper's pair changed inside window A")
     pair = pair[CAST]
@@ -185,18 +191,21 @@ def atlas_text(sha):
 
 
 def clause(files, uuid):
-    """(document number, body) of the clause with this UUID, in either repository layout: one file per
-    clause (front matter `id:` and `docNo:`), or one heading per clause (`# <docNo> - <name> ... <!-- UUID -->`)."""
+    """(document number, name, type, body) of the clause with this UUID, in either repository layout: one file
+    per clause (front matter `id:`, `docNo:`, `name:`, `type:`), or one heading per clause
+    (`# <docNo> - <name> [<type>]  <!-- UUID: … -->`)."""
     for text in files.values():
         fm = re.match(r"\A---\n(.*?)\n---\n", text, re.S)
         if fm and re.search(rf"^id:\s*{re.escape(uuid)}\s*$", fm.group(1), re.M):
-            no = re.search(r"^docNo:\s*(\S+)\s*$", fm.group(1), re.M)
-            return (no.group(1) if no else None), text[fm.end():]
-        head = re.search(rf"^#+ (\S+) - .*<!-- UUID: {re.escape(uuid)} -->\s*$", text, re.M)
+            meta = dict(re.findall(r"^(docNo|name|type):\s*(.*?)\s*$", fm.group(1), re.M))
+            strip = lambda v: v.strip("'\"") if v else None
+            return strip(meta.get("docNo")), strip(meta.get("name")), strip(meta.get("type")), text[fm.end():]
+        head = re.search(rf"^#+ (\S+) - (.*?) \[([^\]]+)\]\s*<!-- UUID: {re.escape(uuid)} -->\s*$", text, re.M)
         if head:
             nxt = re.search(r"^#+ .*<!-- UUID: [0-9a-f-]{36} -->\s*$", text[head.end():], re.M)
-            return head.group(1), (text[head.end():head.end() + nxt.start()] if nxt else text[head.end():])
-    return None, None
+            body = text[head.end():head.end() + nxt.start()] if nxt else text[head.end():]
+            return head.group(1), head.group(2), head.group(3), body
+    return None, None, None, None
 
 
 def atlas_facts(sha):
@@ -204,8 +213,9 @@ def atlas_facts(sha):
     flat = lambda t: re.sub(r"\s+", " ", t or "")
     every = "\n".join(files.values())
     return {"commit": sha, "content_files": len(files),
-            "clauses": {no: {"document_number": clause(files, u)[0],
-                             "quotes_present": [q in flat(clause(files, u)[1]) for q in QUOTES[no]]}
+            "clauses": {no: dict(zip(("document_number", "name", "type"), clause(files, u)[:3]),
+                                 quotes_present=[q in flat(clause(files, u)[3]) for q in QUOTES[no]],
+                                 refers_to=sorted(n for n in CLAUSES if n != no and n in flat(clause(files, u)[3])))
                         for no, u in CLAUSES.items()},
             "absent_phrase_counts": {p: every.count(p) for p in ABSENT},
             "present_phrase_counts": {p: every.count(p) for p in PRESENT}}
@@ -217,11 +227,13 @@ def public_state():
     comments = gh(f"{ATLAS_REPO}/issues/306/comments")
     first = comments[0] if comments else {}
     at_report = gh(f"{ATLAS_REPO}/commits?sha=main&until={ATLAS_AT_REPORT}&per_page=1")[0]
+    mid_july = gh(f"{ATLAS_REPO}/commits?sha=main&until={ATLAS_MID_JULY}&per_page=1")[0]
     head = gh(f"{ATLAS_REPO}/commits/main")
     forum = json.loads(http(FORUM_TOPIC))
     post = next((p for p in forum["post_stream"]["posts"] if p["post_number"] == 1), {})
     cooked = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", post.get("cooked", "")))
-    src = json.loads(http(SOURCIFY))["sources"]
+    verified = json.loads(http(SOURCIFY))
+    src = json.loads(http(SOURCIFY + "?fields=sources"))["sources"]
     sky_sol = next((v["content"] for k, v in src.items() if k.endswith("/Sky.sol")), "")
     lines = [l.strip() for l in sky_sol.splitlines()]
     writes = [i for i, l in enumerate(lines) if re.match(r"totalSupply\s*=", l)]
@@ -229,12 +241,15 @@ def public_state():
         "issue_306": {"state": issue["state"], "closed_at": issue["closed_at"]},
         "maintainer_reply": {"author": first.get("user", {}).get("login"), "association": first.get("author_association"),
                              "created_at": first.get("created_at"),
-                             "says_burned_in_future_executive_vote": "burned in a future executive vote" in (first.get("body") or "")},
+                             "says_burned_in_future_executive_vote": "burned in a future executive vote" in (first.get("body") or ""),
+                             "says_no_atlas_change": "no change to the Atlas is required" in (first.get("body") or "")},
         "atlas_at_report": dict(atlas_facts(at_report["sha"]), committed_at=at_report["commit"]["committer"]["date"]),
         "atlas_now": atlas_facts(head["sha"]),
+        "atlas_mid_july": dict(atlas_facts(mid_july["sha"]), committed_at=mid_july["commit"]["committer"]["date"]),
         "forum_28153_post_1": {"author": post.get("username"), "created_at": post.get("created_at"),
                                "quotes_present": [q in cooked for q in FORUM_QUOTES]},
-        "sky_sol": {"sha256": hashlib.sha256(sky_sol.encode()).hexdigest(),
+        "sky_sol": {"sha256": hashlib.sha256(sky_sol.encode()).hexdigest(), "source_files": sorted(src),
+                    "sourcify_match": {k: verified.get(k) for k in ("match", "runtimeMatch", "creationMatch")},
                     "totalSupply_writes": [lines[i] for i in writes],
                     "next_emit_after_each_write": [next((l for l in lines[i + 1:] if l.startswith("emit ")), None) for i in writes]},
     }
@@ -287,13 +302,17 @@ def main(argv=None, rpc=None, logs=None):
     if rpc is None:
         print("set ETH_ARCHIVE_RPC to an Ethereum archive endpoint", file=sys.stderr)
         return 2
-    checks = archive_checks(rpc)
-    if not checks["pass"]:
-        print(f"endpoint does not serve history: {checks}", file=sys.stderr)
-        return 2
     saved = None if args.write else json.loads(SNAPSHOT.read_text(encoding="utf-8"))
-    now = int(rpc.request("eth_blockNumber", []), 16) - 64 if args.write else saved["pinned_head"]
-    fresh, big = read_chain(Reads(rpc, logs), now)
+    try:
+        checks = archive_checks(rpc)
+        if not checks["pass"]:
+            print(f"endpoint does not serve history: {checks}", file=sys.stderr)
+            return 2
+        now = int(rpc.request("eth_blockNumber", []), 16) - 64 if args.write else saved["pinned_head"]
+        fresh, big = read_chain(Reads(rpc, logs), now)
+    except (evm.ReaderError,) + evm.TRANSPORT_ERRORS as e:
+        print(f"a read failed, nothing compared: {type(e).__name__}: {e}", file=sys.stderr)
+        return 2
     try:
         public, public_error = public_state(), None
     except Exception as e:  # network or API failure; the historical part still counts

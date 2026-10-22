@@ -9,8 +9,8 @@
       "request": "live_verify.py --write",
       "fetched_at": "see checked_at_utc in the file",
       "notes": "Every call and log query is pinned to a block, so live_verify.py --check repeats the read against any Ethereum archive endpoint and compares.",
-      "sha256": "13f46572ab4ae8e50a15be45d7f1ab8e554028011f99f3635709b0008aee0346",
-      "bytes": 118655
+      "sha256": "9835170b2bdac1975acf04df0f7424ce64372b58c739df16ba495a5a9a626ac7",
+      "bytes": 118945
     }
   ]
 }

@@ -10,7 +10,7 @@ Code and text here are drafted by an AI agent, which also runs the checks; I rev
 |---|---|
 | **Reproduced** | Recomputed here from saved raw inputs listed in the case manifest. |
 | **Extract** | Figures copied from saved responses that are not published here, because the provider allowed only an extract. The manifest lists each response's SHA-256, so anyone holding the response can check the extract; for everyone else the figures are shown as `RECORDED`. |
-| **Re-read at block (snapshot)** | Read again at the stated block through an archive node; the result is committed with its date, and the case's `live_verify.py --check` repeats the read for anyone with such a node. |
+| **Re-read at block (snapshot)** | Read again at the stated block; the result is committed with its date, and the case's `live_verify.py --check` repeats the read for anyone with an archive node. Calls go to an archive node. In the Ethereum cases, logs were read through the Etherscan API v2, keeping only on-chain fields; `live_verify.py` can read them with `eth_getLogs` from your own node instead. |
 | **Public sources as of a date (snapshot)** | What an API, a repository or a GitHub thread showed on that date. |
 | **Arithmetic** | Computed from the rows above; only as strong as its weakest input. |
 | **Recorded** | Only the result was kept at the time; the raw response was not. |
@@ -22,8 +22,8 @@ Each row is `MATCH` (the evidence supports the report), `ERRATUM` (the report's 
 | Case | Report | Upstream outcome | Result |
 |---|---|---|---|
 | [Uniswap v4 TVL on BSC](findings/20659-defillama-uniswap-v4-bsc/) | [DefiLlama-Adapters#20659](https://github.com/DefiLlama/DefiLlama-Adapters/issues/20659) | No price returned as of 2026-10-21; [#20690](https://github.com/DefiLlama/DefiLlama-Adapters/pull/20690) merged | 12 match · 5 errata · 11 recorded · 4 observed · 0 fail |
-| [Rocket Pool megapool deposits](findings/8812-defillama-rocketpool-megapools/) | [dimension-adapters#8812](https://github.com/DefiLlama/dimension-adapters/issues/8812) | Fixed in [#8833](https://github.com/DefiLlama/dimension-adapters/pull/8833), merged 2026-08-18 | 20 match · 0 errata · 3 observed · 0 fail |
-| [SKY buybacks and the Atlas burn clause](findings/306-sky-atlas-burn/) | [next-gen-atlas#306](https://github.com/sky-ecosystem/next-gen-atlas/issues/306) | Answered: burned in a later executive vote; spells burned 10/55 of the buybacks on 2026-09-13 and 2026-10-12 | 16 match · 1 erratum · 5 observed · 0 fail |
+| [Rocket Pool megapool deposits](findings/8812-defillama-rocketpool-megapools/) | [dimension-adapters#8812](https://github.com/DefiLlama/dimension-adapters/issues/8812) | Fixed in [#8833](https://github.com/DefiLlama/dimension-adapters/pull/8833), merged 2026-08-18 | 22 match · 0 errata · 1 recorded · 3 observed · 0 fail |
+| [SKY buybacks and the Atlas burn clause](findings/306-sky-atlas-burn/) | [next-gen-atlas#306](https://github.com/sky-ecosystem/next-gen-atlas/issues/306) | Answered: burned in a later executive vote; spells burned 10/55 of the buybacks on 2026-09-13 and 2026-10-12 | 17 match · 1 erratum · 1 recorded · 5 observed · 0 fail |
 
 ## Run
 

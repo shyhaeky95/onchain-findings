@@ -9,8 +9,8 @@
       "request": "live_verify.py --write",
       "fetched_at": "see checked_at_utc in data/live_snapshot.json",
       "notes": "Every call and log query is pinned to a block, so live_verify.py --check repeats the read against any Ethereum archive endpoint and compares. Post-report rows use the head pinned at write time (pinned_head).",
-      "sha256": "bcb7b8ff5799dc2c495cfb0b82800e9244ce23dff9c547fc7b0028748c15def9",
-      "bytes": 454947
+      "sha256": "8e052a5dfae144928d00eeb58897d6864a1accc07c07b9fecafd263c5bbf0ad1",
+      "bytes": 457446
     },
     {
       "path": "data/window_b_buybacks.json",

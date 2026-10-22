@@ -15,6 +15,9 @@ from unittest import mock
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from support import ROOT, CaseCopy, call, load_module, query, set_words, silent, word  # noqa: E402
 
+sys.path.insert(0, str(ROOT / "lib"))
+import evm  # noqa: E402
+
 CASE = ROOT / "findings" / "8812-defillama-rocketpool-megapools"
 reproduce = load_module("reproduce_8812", CASE / "reproduce.py")
 live_verify = load_module("live_verify_8812", CASE / "live_verify.py")
@@ -136,10 +139,48 @@ def bump_vault(label, delta):
     return mutate
 
 
+def flag_call(addr):
+    key = evm.storage_key("megapool.exists", bytes.fromhex(addr[2:]))
+    return {"label": f"megapool.exists({addr})", "block": 25772201, "to": reproduce.ROCKET_STORAGE,
+            "data": evm.calldata("getBool(bytes32)", key[2:]), "result": word(0)}
+
+
 def second_other_emitter(d):
     r, fs = first_other_rd(d)
     r[fs.index("address")] = "0x" + "12" * 20
-    d["calls"].append(dict(call(d, f"megapool.exists({OTHER})"), label=f"megapool.exists({'0x' + '12' * 20})"))
+    d["calls"].append(flag_call("0x" + "12" * 20))
+
+
+def drop_other_emitter(d):
+    q = query(d, RD)
+    q["rows"][:] = [r for r in q["rows"] if OTHER not in r]
+    d["calls"][:] = [c for c in d["calls"] if c["label"] != f"megapool.exists({OTHER})"]
+
+
+def unflag(d, mp=MP):
+    """MP stops being a megapool, consistently: its flag is 0 and its megapool-only reads are gone."""
+    call(d, f"megapool.exists({mp})")["result"] = word(0)
+    gone = {f"getNodeDepositBalance()@{mp}", f"getNodeFee()@{mp}", f"getMinipoolExists({mp})"}
+    d["calls"][:] = [c for c in d["calls"] if c["label"] not in gone]
+    d["logs"][:] = [q for q in d["logs"] if q["label"] != f"rETH EtherDeposited from {mp}"]
+
+
+def move_minipool(i):
+    """The minipool at index i is another address, and the two control calls go to it."""
+    def mutate(d):
+        call(d, f"getMinipoolAt({i})")["result"] = SOME_ADDRESS
+        for fn in ("getNodeDepositBalance()", "getNodeFee()"):
+            call(d, f"{fn}@minipool {i}")["to"] = "0x" + SOME_ADDRESS[-40:]
+    return mutate
+
+
+def move_contract(name, calls_to_it):
+    """RocketStorage resolves NAME elsewhere, and the calls to it follow."""
+    def mutate(d):
+        call(d, f"getAddress(contract.address{name})@25772201")["result"] = SOME_ADDRESS
+        for label in calls_to_it:
+            call(d, label)["to"] = "0x" + SOME_ADDRESS[-40:]
+    return mutate
 
 
 def split_other(d):
@@ -174,16 +215,16 @@ SOME_ADDRESS = "0x" + "0" * 24 + "11" * 20
 ZERO_WORD = word(0)
 
 MUTATIONS = [
-    ("L1", "a megapool loses its flag", SNAP, setnum(f"megapool.exists({MP})", lambda v: 0)),
-    ("L1", "the other emitter disappears", SNAP,
-     lambda d: query(d, RD)["rows"].__setitem__(slice(None), [r for r in query(d, RD)["rows"] if OTHER not in r])),
+    ("L1", "a megapool loses its flag", SNAP, unflag),
+    ("L1", "the other emitter disappears", SNAP, drop_other_emitter),
     ("L2", "one megapool answers getNodeFee()", SNAP, setcall(f"getNodeFee()@{MP}", ZERO_WORD)),
-    ("L2", "30 megapools", SNAP, setnum(f"megapool.exists({MP})", lambda v: 0)),
+    ("L2", "30 megapools", SNAP, unflag),
     ("L3", "one megapool is a minipool", SNAP, setnum(f"getMinipoolExists({MP})", lambda v: 1)),
     ("L4", "minipool count", SNAP, setnum("getMinipoolCount()", lambda v: v - 1)),
-    ("L5", "index 0 address", SNAP, setcall("getMinipoolAt(0)", SOME_ADDRESS)),
-    ("L5", "index 21158 address", SNAP, setcall("getMinipoolAt(21158)", SOME_ADDRESS)),
-    ("L5", "index 42316 address", SNAP, setcall("getMinipoolAt(42316)", SOME_ADDRESS)),
+    ("L5", "index 0 address", SNAP, move_minipool(0)),
+    ("L5", "index 21158 address", SNAP, move_minipool(21158)),
+    ("L5", "index 42316 address", SNAP, chain(move_minipool(42316), lambda d: query(d, "rETH EtherDeposited from minipool 42316")
+                                              ["topics"].__setitem__(1, "0x" + "0" * 24 + SOME_ADDRESS[-40:]))),
     ("L5", "index 0 values", SNAP, setnum("getNodeFee()@minipool 0", lambda v: v + 10 ** 16)),
     ("L5", "index 21158 values", SNAP, setnum("getNodeDepositBalance()@minipool 21158", lambda v: v * 2)),
     ("L5", "index 42316 values", SNAP, setnum("getNodeFee()@minipool 42316", lambda v: v + 10 ** 16)),
@@ -196,10 +237,15 @@ MUTATIONS = [
     ("L9", "a matched pair removed", SNAP, drop_pair),
     ("L9", "an unmatched deposit", SNAP, extra_dep),
     ("L9", "an unmatched distribution", SNAP, extra_rd),
+    ("L9", "a time field that disagrees", SNAP, bump_rd(4, 1)),
     ("L10", "voter share", SNAP, setnum("getVoterShare()", lambda v: v + 1)),
     ("L10", "node share", SNAP, setnum("getNodeShare()", lambda v: v + 1)),
     ("L10", "protocol DAO share", SNAP, setnum("getProtocolDAOShare()", lambda v: 1)),
     ("L10", "current voter share", SNAP, setnum("getCurrentVoterShare()", lambda v: v + 1)),
+    ("L10", "another settings contract", SNAP,
+     move_contract("rocketDAOProtocolSettingsNetwork", ["getVoterShare()", "getNodeShare()", "getProtocolDAOShare()"])),
+    ("L10", "another revenues contract", SNAP, move_contract("rocketNetworkRevenues", ["getCurrentVoterShare()"])),
+    ("L10", "head block on another day", SNAP, shift_block_time(25772201, 86400)),
     ("L11", "voter amount", SNAP, bump_rd(1, 1)),
     ("L11", "node amount", SNAP, bump_rd(0, 1)),
     ("L11", "protocol DAO amount", SNAP, bump_rd(3, 1)),
@@ -235,6 +281,10 @@ MUTATIONS = [
     ("P3", "#2765 without getNodeFee", SNAP, setpub(["pr_2765", "adds_getNodeFee"], False)),
     ("P3", "#3519 date", SNAP, setpub(["pr_3519", "merged_at"], "2025-06-23T00:00:00Z")),
     ("P3", "#3519 without zero revenue", SNAP, setpub(["pr_3519", "adds_zero_revenue"], False)),
+    ("P4", "SupplySideRevenue text gone", SNAP, setpub(["adapter_before_fix", "supply_side_text_pre_saturn"], False)),
+    ("P4", "Revenue text gone", SNAP, setpub(["adapter_before_fix", "revenue_text_no_cut"], False)),
+    ("P4", "a UserFees label", SNAP, setpub(["adapter_before_fix", "has_user_fees_label"], True)),
+    ("P4", "a ProtocolRevenue label", SNAP, setpub(["adapter_before_fix", "has_protocol_revenue_label"], True)),
     ("O1", "not merged", SNAP, setpub(["pr_8833", "merged_at"], None)),
     ("O1", "does not close #8812", SNAP, setpub(["pr_8833", "body_closes_8812"], False)),
     ("O1", "does not cite the figure", SNAP, setpub(["pr_8833", "body_cites_78_23_eth"], False)),
@@ -245,8 +295,11 @@ MUTATIONS = [
     ("O3", "closing date", SNAP, setpub(["issue_8812", "closed_at"], "2026-08-19T00:00:00Z")),
 ]
 
-CONDITIONS = {"L1": 2, "L2": 2, "L5": 6, "L6": 2, "L8": 3, "L9": 3, "L10": 4, "L11": 3, "L12": 4, "L13": 4, "L14": 5,
-              "P1": 5, "P3": 5, "O1": 3, "O2": 2, "O3": 3}
+CONDITIONS = {"L1": 2, "L2": 2, "L5": 6, "L6": 2, "L8": 3, "L9": 4, "L10": 7, "L11": 3, "L12": 4, "L13": 4, "L14": 5,
+              "P1": 5, "P3": 5, "P4": 4, "O1": 3, "O2": 2, "O3": 3}
+# Rows no data change can break: R1 has no condition (the report's own text), and A4 checks the report's printed
+# topic0 against Keccak-256 of the signature, a constant; TestConstantRows covers it.
+NOT_DATA = {"R1", "A4"}
 
 
 class Base(CaseCopy):
@@ -262,7 +315,8 @@ class TestPristine(Base):
     def test_statuses(self):
         rows = reproduce.results(self.case)
         self.assertEqual({r["id"] for r in rows if r["status"] == "OBSERVED"}, {"O1", "O2", "O3"})
-        self.assertEqual({r["status"] for r in rows if not r["id"].startswith("O")}, {"MATCH"})
+        self.assertEqual({r["id"] for r in rows if r["status"] == "RECORDED"}, {"R1"})
+        self.assertEqual({r["status"] for r in rows if r["id"][0] in "LAP"}, {"MATCH"})
 
     def test_runs_without_network(self):
         import socket
@@ -276,10 +330,46 @@ class TestPristine(Base):
 
 class TestEveryCondition(Base):
     def test_coverage(self):
-        self.check_coverage(MUTATIONS, CONDITIONS)
+        self.check_coverage(MUTATIONS, CONDITIONS, not_data=NOT_DATA)
 
     def test_each_mutation_fails_its_row(self):
         self.run_mutations(MUTATIONS)
+
+
+class TestConstantRows(Base):
+    def test_a4_fails_if_the_printed_topic_differs(self):
+        with mock.patch.dict(reproduce.REPORT, {"deposit_topic0": "0x" + "0" * 64}):
+            self.assertEqual(self.row(reproduce.results(self.case), "A4")["status"], "FAIL")
+
+    def test_r1_is_recorded(self):
+        self.assertEqual(self.row(reproduce.results(self.case), "R1")["status"], "RECORDED")
+
+
+class TestStructure(Base):
+    """A read that is not what its label says is a data error, not a row result."""
+
+    def expect_error(self, mutate, pattern):
+        self.edit(self.case, SNAP, mutate)
+        with self.assertRaisesRegex(reproduce.DataError, pattern):
+            reproduce.results(self.case)
+
+    def test_call_at_another_block(self):
+        self.expect_error(lambda d: call(d, "getMinipoolCount()").__setitem__("block", 25772200), "not the call")
+
+    def test_call_to_another_contract(self):
+        self.expect_error(lambda d: call(d, f"getNodeFee()@{MP}").__setitem__("to", "0x" + "11" * 20), "not the call")
+
+    def test_query_over_another_range(self):
+        self.expect_error(lambda d: query(d, DEP).__setitem__("from", 1), "not the query")
+
+    def test_log_outside_its_range(self):
+        self.expect_error(lambda d: query(d, DEP)["rows"][0].__setitem__(0, 25772217), "outside its filter")
+
+    def test_missing_call(self):
+        self.expect_error(lambda d: d["calls"].remove(call(d, "getPendingVoterShare()")), "expected set")
+
+    def test_vault_moved_between_blocks(self):
+        self.expect_error(setcall("getAddress(contract.addressrocketVault)@25772216", SOME_ADDRESS), "differs between")
 
 
 class TestIntegrity(Base):

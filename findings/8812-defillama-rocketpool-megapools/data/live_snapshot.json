@@ -1,6 +1,6 @@
 {
  "case": "DefiLlama/dimension-adapters#8812",
- "checked_at_utc": "2026-10-22T03:40:21Z",
+ "checked_at_utc": "2026-10-22T04:58:02Z",
  "readers": {
   "calls": "archive JSON-RPC (endpoint not recorded)",
   "logs": "Etherscan API v2 getLogs"
@@ -2873,6 +2873,10 @@
    "permit_failure": true,
    "skips_when_either_is_null": true,
    "subtracts_24_and_16_eth": true,
+   "supply_side_text_pre_saturn": true,
+   "revenue_text_no_cut": true,
+   "has_user_fees_label": false,
+   "has_protocol_revenue_label": false,
    "reads_megapool_exists_flag": false,
    "reads_rewards_distributed_of_megapools": false
   },
@@ -2883,6 +2887,10 @@
    "permit_failure": true,
    "skips_when_either_is_null": true,
    "subtracts_24_and_16_eth": true,
+   "supply_side_text_pre_saturn": true,
+   "revenue_text_no_cut": true,
+   "has_user_fees_label": false,
+   "has_protocol_revenue_label": false,
    "reads_megapool_exists_flag": true,
    "reads_rewards_distributed_of_megapools": true
   },

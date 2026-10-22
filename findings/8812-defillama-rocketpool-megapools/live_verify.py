@@ -14,7 +14,7 @@ same snapshot. Endpoints and keys are never written to disk.
 --check compares a fresh read with data/live_snapshot.json:
     exit 0  identical
     exit 1  a historical read differs (blocks, calls or logs)
-    exit 2  no usable endpoint, or the endpoint does not serve history
+    exit 2  no usable endpoint, the endpoint does not serve history, or a read failed
     exit 3  only the public sources differ (GitHub)
     exit 4  a public source could not be read (the historical check still ran)
 --write replaces the snapshot, and refuses to write a partial one.
@@ -52,6 +52,7 @@ T_VAULT_WITHDRAW = evm.topic("EtherWithdrawn(string,uint256,uint256)")
 REWARDS_POOL_TOPIC = evm.hex32(evm.keccak256(b"rocketRewardsPool"))
 
 GITHUB = "DefiLlama/dimension-adapters"
+SUPPLY_SIDE_TEXT = "Total ETH staking rewards are distributed to rETH stakers and minipool depositors"
 ADAPTER_PATH = "fees/rocketpool.ts"
 
 
@@ -175,6 +176,10 @@ def adapter_facts(src):
         "skips_when_either_is_null": bool(re.search(
             r"if\s*\(\s*nodeBalance\s*===\s*null\s*\|\|\s*nodeFeeRate\s*===\s*null\s*\)\s*\{\s*continue", text)),
         "subtracts_24_and_16_eth": "24e18" in text and "16e18" in text,
+        "supply_side_text_pre_saturn": SUPPLY_SIDE_TEXT in text,
+        "revenue_text_no_cut": "Rocket Pool protocol doesn't take any fees or rewards cut." in text,
+        "has_user_fees_label": bool(re.search(r"\bUserFees\b", text)),
+        "has_protocol_revenue_label": bool(re.search(r"\bProtocolRevenue\b", text)),
         "reads_megapool_exists_flag": "megapool.exists" in text,
         "reads_rewards_distributed_of_megapools": bool(re.search(r"targets:\s*megapoolAddresses", text))
                                                   and "RewardsDistributed" in text,
@@ -240,11 +245,15 @@ def main(argv=None, rpc=None, logs=None):
     if rpc is None:
         print("set ETH_ARCHIVE_RPC to an Ethereum archive endpoint", file=sys.stderr)
         return 2
-    checks = archive_checks(rpc)
-    if not checks["pass"]:
-        print(f"endpoint does not serve history: {checks}", file=sys.stderr)
+    try:
+        checks = archive_checks(rpc)
+        if not checks["pass"]:
+            print(f"endpoint does not serve history: {checks}", file=sys.stderr)
+            return 2
+        fresh = read_chain(Reads(rpc, logs))
+    except (evm.ReaderError,) + evm.TRANSPORT_ERRORS as e:
+        print(f"a read failed, nothing compared: {type(e).__name__}: {e}", file=sys.stderr)
         return 2
-    fresh = read_chain(Reads(rpc, logs))
     try:
         public, public_error = public_state(), None
     except Exception as e:  # network or API failure; the historical part still counts

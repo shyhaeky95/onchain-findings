@@ -35,6 +35,10 @@ BOUGHT_S = "SKY pair -> MCD_PAUSE_PROXY, scale range"
 BURNS_AFTER = "SKY Transfer to 0x0, cast to pinned head"
 BOUGHT_AUG = "SKY pair -> MCD_PAUSE_PROXY, cast to end of August"
 BOUGHT_SEP = "SKY pair -> MCD_PAUSE_PROXY, September"
+KICKS_AUG = "USDS MCD_FLAP -> pair, cast to end of August"
+KICKS_SEP = "USDS MCD_FLAP -> pair, September"
+MINTS_AFTER = "SKY Transfer from 0x0, cast to pinned head"
+OTHER = "0x" + "0" * 24 + "77" * 20
 NEW_TX = "0x" + "cd" * 32
 SKY = 10 ** 18
 LAST_B_BURN = 24246170
@@ -122,6 +126,33 @@ def add_mint(d):
     q["rows"].append([r[f] for f in fs])
 
 
+def zero_kick_at_end(usds_label, sky_label):
+    """One more kick of zero at the end of a month window: the same total, so a second run of kicks also matches."""
+    def mutate(d):
+        for label in (usds_label, sky_label):
+            rs, fs = rows(d, label)
+            r = list(rs[-1])
+            r[fs.index("transactionHash")] = NEW_TX
+            r[fs.index("logIndex")] += 1000
+            r[fs.index("data")] = set_words(r[fs.index("data")], {0: lambda v: 0})
+            rs.append(r)
+    return mutate
+
+
+def mint_after(d):
+    q = query(d, MINTS_AFTER)
+    r = {"blockNumber": CAST + 1, "logIndex": 0, "transactionHash": NEW_TX,
+         "topics": [q["topics"][0], q["topics"][1], OTHER], "data": "0x" + "0" * 64}
+    q["rows"].append([r[f] for f in q["fields"]])
+    d["blocks"].setdefault(str(CAST + 1), d["blocks"][str(CAST)])
+
+
+def setcall(label, value):
+    def mutate(d):
+        call(d, label)["result"] = value
+    return mutate
+
+
 def chain(*fs):
     def mutate(d):
         for f in fs:
@@ -187,8 +218,12 @@ MUTATIONS = [
     ("L11", "one more pair of kicks", BIG, chain(add_row(KICKS_S), add_row(BOUGHT_S))),
     ("L11", "SKY total", BIG, bump(BOUGHT_S, SKY // 100)),
     ("L11", "a SKY log on another transaction", BIG, retx(BOUGHT_S)),
+    ("L11", "another flapper at the start of the range", SNAP, setcall(f"chainlog MCD_FLAP@{B_START}", OTHER)),
+    ("L11", "another pair at the start of the range", SNAP, setcall(f"MCD_FLAP.pair()@{B_START}", OTHER)),
     ("L12", "split", SNAP, setnum("MCD_SPLIT.burn()", lambda v: v + 10 ** 16)),
     ("A1", "implied burn", SNAP, bump(BOUGHT_A, SKY)),
+    ("P1", "two source files", SNAP, lambda d: d["public"]["sky_sol"]["source_files"].append("src/Other.sol")),
+    ("P1", "no Sourcify match", SNAP, setpub(["sky_sol", "sourcify_match", "runtimeMatch"], None)),
     ("P1", "a third write", SNAP, lambda d: d["public"]["sky_sol"]["totalSupply_writes"].append("totalSupply = 0;")),
     ("P1", "mint does not add", SNAP, lambda d: d["public"]["sky_sol"]["totalSupply_writes"].__setitem__(0, "totalSupply = value;")),
     ("P1", "burn does not subtract", SNAP, lambda d: d["public"]["sky_sol"]["totalSupply_writes"].__setitem__(1, "totalSupply = value;")),
@@ -197,7 +232,14 @@ MUTATIONS = [
     ("P2", "A.2 clause number", SNAP, setpub(["atlas_at_report", "clauses", "A.2.3.1.2.4", "document_number"], "A.2.3.1.2.5")),
     ("P2", "A.4 clause number", SNAP, setpub(["atlas_at_report", "clauses", "A.4.1.2.2.3", "document_number"], None)),
     ("P2", "A.2 wording", SNAP, setpub(["atlas_at_report", "clauses", "A.2.3.1.2.4", "quotes_present"], [False])),
-    ("P2", "A.4 wording", SNAP, setpub(["atlas_at_report", "clauses", "A.4.1.2.2.3", "quotes_present"], [True, False])),
+    ("P2", "A.4 wording", SNAP, setpub(["atlas_at_report", "clauses", "A.4.1.2.2.3", "quotes_present"], [True, True, False])),
+    ("P2", "A.2 name", SNAP, setpub(["atlas_at_report", "clauses", "A.2.3.1.2.4", "name"], "Step 3")),
+    ("P2", "A.4 name", SNAP, setpub(["atlas_at_report", "clauses", "A.4.1.2.2.3", "name"], "Burning")),
+    ("P2", "A.2 not Core", SNAP, setpub(["atlas_at_report", "clauses", "A.2.3.1.2.4", "type"], "Section")),
+    ("P2", "A.4 not Core", SNAP, setpub(["atlas_at_report", "clauses", "A.4.1.2.2.3", "type"], "Section")),
+    ("P2", "A.4 does not refer to A.2", SNAP, setpub(["atlas_at_report", "clauses", "A.4.1.2.2.3", "refers_to"], [])),
+    ("P5", "not found in July", SNAP, setpub(["atlas_mid_july", "clauses", "A.4.1.2.2.3", "document_number"], None)),
+    ("P5", "other wording in July", SNAP, setpub(["atlas_mid_july", "clauses", "A.4.1.2.2.3", "quotes_present"], [True, False, True])),
     ("P3", "'non-issuance' found", SNAP, setpub(["atlas_at_report", "absent_phrase_counts", "non-issuance"], 1)),
     ("P3", "'not issued' found", SNAP, setpub(["atlas_at_report", "absent_phrase_counts", "not issued"], 1)),
     ("P3", "'no explicit burn' found", SNAP, setpub(["atlas_at_report", "absent_phrase_counts", "no explicit burn"], 1)),
@@ -206,23 +248,31 @@ MUTATIONS = [
     ("P4", "no 'no explicit burn'", SNAP, setpub(["forum_28153_post_1", "quotes_present"], [False, True])),
     ("P4", "no 'non-issuance'", SNAP, setpub(["forum_28153_post_1", "quotes_present"], [True, False])),
     ("O1", "reply says otherwise", SNAP, setpub(["maintainer_reply", "says_burned_in_future_executive_vote"], False)),
+    ("O1", "reply asks for an Atlas change", SNAP, setpub(["maintainer_reply", "says_no_atlas_change"], False)),
     ("O1", "issue open", SNAP, setpub(["issue_306", "state"], "open")),
     ("O1", "closed at another time", SNAP, setpub(["issue_306", "closed_at"], "2026-08-19T00:00:00Z")),
     ("O2", "a third burn of zero", SNAP, third_burn),
     ("O2", "a burn by another holder", SNAP, burn_by_other),
     ("O2", "supply now", SNAP, setnum(f"SKY.totalSupply()@{HEAD}", lambda v: v + 1)),
+    ("O2", "a mint of zero", SNAP, mint_after),
     ("O3", "August buybacks six SKY higher (1.09 SKY at 10/55)", SNAP, bump(BOUGHT_AUG, 6 * SKY)),
-    ("O3", "an August SKY log on another transaction", SNAP, retx(BOUGHT_AUG)),
+    ("O3", "an August SKY log on another transaction", SNAP, retx(BOUGHT_AUG, -1)),
     ("O3", "window end is not the month's last block", SNAP, block_time(AUG + 1, lambda t: t - 13)),
+    ("O3", "burn on another day", SNAP, lambda d: block_time(rows(d, BURNS_AFTER)[0][0][0], lambda t: t + 86400)(d)),
+    ("O3", "a second matching run", SNAP, zero_kick_at_end(KICKS_AUG, BOUGHT_AUG)),
+    ("O3", "window A outside the window", SNAP, retx(BOUGHT_A)),
     ("O4", "September buybacks ten SKY higher", SNAP, bump(BOUGHT_SEP, 10 * SKY)),
-    ("O4", "a September SKY log on another transaction", SNAP, retx(BOUGHT_SEP)),
+    ("O4", "a September SKY log on another transaction", SNAP, retx(BOUGHT_SEP, -1)),
     ("O4", "window end is not the month's last block", SNAP, block_time(SEP + 1, lambda t: t - 13)),
+    ("O4", "burn on another day", SNAP, lambda d: block_time(rows(d, BURNS_AFTER)[0][1][0], lambda t: t + 86400)(d)),
+    ("O4", "a second matching run", SNAP, zero_kick_at_end(KICKS_SEP, BOUGHT_SEP)),
     ("O5", "A.2 wording changed", SNAP, setpub(["atlas_now", "clauses", "A.2.3.1.2.4", "quotes_present"], [False])),
     ("O5", "A.4 clause renumbered", SNAP, setpub(["atlas_now", "clauses", "A.4.1.2.2.3", "document_number"], "A.4.1.2.2.4")),
 ]
 
-CONDITIONS = {"L1": 2, "L2": 2, "L3": 3, "L5": 2, "L6": 3, "L7": 3, "L8": 5, "L9": 3, "L10": 3, "L11": 3,
-              "P1": 5, "P2": 4, "P3": 5, "P4": 2, "O1": 3, "O2": 3, "O3": 3, "O4": 3, "O5": 2}
+CONDITIONS = {"L1": 2, "L2": 2, "L3": 3, "L5": 2, "L6": 3, "L7": 3, "L8": 5, "L9": 3, "L10": 3, "L11": 5,
+              "P1": 7, "P2": 9, "P3": 5, "P4": 2, "P5": 2, "O1": 4, "O2": 4, "O3": 6, "O4": 5, "O5": 2}
+NOT_DATA = {"R1"}  # the report's own control counts: no condition
 ERRATA = {"L10"}
 
 
@@ -241,6 +291,7 @@ class TestPristine(Base):
         by = lambda s: {r["id"] for r in rows if r["status"] == s}
         self.assertEqual(by("ERRATUM"), ERRATA)
         self.assertEqual(by("OBSERVED"), {"O1", "O2", "O3", "O4", "O5"})
+        self.assertEqual(by("RECORDED"), {"R1"})
 
     def test_runs_without_network(self):
         import socket
@@ -260,10 +311,39 @@ class TestPristine(Base):
 
 class TestEveryCondition(Base):
     def test_coverage(self):
-        self.check_coverage(MUTATIONS, CONDITIONS, ERRATA)
+        self.check_coverage(MUTATIONS, CONDITIONS, ERRATA, not_data=NOT_DATA)
 
     def test_each_mutation_fails_its_row(self):
         self.run_mutations(MUTATIONS, ERRATA)
+
+
+class TestStructure(Base):
+    """A read that is not what its label says is a data error, not a row result."""
+
+    def expect_error(self, rel, mutate, pattern):
+        self.edit(self.case, rel, mutate)
+        with self.assertRaisesRegex(reproduce.DataError, pattern):
+            reproduce.results(self.case)
+
+    def test_call_at_another_block(self):
+        self.expect_error(SNAP, lambda d: call(d, "MCD_SPLIT.burn()").__setitem__("block", A_END - 1), "not the call")
+
+    def test_query_over_another_range(self):
+        self.expect_error(SNAP, lambda d: query(d, KICKS_A).__setitem__("from", CAST + 1), "not the query")
+
+    def test_scale_query_with_another_filter(self):
+        self.expect_error(BIG, lambda d: query(d, KICKS_S)["topics"].__setitem__(2, "0x" + "0" * 64), "not the query")
+
+    def test_log_outside_its_filter(self):
+        def other_from(d):
+            rs, fs = rows(d, BURNS_B)
+            topics = list(rs[0][fs.index("topics")])
+            topics[2] = "0x" + "0" * 24 + "77" * 20
+            rs[0][fs.index("topics")] = topics
+        self.expect_error(SNAP, other_from, "outside its filter")
+
+    def test_address_not_from_the_chainlog(self):
+        self.expect_error(SNAP, lambda d: d["addresses"].__setitem__("MCD_SPLIT", "0x" + "11" * 20), "chainlog")
 
 
 class TestIntegrity(Base):
@@ -359,20 +439,21 @@ class TestLiveCheck(Base):
 class TestAtlasParsing(unittest.TestCase):
     def test_clause_by_front_matter(self):
         files = {"content/x/document.md": "---\nid: 5ce73730-4d5d-479c-b01e-40e87f072121\ndocNo: A.2.3.1.2.4\n---\n# A.2.3.1.2.4 - Step 3\nbody text\n"}
-        no, body = live_verify.clause(files, "5ce73730-4d5d-479c-b01e-40e87f072121")
-        self.assertEqual(no, "A.2.3.1.2.4")
+        files["content/x/document.md"] = files["content/x/document.md"].replace("docNo:", "name: Step 3\ntype: Core\ndocNo:")
+        no, name, kind, body = live_verify.clause(files, "5ce73730-4d5d-479c-b01e-40e87f072121")
+        self.assertEqual((no, name, kind), ("A.2.3.1.2.4", "Step 3", "Core"))
         self.assertIn("body text", body)
 
     def test_clause_by_heading_stops_at_next_clause(self):
         text = ("## A.2.3.1.2.4 - Step 3 [Core]  <!-- UUID: 5ce73730-4d5d-479c-b01e-40e87f072121 -->\n\nmine\n\n"
                 "### A.2.3.1.2.5 - Next [Core]  <!-- UUID: 00000000-0000-0000-0000-000000000000 -->\n\nnot mine\n")
-        no, body = live_verify.clause({"content/A.2.md": text}, "5ce73730-4d5d-479c-b01e-40e87f072121")
-        self.assertEqual(no, "A.2.3.1.2.4")
+        no, name, kind, body = live_verify.clause({"content/A.2.md": text}, "5ce73730-4d5d-479c-b01e-40e87f072121")
+        self.assertEqual((no, name, kind), ("A.2.3.1.2.4", "Step 3", "Core"))
         self.assertIn("mine", body)
         self.assertNotIn("not mine", body)
 
     def test_unknown_uuid(self):
-        self.assertEqual(live_verify.clause({"a.md": "# x"}, "5ce73730-4d5d-479c-b01e-40e87f072121"), (None, None))
+        self.assertEqual(live_verify.clause({"a.md": "# x"}, "5ce73730-4d5d-479c-b01e-40e87f072121"), (None, None, None, None))
 
 
 if __name__ == "__main__":
