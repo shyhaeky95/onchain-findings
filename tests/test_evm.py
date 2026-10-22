@@ -173,8 +173,10 @@ class TestRpc(unittest.TestCase):
 
     def test_a_range_error_is_not_read_as_throttling(self):
         self.assertFalse(evm._throttled({"code": -32600, "message": "query exceeds max block range limit"}))
+        self.assertFalse(evm._throttled({"code": -32005, "message": "query returned more than 10000 results"}))
+        self.assertFalse(evm._throttled({"code": -32000, "message": "failed to generate a separate trace"}))
         self.assertTrue(evm._throttled({"code": 429, "message": "Too many requests"}))
-        self.assertTrue(evm._throttled({"code": -32005, "message": "slow down"}))
+        self.assertTrue(evm._throttled({"code": -32005, "message": "daily request count exceeded, request rate limited"}))
 
     def test_socket_timeout_is_retried(self):
         import socket

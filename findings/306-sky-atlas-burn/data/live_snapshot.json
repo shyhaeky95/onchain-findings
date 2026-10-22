@@ -1,6 +1,6 @@
 {
  "case": "sky-ecosystem/next-gen-atlas#306",
- "checked_at_utc": "2026-10-22T05:02:40Z",
+ "checked_at_utc": "2026-10-22T06:00:44Z",
  "readers": {
   "calls": "archive JSON-RPC (endpoint not recorded)",
   "logs": "Etherscan API v2 getLogs"
@@ -10,7 +10,7 @@
   "splitter_unset_at_18000000": true,
   "pass": true
  },
- "pinned_head": 26245852,
+ "pinned_head": 26246146,
  "end_of_august_block": 25878704,
  "end_of_september_block": 26093737,
  "addresses": {
@@ -38,9 +38,9 @@
    "hash": "0xa337d10ecd45444b3387be13d059dc842d6dff3d429fed9f43e60b7e70b983f6",
    "timestamp": 1786975343
   },
-  "26245852": {
-   "hash": "0xd74f21f228ac0a4e312cf316f60e1ba56d1dc22b899e6ad3809e317503248f32",
-   "timestamp": 1792644359
+  "26246146": {
+   "hash": "0x47e57d9753d7a165f28aae4f5d916a389c48e60dddb22940db5fe6c37765ba3b",
+   "timestamp": 1792647887
   },
   "24246077": {
    "hash": "0x33b9a4b2415fe37e061ff3bbc380a5f6044d9840402ef038686e8ea4059443e3",
@@ -179,8 +179,8 @@
    "result": "0x00000000000000000000000000000000000000004bcfdc9a40f2d71fc4e9599b"
   },
   {
-   "label": "SKY.totalSupply()@26245852",
-   "block": 26245852,
+   "label": "SKY.totalSupply()@26246146",
+   "block": 26246146,
    "to": "0x56072c95faa701256059aa122697b133aded9279",
    "data": "0x18160ddd",
    "result": "0x00000000000000000000000000000000000000004bc765a1a5fec0aaa2c1599b"
@@ -547,7 +547,7 @@
     "0x0000000000000000000000000000000000000000000000000000000000000000"
    ],
    "from": 25775271,
-   "to": 26245852,
+   "to": 26246146,
    "fields": [
     "blockNumber",
     "logIndex",
@@ -589,7 +589,7 @@
     null
    ],
    "from": 25775271,
-   "to": 26245852,
+   "to": 26246146,
    "fields": [
     "blockNumber",
     "logIndex",
@@ -14581,6 +14581,7 @@
      "name": "Step 3: Smart Burn Engine",
      "type": "Core",
      "quotes_present": [
+      true,
       true
      ],
      "refers_to": []
@@ -14620,6 +14621,7 @@
      "name": "Step 3: Smart Burn Engine",
      "type": "Core",
      "quotes_present": [
+      true,
       true
      ],
      "refers_to": []
@@ -14658,6 +14660,7 @@
      "name": "Step 3: Smart Burn Engine",
      "type": "Core",
      "quotes_present": [
+      true,
       true
      ],
      "refers_to": []
@@ -14697,6 +14700,7 @@
    ]
   },
   "sky_sol": {
+   "address": "0x56072c95faa701256059aa122697b133aded9279",
    "sha256": "84c7a1cb929c045daeee5568afa993ef42cb28e3c1b774745c90d9e060869dab",
    "source_files": [
     "src/Sky.sol"

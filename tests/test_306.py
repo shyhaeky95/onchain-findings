@@ -222,6 +222,7 @@ MUTATIONS = [
     ("L11", "another pair at the start of the range", SNAP, setcall(f"MCD_FLAP.pair()@{B_START}", OTHER)),
     ("L12", "split", SNAP, setnum("MCD_SPLIT.burn()", lambda v: v + 10 ** 16)),
     ("A1", "implied burn", SNAP, bump(BOUGHT_A, SKY)),
+    ("P1", "source of another address", SNAP, setpub(["sky_sol", "address"], "0x" + "11" * 20)),
     ("P1", "two source files", SNAP, lambda d: d["public"]["sky_sol"]["source_files"].append("src/Other.sol")),
     ("P1", "no Sourcify match", SNAP, setpub(["sky_sol", "sourcify_match", "runtimeMatch"], None)),
     ("P1", "a third write", SNAP, lambda d: d["public"]["sky_sol"]["totalSupply_writes"].append("totalSupply = 0;")),
@@ -266,12 +267,18 @@ MUTATIONS = [
     ("O4", "window end is not the month's last block", SNAP, block_time(SEP + 1, lambda t: t - 13)),
     ("O4", "burn on another day", SNAP, lambda d: block_time(rows(d, BURNS_AFTER)[0][1][0], lambda t: t + 86400)(d)),
     ("O4", "a second matching run", SNAP, zero_kick_at_end(KICKS_SEP, BOUGHT_SEP)),
-    ("O5", "A.2 wording changed", SNAP, setpub(["atlas_now", "clauses", "A.2.3.1.2.4", "quotes_present"], [False])),
+    ("O5", "A.2 wording changed", SNAP, setpub(["atlas_now", "clauses", "A.2.3.1.2.4", "quotes_present"], [True, False])),
+    ("O5", "A.4 wording changed", SNAP, setpub(["atlas_now", "clauses", "A.4.1.2.2.3", "quotes_present"], [True, True, False])),
+    ("O5", "A.2 clause renumbered", SNAP, setpub(["atlas_now", "clauses", "A.2.3.1.2.4", "document_number"], "A.2.3.1.2.5")),
     ("O5", "A.4 clause renumbered", SNAP, setpub(["atlas_now", "clauses", "A.4.1.2.2.3", "document_number"], "A.4.1.2.2.4")),
+    ("O5", "A.2 renamed", SNAP, setpub(["atlas_now", "clauses", "A.2.3.1.2.4", "name"], "Step 3")),
+    ("O5", "A.4 renamed", SNAP, setpub(["atlas_now", "clauses", "A.4.1.2.2.3", "name"], "Burning")),
+    ("O5", "A.2 no longer Core", SNAP, setpub(["atlas_now", "clauses", "A.2.3.1.2.4", "type"], "Section")),
+    ("O5", "A.4 no longer Core", SNAP, setpub(["atlas_now", "clauses", "A.4.1.2.2.3", "type"], "Section")),
 ]
 
 CONDITIONS = {"L1": 2, "L2": 2, "L3": 3, "L5": 2, "L6": 3, "L7": 3, "L8": 5, "L9": 3, "L10": 3, "L11": 5,
-              "P1": 7, "P2": 9, "P3": 5, "P4": 2, "P5": 2, "O1": 4, "O2": 4, "O3": 6, "O4": 5, "O5": 2}
+              "P1": 8, "P2": 9, "P3": 5, "P4": 2, "P5": 2, "O1": 4, "O2": 4, "O3": 6, "O4": 5, "O5": 8}
 NOT_DATA = {"R1"}  # the report's own control counts: no condition
 ERRATA = {"L10"}
 

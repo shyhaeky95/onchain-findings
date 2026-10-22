@@ -69,6 +69,7 @@ REPORT = {
     "falsifier_sky": "177,481.93",
     "atlas_absent": ["non-issuance", "not issued", "no explicit burn", "reduce the supply"],
     "clause_names": {"A.2.3.1.2.4": "Step 3: Smart Burn Engine", "A.4.1.2.2.3": "Burning Of Existing Tokens"},
+    "sky_address": "0x56072c95faa701256059aa122697b133aded9279",
     "atlas_controls": {"Smart Burn Engine": 30, "USDS": 1182},
 }
 
@@ -336,7 +337,7 @@ def results(case=CASE):
                      "same pair over the range": {evm.address_of(d.calls[f"MCD_FLAP.pair()@{b}"]["result"]) for b in (B_START, SCALE_END)}
                      == {d.snap["addresses"]["pair"]}},
             "Pairing by transaction makes the SKY leg 8,656 logs as well. The chainlog's MCD_FLAP and its pair() are the "
-            "same at both ends of the range as at the cast, so no kick went through another flapper or pair.")
+            "same at both ends of the range as at the cast; that does not rule out a change and a change back in between.")
     split = Fraction(d.word("MCD_SPLIT.burn()"), WEI)
     r.check("L12", "MCD_SPLIT.burn() at block 25,780,667", REPORT["split_burn"], f"{float(split):g}", REREAD,
             {"0.55": f"{float(split):g}" == REPORT["split_burn"]})
@@ -352,7 +353,9 @@ def results(case=CASE):
     r.check("P1", "verified Sky.sol: the only writes to totalSupply are mint (+) and burn (−), each followed by its Transfer",
             "two writes; Transfer(address(0), to) / Transfer(from, address(0))",
             f"{len(sol['totalSupply_writes'])} writes; {' / '.join(sol['next_emit_after_each_write'])}", PUBLIC,
-            {"single source file": len(sol["source_files"]) == 1,
+            {"source of the SKY the report names, which the chainlog returns":
+                 sol["address"] == REPORT["sky_address"] == d.snap["addresses"]["SKY"],
+             "single source file": len(sol["source_files"]) == 1,
              "Sourcify matches the deployed code": sol["sourcify_match"].get("runtimeMatch") in ("match", "exact_match"),
              "two writes": len(sol["totalSupply_writes"]) == 2,
              "mint adds": sol["totalSupply_writes"][0:1] == ["totalSupply = totalSupply + value;"],
@@ -363,7 +366,8 @@ def results(case=CASE):
             f"'{sol['sourcify_match'].get('runtimeMatch')}'.")
     at = pub["atlas_at_report"]
     r.check("P2", "the two [Core] clauses, in the Atlas the day the report was posted",
-            "A.2.3.1.2.4 - Step 3: Smart Burn Engine [Core]: '… are burned.' · A.4.1.2.2.3 - Burning Of Existing Tokens [Core]: "
+            "A.2.3.1.2.4 - Step 3: Smart Burn Engine [Core]: 45% bought back for staking rewards, 10% '… are burned.' · "
+            "A.4.1.2.2.3 - Burning Of Existing Tokens [Core]: "
             "'At the same time that no new SKY tokens are issued … bought back and burned on a regular basis … continue to decrease', "
             "restating A.2.3.1.2.4",
             " · ".join(f"{no}: {c['document_number']} - {c['name']} [{c['type']}] {c['quotes_present']} refers to {c['refers_to']}"
@@ -449,10 +453,14 @@ def results(case=CASE):
                   f"the {len(all_kicks):,} kicks from the cast to 30 September was tried; only this one is within 1 SKY."
                   + (" It contains window A, so the 177,481.93 SKY of A1 is inside this burn." if cid == "O3" else ""))
     now_atlas = pub["atlas_now"]
-    r.observe("O5", "the two clauses in the Atlas as of 2026-10-22", "wording unchanged",
-              " · ".join(f"{no}: {c['quotes_present']}" for no, c in now_atlas["clauses"].items()), PUBLIC,
-              {f"{no} unchanged": c["document_number"] == no and all(c["quotes_present"]) for no, c in now_atlas["clauses"].items()},
-              f"next-gen-atlas at {now_atlas['commit'][:10]}.")
+    r.observe("O5", "the two clauses in the Atlas as of 2026-10-22", "number, name, [Core] and the quoted passages as at the report",
+              " · ".join(f"{no}: {c['document_number']} - {c['name']} [{c['type']}] {c['quotes_present']}"
+                         for no, c in now_atlas["clauses"].items()), PUBLIC,
+              {**{f"{no} number": c["document_number"] == no for no, c in now_atlas["clauses"].items()},
+               **{f"{no} name": c["name"] == REPORT["clause_names"][no] for no, c in now_atlas["clauses"].items()},
+               **{f"{no} [Core]": c["type"] == "Core" for no, c in now_atlas["clauses"].items()},
+               **{f"{no} quoted passages": all(c["quotes_present"]) and c["quotes_present"] != [] for no, c in now_atlas["clauses"].items()}},
+              f"next-gen-atlas at {now_atlas['commit'][:10]}. Only these passages are checked, not the whole text of each clause.")
     return r.rows
 
 

@@ -3,6 +3,7 @@
 Standard library only. Endpoints and keys are read from the environment by the caller and are
 never written to disk; nothing here prints them.
 """
+import http.client
 import json
 import socket
 import time
@@ -148,13 +149,15 @@ class ReaderError(Exception):
     """A read that did not give an answer (as opposed to a call that reverted)."""
 
 
-TRANSPORT_ERRORS = (urllib.error.URLError, socket.timeout, TimeoutError, ConnectionError, json.JSONDecodeError)
+TRANSPORT_ERRORS = (urllib.error.URLError, http.client.HTTPException, socket.timeout, TimeoutError, ConnectionError,
+                    json.JSONDecodeError)
+THROTTLE_WORDS = ("rate limit", "rate-limit", "ratelimit", "rate exceeded", "too many requests", "capacity", "timeout", "timed out")
 
 
 def _throttled(error):
     """A JSON-RPC error that means "slow down", as opposed to an answer or a refused request."""
     msg = str(error.get("message", "")).lower()
-    return error.get("code") in (429, -32005) or "rate" in msg or "too many" in msg or "capacity" in msg or "timeout" in msg
+    return error.get("code") == 429 or any(w in msg for w in THROTTLE_WORDS)
 
 
 def _post(url, body, timeout=60):

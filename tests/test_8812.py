@@ -284,6 +284,8 @@ MUTATIONS = [
     ("P4", "SupplySideRevenue text gone", SNAP, setpub(["adapter_before_fix", "supply_side_text_pre_saturn"], False)),
     ("P4", "Revenue text gone", SNAP, setpub(["adapter_before_fix", "revenue_text_no_cut"], False)),
     ("P4", "a UserFees label", SNAP, setpub(["adapter_before_fix", "has_user_fees_label"], True)),
+    ("P4", "a fourth methodology label", SNAP,
+     setpub(["adapter_before_fix", "methodology_labels"], ["Fees", "Revenue", "SupplySideRevenue", "HoldersRevenue"])),
     ("P4", "a ProtocolRevenue label", SNAP, setpub(["adapter_before_fix", "has_protocol_revenue_label"], True)),
     ("O1", "not merged", SNAP, setpub(["pr_8833", "merged_at"], None)),
     ("O1", "does not close #8812", SNAP, setpub(["pr_8833", "body_closes_8812"], False)),
@@ -296,7 +298,7 @@ MUTATIONS = [
 ]
 
 CONDITIONS = {"L1": 2, "L2": 2, "L5": 6, "L6": 2, "L8": 3, "L9": 4, "L10": 7, "L11": 3, "L12": 4, "L13": 4, "L14": 5,
-              "P1": 5, "P3": 5, "P4": 4, "O1": 3, "O2": 2, "O3": 3}
+              "P1": 5, "P3": 5, "P4": 5, "O1": 3, "O2": 2, "O3": 3}
 # Rows no data change can break: R1 has no condition (the report's own text), and A4 checks the report's printed
 # topic0 against Keccak-256 of the signature, a constant; TestConstantRows covers it.
 NOT_DATA = {"R1", "A4"}

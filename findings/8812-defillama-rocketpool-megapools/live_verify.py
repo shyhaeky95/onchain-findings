@@ -166,6 +166,12 @@ def gh(path):
     return json.loads(http(f"https://api.github.com/repos/{GITHUB}/{path}"))
 
 
+def methodology_labels(text):
+    """Top-level keys of the adapter's `methodology` object, in order."""
+    m = re.search(r"\bmethodology\s*[:=]\s*\{(.*?)\n\s*\}", text, re.S)
+    return re.findall(r"^\s*(\w+)\s*:", m.group(1), re.M) if m else None
+
+
 def adapter_facts(src):
     text = src.decode()
     return {
@@ -178,6 +184,7 @@ def adapter_facts(src):
         "subtracts_24_and_16_eth": "24e18" in text and "16e18" in text,
         "supply_side_text_pre_saturn": SUPPLY_SIDE_TEXT in text,
         "revenue_text_no_cut": "Rocket Pool protocol doesn't take any fees or rewards cut." in text,
+        "methodology_labels": methodology_labels(text),
         "has_user_fees_label": bool(re.search(r"\bUserFees\b", text)),
         "has_protocol_revenue_label": bool(re.search(r"\bProtocolRevenue\b", text)),
         "reads_megapool_exists_flag": "megapool.exists" in text,
@@ -251,7 +258,7 @@ def main(argv=None, rpc=None, logs=None):
             print(f"endpoint does not serve history: {checks}", file=sys.stderr)
             return 2
         fresh = read_chain(Reads(rpc, logs))
-    except (evm.ReaderError,) + evm.TRANSPORT_ERRORS as e:
+    except Exception as e:  # any failure while reading means nothing was compared: never exit 1 for it
         print(f"a read failed, nothing compared: {type(e).__name__}: {e}", file=sys.stderr)
         return 2
     try:

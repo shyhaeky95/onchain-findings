@@ -290,7 +290,7 @@ def results(case=CASE):
     r.check("L6", "rETH EtherDeposited from the 31 megapools, block 0 to 25,772,216",
             f"{REPORT['deposits']} logs, {eth(REPORT['skipped_wei'])} ETH", f"{len(deposits)} logs, {eth(skipped)} ETH", REREAD,
             {"53 logs": len(deposits) == REPORT["deposits"], "total to the wei": skipped == REPORT["skipped_wei"]},
-            f"Largest per-address count: {per_address} (the report: no address reached a 1,000-log page). "
+            f"Largest per-address count: {per_address} (the report: no address reached a 1,000-log page; implied by the 53-log total). "
             "A lower bound: only megapools that emitted RewardsDistributed are in the seed set.")
     control = s.logs["rETH EtherDeposited from minipool 42316"]
     r.check("L7", "positive control: the same query for minipool 0x3b7fe930…22fb", REPORT["control_logs"], len(control),
@@ -412,10 +412,12 @@ def results(case=CASE):
 
     r.check("P4", "the methodology strings in fees/rocketpool.ts: SupplySideRevenue still describes the pre-Saturn split; "
             "only Fees, Revenue and SupplySideRevenue appear",
-            f"'{REPORT['supply_side_text']}'; no UserFees, no ProtocolRevenue",
+            f"'{REPORT['supply_side_text']}'; labels Fees, Revenue, SupplySideRevenue; no UserFees, no ProtocolRevenue",
             f"SupplySideRevenue text {pre['supply_side_text_pre_saturn']}, Revenue text {pre['revenue_text_no_cut']}, "
-            f"UserFees {pre['has_user_fees_label']}, ProtocolRevenue {pre['has_protocol_revenue_label']}", PUBLIC,
+            f"methodology labels {pre['methodology_labels']}, UserFees anywhere {pre['has_user_fees_label']}, "
+            f"ProtocolRevenue anywhere {pre['has_protocol_revenue_label']}", PUBLIC,
             {"SupplySideRevenue text": pre["supply_side_text_pre_saturn"], "Revenue text": pre["revenue_text_no_cut"],
+             "exactly three methodology labels": pre["methodology_labels"] == ["Fees", "Revenue", "SupplySideRevenue"],
              "no UserFees": not pre["has_user_fees_label"], "no ProtocolRevenue": not pre["has_protocol_revenue_label"]},
             "Same file as P1.")
     r.record("R1", "two further methodology strings in DefiLlama's API response of 2026-08-17",

@@ -59,7 +59,9 @@ ATLAS_AT_REPORT = "2026-08-18T12:00:21Z"   # the report was posted at this time
 ATLAS_MID_JULY = "2026-07-16T00:00:00Z"    # the report: the A.4.1.2.2.3 wording was checked back to a 2026-07-15 snapshot
 CLAUSES = {"A.2.3.1.2.4": "5ce73730-4d5d-479c-b01e-40e87f072121", "A.4.1.2.2.3": "5b94d42a-28fa-40fa-8948-ba3113a4d5b8"}
 QUOTES = {
-    "A.2.3.1.2.4": ["Ten percent (10%) of Step 3 Capital is used by the Smart Burn Engine to buy back SKY, and the SKY "
+    "A.2.3.1.2.4": ["Forty-five percent (45%) of Step 3 Capital is used by the Smart Burn Engine to buy back SKY, and "
+                    "the SKY tokens acquired through these buybacks are distributed to SKY stakers as SKY Staking Rewards",
+                    "Ten percent (10%) of Step 3 Capital is used by the Smart Burn Engine to buy back SKY, and the SKY "
                     "tokens acquired through these buybacks are burned."],
     "A.4.1.2.2.3": ["At the same time that no new SKY tokens are issued",
                     "SKY tokens are bought back and burned on a regular basis",
@@ -248,7 +250,8 @@ def public_state():
         "atlas_mid_july": dict(atlas_facts(mid_july["sha"]), committed_at=mid_july["commit"]["committer"]["date"]),
         "forum_28153_post_1": {"author": post.get("username"), "created_at": post.get("created_at"),
                                "quotes_present": [q in cooked for q in FORUM_QUOTES]},
-        "sky_sol": {"sha256": hashlib.sha256(sky_sol.encode()).hexdigest(), "source_files": sorted(src),
+        "sky_sol": {"address": SOURCIFY.rsplit("/", 1)[-1].lower(), "sha256": hashlib.sha256(sky_sol.encode()).hexdigest(),
+                    "source_files": sorted(src),
                     "sourcify_match": {k: verified.get(k) for k in ("match", "runtimeMatch", "creationMatch")},
                     "totalSupply_writes": [lines[i] for i in writes],
                     "next_emit_after_each_write": [next((l for l in lines[i + 1:] if l.startswith("emit ")), None) for i in writes]},
@@ -310,7 +313,7 @@ def main(argv=None, rpc=None, logs=None):
             return 2
         now = int(rpc.request("eth_blockNumber", []), 16) - 64 if args.write else saved["pinned_head"]
         fresh, big = read_chain(Reads(rpc, logs), now)
-    except (evm.ReaderError,) + evm.TRANSPORT_ERRORS as e:
+    except Exception as e:  # any failure while reading means nothing was compared: never exit 1 for it
         print(f"a read failed, nothing compared: {type(e).__name__}: {e}", file=sys.stderr)
         return 2
     try:

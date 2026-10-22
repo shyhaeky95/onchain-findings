@@ -13,9 +13,9 @@ Code and text here are drafted by an AI agent, which also runs the checks; I rev
 | **Re-read at block (snapshot)** | Read again at the stated block; the result is committed with its date, and the case's `live_verify.py --check` repeats the read for anyone with an archive node. Calls go to an archive node. In the Ethereum cases, logs were read through the Etherscan API v2, keeping only on-chain fields; `live_verify.py` can read them with `eth_getLogs` from your own node instead. |
 | **Public sources as of a date (snapshot)** | What an API, a repository or a GitHub thread showed on that date. |
 | **Arithmetic** | Computed from the rows above; only as strong as its weakest input. |
-| **Recorded** | Only the result was kept at the time; the raw response was not. |
+| **Recorded** | Only the result was kept at the time, or only the report's own text remains; the raw response was not kept. |
 
-Each row is `MATCH` (the evidence supports the report), `ERRATUM` (the report's text is wrong and the evidence equals the documented correction), `RECORDED` (a kept value or extract figure that agrees with the report but is not re-derived; not counted as a match), `OBSERVED` (a fact about the sources after the report; not a statement of the report) or `FAIL`. A checksum only shows that a file has not changed since the manifest was written; each manifest also says where the file came from, or `unknown`.
+Each row is `MATCH` (the evidence supports the report), `ERRATUM` (the report's text is wrong and the evidence equals the documented correction), `RECORDED` (a kept value or extract figure that agrees with the report, or a statement that exists only in the report's text; not re-derived and not counted as a match), `OBSERVED` (a fact about the sources after the report; not a statement of the report) or `FAIL`. A checksum only shows that a file has not changed since the manifest was written; each manifest also says where the file came from, or `unknown`.
 
 ## Cases
 
