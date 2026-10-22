@@ -1,0 +1,16 @@
+{
+  "case": "DefiLlama/dimension-adapters#8812",
+  "about": "SHA-256 shows a file is unchanged since this manifest was written. It does not show the file was fetched correctly; the provenance fields say where each file came from.",
+  "files": [
+    {
+      "path": "data/live_snapshot.json",
+      "kind": "snapshot",
+      "source": "Ethereum mainnet: calls and block headers from an archive node (endpoint not recorded), logs through the Etherscan API v2 (only on-chain fields kept); GitHub API and raw.githubusercontent.com for the adapter and its pull requests",
+      "request": "live_verify.py --write",
+      "fetched_at": "see checked_at_utc in the file",
+      "notes": "Every call and log query is pinned to a block, so live_verify.py --check repeats the read against any Ethereum archive endpoint and compares.",
+      "sha256": "13f46572ab4ae8e50a15be45d7f1ab8e554028011f99f3635709b0008aee0346",
+      "bytes": 118655
+    }
+  ]
+}

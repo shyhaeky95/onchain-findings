@@ -1,0 +1,26 @@
+{
+  "case": "sky-ecosystem/next-gen-atlas#306",
+  "about": "SHA-256 shows a file is unchanged since this manifest was written. It does not show the file was fetched correctly; the provenance fields say where each file came from.",
+  "files": [
+    {
+      "path": "data/live_snapshot.json",
+      "kind": "snapshot",
+      "source": "Ethereum mainnet: calls and block headers from an archive node (endpoint not recorded), logs through the Etherscan API v2 (only on-chain fields kept); GitHub API and codeload.github.com for the issue and the Atlas, forum.skyeco.com for the forum note, Sourcify for Sky.sol",
+      "request": "live_verify.py --write",
+      "fetched_at": "see checked_at_utc in data/live_snapshot.json",
+      "notes": "Every call and log query is pinned to a block, so live_verify.py --check repeats the read against any Ethereum archive endpoint and compares. Post-report rows use the head pinned at write time (pinned_head).",
+      "sha256": "bcb7b8ff5799dc2c495cfb0b82800e9244ce23dff9c547fc7b0028748c15def9",
+      "bytes": 454947
+    },
+    {
+      "path": "data/window_b_buybacks.json",
+      "kind": "snapshot",
+      "source": "Ethereum mainnet logs through the Etherscan API v2 (only on-chain fields kept)",
+      "request": "live_verify.py --write",
+      "fetched_at": "see checked_at_utc in data/live_snapshot.json",
+      "notes": "The two log queries of the report's buyback-scale range (8,656 transfers on each leg), one row per log; written by the same live_verify.py --write run.",
+      "sha256": "bc2d431ceba55cdb8ef356da0ac456936cf4bd618c0d6605143b64ff0905e918",
+      "bytes": 2747569
+    }
+  ]
+}

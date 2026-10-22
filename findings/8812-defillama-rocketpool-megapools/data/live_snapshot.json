@@ -1,0 +1,2902 @@
+{
+ "case": "DefiLlama/dimension-adapters#8812",
+ "checked_at_utc": "2026-10-22T03:40:21Z",
+ "readers": {
+  "calls": "archive JSON-RPC (endpoint not recorded)",
+  "logs": "Etherscan API v2 getLogs"
+ },
+ "archive_checks": {
+  "code_at_block_1_empty": true,
+  "factory_address_differs_before_and_after_activation": true,
+  "pass": true
+ },
+ "blocks": {
+  "25772201": {
+   "hash": "0x491069aad45117a93dbcf8a712c3224e6ca4e353ce563fc61a56dcd096c9773b",
+   "timestamp": 1786938383
+  },
+  "25772216": {
+   "hash": "0x9cd88aa63217828d346109f1a51aab0d16a41ff16a9a2583e62c833b4cab90ac",
+   "timestamp": 1786938575
+  },
+  "24479993": {
+   "hash": "0x8c26a07a5b2c987c58afd5e3458115a5ce49e6e6e9cff72780d2dfa7b89f3bfd",
+   "timestamp": 1771372787
+  },
+  "24479994": {
+   "hash": "0xc8bed9b5f5aeddbbaa6f64ae5552a42b08f0efd712a345a822db4301b3481013",
+   "timestamp": 1771372799
+  }
+ },
+ "calls": [
+  {
+   "label": "getAddress(contract.addressrocketTokenRETH)@25772201",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a721e3744443225bff7cc22028be036b80de58057d65a3fdca0a3df329f525e31ccc",
+   "result": "0x000000000000000000000000ae78736cd615f374d3085123a210448e74fc6393"
+  },
+  {
+   "label": "getAddress(contract.addressrocketMinipoolManager)@25772201",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a721e9dfec9339b94a131861a58f1bb4ac4c1ce55c7ffe8550e0b6ebcfde87bb012f",
+   "result": "0x000000000000000000000000e54b8c641fd96de5d6747f47c19964c6b824d62c"
+  },
+  {
+   "label": "getAddress(contract.addressrocketDAOProtocolSettingsNetwork)@25772201",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a721282fd49dacaf2128d6f069f81013ec59ae7081a236fbad29f69dd2383662ce5c",
+   "result": "0x00000000000000000000000067fd03a5095197d1ad1f932bc55e022c420b1153"
+  },
+  {
+   "label": "getAddress(contract.addressrocketNetworkRevenues)@25772201",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a7218f9e2ad2dfaf148af699eed576646085970cad645107033c3eed729180249a5f",
+   "result": "0x0000000000000000000000009d9708da8e0200dd8dd9ad09e0aaf184ad260842"
+  },
+  {
+   "label": "getAddress(contract.addressrocketVault)@25772201",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a72141c30d91bfaf5fa8d610263b0554366f2159a2b6807bf2fdbeb8f2b21a62f17b",
+   "result": "0x0000000000000000000000003bdc69c4e5e13e52a65f5583c23efb9636b469d6"
+  },
+  {
+   "label": "getAddress(contract.addressrocketRewardsPool)@25772201",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a72146c2b81204bf2f9dad36168c4aa8891f039200535328e7da10bb73514970fae4",
+   "result": "0x000000000000000000000000cba5951fc706fc783b7c142dae8576ebe29c41fd"
+  },
+  {
+   "label": "getAddress(contract.addressrocketVault)@25772216",
+   "block": 25772216,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a72141c30d91bfaf5fa8d610263b0554366f2159a2b6807bf2fdbeb8f2b21a62f17b",
+   "result": "0x0000000000000000000000003bdc69c4e5e13e52a65f5583c23efb9636b469d6"
+  },
+  {
+   "label": "getAddress(contract.addressrocketRewardsPool)@25772216",
+   "block": 25772216,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a72146c2b81204bf2f9dad36168c4aa8891f039200535328e7da10bb73514970fae4",
+   "result": "0x000000000000000000000000cba5951fc706fc783b7c142dae8576ebe29c41fd"
+  },
+  {
+   "label": "getAddress(contract.addressrocketMegapoolFactory)@24479993",
+   "block": 24479993,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a7210daa0d715a7b4f4224221c135ef0a61050b0d8b23f030d7c9bb8128781b94eb0",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getAddress(contract.addressrocketMegapoolFactory)@24479994",
+   "block": 24479994,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a7210daa0d715a7b4f4224221c135ef0a61050b0d8b23f030d7c9bb8128781b94eb0",
+   "result": "0x000000000000000000000000d5bffeaa9f373b9c367132772faa0b88e3f0e38b"
+  },
+  {
+   "label": "getAddress(contract.addressrocketMegapoolManager)@24479993",
+   "block": 24479993,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a7212a2b4a8dd1ebf36039ccacb8955595756efac973c96d20c49559e03f5c7154ae",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getAddress(contract.addressrocketMegapoolManager)@24479994",
+   "block": 24479994,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x21f8a7212a2b4a8dd1ebf36039ccacb8955595756efac973c96d20c49559e03f5c7154ae",
+   "result": "0x000000000000000000000000f2ccd522ba5ffeda28fe0389963845d61f342034"
+  },
+  {
+   "label": "megapool.exists(0x001026c70491f0bfd836b8ae2d05dba2fea553b3)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcaf9790823b69b19c48bb9d664515bd0236b3206273c749e07f8f45ff2eb2f2427",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x28f4b296ca87682fb1254033121d685feaa7537a)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca4b815a9b49040fee3c2e208930fd7db23f1ae65bf79e4cbd36d1b9ff27dce4fc",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x2a5552663e53a6b807c3615a625496f265cc0774)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcad602e915c43b361cb602c1cc938dd662681f5f16c4aa0d3a5aa696428f5444be",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x2bf8800f5ba6c5663d2c5783c80732675195f5f1)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcadc8964b1f1a128d5c07c846de4e2fd01eeb2a046665f9db6b03c7cd727b618e2",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x34558f6ec05f91773b7d269f50ce0bbec4403760)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca08cf7afcfc32cb0a5d4386192757c0f9b758ca883d9ca0ef32db4fc922dad342",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "megapool.exists(0x3993a11d14b39a816e122e04575d867eb5fa2f14)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca887af4273877bbfd6761f1e8e1064e7cbdca327f320eb35dcde4d200ce82ac78",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x39c3911cad928028a40e7ae65bbcab292f56e4a5)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca965b4927f32b7fd5ee4b03719f5cbb4edd1e34038f171b17803086c9b1a548ff",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x3cb664484946227a0e6e7dafd930dbfe3b86fb11)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca3d4e650407ada25ee1f6ff371bac0b2a57ce22d28acefc4cad3588b5a483cd81",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca250615b1016d1023bb3cf189840b634e964e85dfcda43a9d2ca25fb98996c2d3",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x3fe49eae720d868e878bc227e3b5edcdedbf46f4)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca04c1bc78a7989332c57a80a3af288f4d1559d5eb1273a914b2c7ba9838b6687b",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x410a22b5c662b9e3a03dca5672c06ac8f6506b36)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcadac062f67fbb127643b3b4dd15acab5d055a958d45016b20d757105bd805144d",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x46e5cd357cd6dac27c707906e2cc886fbce1674b)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcacf6c4c6bc27a74c3683d3686083ba6a7c824b786e23641571f3803efc26f2773",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x543dba54e98feb402dc11a4ad476c9ab892e81dc)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcab76e62c5de1e6b26b95239f77bcea7de22fc01667c6935fcc25c54753bbe1fc7",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcad66b732a97ec1591049af5e6869251608119b1d628c64b55d28e8a6b1fe2d8e9",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcaf7295c62a855698e75636ba8afb9c5399a6573647112e2cada521860fb9e6037",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x85aae9b1b4016e46c1e23761f14d2fb768a868ba)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca176dca6e7ed7c33b22c1ba0dcfb9480f655bdc47233003c6f2ae853cbe084b31",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x8f74e925a69b5a4639323e70ff07ea22b3072f04)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcab34d68564549bfae1e22fd38caba1410e2117899e28e7cbcb6e2d4b8f857a398",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca5015472e1a455ed97384d595d481de8215fec9df9926d176a0ce556aa3f576ba",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xa8ae9700f19230ca8beb04bb6ecd17f205d50618)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca5eadc7d2ed42a3bfc0afe20d78e5150af578e65554617237672662c01c139a38",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xaabc622455e489f27ffe18697bb6f09c8fee7287)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca52128db521098149b8254299b62efb4e725daab8f765206c28cb298ba522f3b0",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xaba524ac37db09c3b212bab69d4ec623cefaec73)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca7024312201601bc9e82ae61406b427958d6d4b239411b288397f001afad85ef6",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xb03a15f087ddeae2c88c659ba24dcca8f8609e13)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca31e48a76b26ea697fa08696340c763b0367a7a28ae0fd3486d58022f50af704a",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca71c86d78fb901699c542d03f1b2e580290e141655b8eb6dcf8802cf1c7406d51",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xcb45405e4ec86e64c39820789b591ec33c460473)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcae07b2ea71277486e2e0aacd9eee670e7bbcb6304e1cdf9ca771f49e81582ab63",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca530e89cca75fb24f08e0d1d4fb6ec2b9f7be0074335ffa7e23cca6e01a1be833",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xe53aaf695bc50007a60fcd997181222636b6dc6f)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca5d5a37e6d8498cb4dfd337cf1cb3b11dd7bfbcdf606961e704c7b20ed4f657ee",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xf0b97ef86a1c491fd794fb7853b8c87c05d26004)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcaf5a22a7d9ae41006a683283bef347b91c8bb6189840dcf7aa39f24970c523df6",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca06e079f1779ca09c1b8a838c6f49a573f76a3e77be66624cc49127be27f4669f",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca2cb2cb0e884fa2e8cc65a58fa83de9776e4fd9629a242aadd2974388e5a9f1fb",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xf70f8aaa9f837a5eb963036243178e81b26ceeb0)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca5d96141656ad3454b133954b21d56f327846e06d071cc70bee2c89489fbc50b5",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfca4f477daa386dbac9f388e28b86c6fb27ad3cde3d4c896fa242311fc51f19600f",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "megapool.exists(0xfede54fd2c4838bbb43c9d130d642d81d0d4c381)",
+   "block": 25772201,
+   "to": "0x1d8f8f00cfa6758d7be78336684788fb0ee0fa46",
+   "data": "0x7ae1cfcaa45fc65421b4dd7e2cd7c0d2e629f15bb34f238077c495e846c783b7aa196079",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x001026c70491f0bfd836b8ae2d05dba2fea553b3",
+   "block": 25772201,
+   "to": "0x001026c70491f0bfd836b8ae2d05dba2fea553b3",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x001026c70491f0bfd836b8ae2d05dba2fea553b3",
+   "block": 25772201,
+   "to": "0x001026c70491f0bfd836b8ae2d05dba2fea553b3",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x001026c70491f0bfd836b8ae2d05dba2fea553b3)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000001026c70491f0bfd836b8ae2d05dba2fea553b3",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x28f4b296ca87682fb1254033121d685feaa7537a",
+   "block": 25772201,
+   "to": "0x28f4b296ca87682fb1254033121d685feaa7537a",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x28f4b296ca87682fb1254033121d685feaa7537a",
+   "block": 25772201,
+   "to": "0x28f4b296ca87682fb1254033121d685feaa7537a",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x28f4b296ca87682fb1254033121d685feaa7537a)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e00000000000000000000000028f4b296ca87682fb1254033121d685feaa7537a",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x2a5552663e53a6b807c3615a625496f265cc0774",
+   "block": 25772201,
+   "to": "0x2a5552663e53a6b807c3615a625496f265cc0774",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x2a5552663e53a6b807c3615a625496f265cc0774",
+   "block": 25772201,
+   "to": "0x2a5552663e53a6b807c3615a625496f265cc0774",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x2a5552663e53a6b807c3615a625496f265cc0774)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000002a5552663e53a6b807c3615a625496f265cc0774",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+   "block": 25772201,
+   "to": "0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+   "block": 25772201,
+   "to": "0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x2bf8800f5ba6c5663d2c5783c80732675195f5f1)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000002bf8800f5ba6c5663d2c5783c80732675195f5f1",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x3993a11d14b39a816e122e04575d867eb5fa2f14",
+   "block": 25772201,
+   "to": "0x3993a11d14b39a816e122e04575d867eb5fa2f14",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x3993a11d14b39a816e122e04575d867eb5fa2f14",
+   "block": 25772201,
+   "to": "0x3993a11d14b39a816e122e04575d867eb5fa2f14",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x3993a11d14b39a816e122e04575d867eb5fa2f14)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000003993a11d14b39a816e122e04575d867eb5fa2f14",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x39c3911cad928028a40e7ae65bbcab292f56e4a5",
+   "block": 25772201,
+   "to": "0x39c3911cad928028a40e7ae65bbcab292f56e4a5",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x39c3911cad928028a40e7ae65bbcab292f56e4a5",
+   "block": 25772201,
+   "to": "0x39c3911cad928028a40e7ae65bbcab292f56e4a5",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x39c3911cad928028a40e7ae65bbcab292f56e4a5)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e00000000000000000000000039c3911cad928028a40e7ae65bbcab292f56e4a5",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x3cb664484946227a0e6e7dafd930dbfe3b86fb11",
+   "block": 25772201,
+   "to": "0x3cb664484946227a0e6e7dafd930dbfe3b86fb11",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x3cb664484946227a0e6e7dafd930dbfe3b86fb11",
+   "block": 25772201,
+   "to": "0x3cb664484946227a0e6e7dafd930dbfe3b86fb11",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x3cb664484946227a0e6e7dafd930dbfe3b86fb11)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000003cb664484946227a0e6e7dafd930dbfe3b86fb11",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+   "block": 25772201,
+   "to": "0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+   "block": 25772201,
+   "to": "0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000003ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x3fe49eae720d868e878bc227e3b5edcdedbf46f4",
+   "block": 25772201,
+   "to": "0x3fe49eae720d868e878bc227e3b5edcdedbf46f4",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x3fe49eae720d868e878bc227e3b5edcdedbf46f4",
+   "block": 25772201,
+   "to": "0x3fe49eae720d868e878bc227e3b5edcdedbf46f4",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x3fe49eae720d868e878bc227e3b5edcdedbf46f4)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000003fe49eae720d868e878bc227e3b5edcdedbf46f4",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+   "block": 25772201,
+   "to": "0x410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+   "block": 25772201,
+   "to": "0x410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x410a22b5c662b9e3a03dca5672c06ac8f6506b36)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x46e5cd357cd6dac27c707906e2cc886fbce1674b",
+   "block": 25772201,
+   "to": "0x46e5cd357cd6dac27c707906e2cc886fbce1674b",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x46e5cd357cd6dac27c707906e2cc886fbce1674b",
+   "block": 25772201,
+   "to": "0x46e5cd357cd6dac27c707906e2cc886fbce1674b",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x46e5cd357cd6dac27c707906e2cc886fbce1674b)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e00000000000000000000000046e5cd357cd6dac27c707906e2cc886fbce1674b",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x543dba54e98feb402dc11a4ad476c9ab892e81dc",
+   "block": 25772201,
+   "to": "0x543dba54e98feb402dc11a4ad476c9ab892e81dc",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x543dba54e98feb402dc11a4ad476c9ab892e81dc",
+   "block": 25772201,
+   "to": "0x543dba54e98feb402dc11a4ad476c9ab892e81dc",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x543dba54e98feb402dc11a4ad476c9ab892e81dc)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000543dba54e98feb402dc11a4ad476c9ab892e81dc",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924",
+   "block": 25772201,
+   "to": "0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924",
+   "block": 25772201,
+   "to": "0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000006394c9e9e2d5f2a14eafa5614b8254a4a7c0a924",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73",
+   "block": 25772201,
+   "to": "0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73",
+   "block": 25772201,
+   "to": "0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000007c83b68b2998eb3aaf5715da9ea77fc817bc6a73",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x85aae9b1b4016e46c1e23761f14d2fb768a868ba",
+   "block": 25772201,
+   "to": "0x85aae9b1b4016e46c1e23761f14d2fb768a868ba",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x85aae9b1b4016e46c1e23761f14d2fb768a868ba",
+   "block": 25772201,
+   "to": "0x85aae9b1b4016e46c1e23761f14d2fb768a868ba",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x85aae9b1b4016e46c1e23761f14d2fb768a868ba)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e00000000000000000000000085aae9b1b4016e46c1e23761f14d2fb768a868ba",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x8f74e925a69b5a4639323e70ff07ea22b3072f04",
+   "block": 25772201,
+   "to": "0x8f74e925a69b5a4639323e70ff07ea22b3072f04",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x8f74e925a69b5a4639323e70ff07ea22b3072f04",
+   "block": 25772201,
+   "to": "0x8f74e925a69b5a4639323e70ff07ea22b3072f04",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x8f74e925a69b5a4639323e70ff07ea22b3072f04)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000008f74e925a69b5a4639323e70ff07ea22b3072f04",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049",
+   "block": 25772201,
+   "to": "0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049",
+   "block": 25772201,
+   "to": "0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e0000000000000000000000009b58c444689a7a3b80b1a3b9f60fb2439c8e2049",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xa8ae9700f19230ca8beb04bb6ecd17f205d50618",
+   "block": 25772201,
+   "to": "0xa8ae9700f19230ca8beb04bb6ecd17f205d50618",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xa8ae9700f19230ca8beb04bb6ecd17f205d50618",
+   "block": 25772201,
+   "to": "0xa8ae9700f19230ca8beb04bb6ecd17f205d50618",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xa8ae9700f19230ca8beb04bb6ecd17f205d50618)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000a8ae9700f19230ca8beb04bb6ecd17f205d50618",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xaabc622455e489f27ffe18697bb6f09c8fee7287",
+   "block": 25772201,
+   "to": "0xaabc622455e489f27ffe18697bb6f09c8fee7287",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xaabc622455e489f27ffe18697bb6f09c8fee7287",
+   "block": 25772201,
+   "to": "0xaabc622455e489f27ffe18697bb6f09c8fee7287",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xaabc622455e489f27ffe18697bb6f09c8fee7287)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000aabc622455e489f27ffe18697bb6f09c8fee7287",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xaba524ac37db09c3b212bab69d4ec623cefaec73",
+   "block": 25772201,
+   "to": "0xaba524ac37db09c3b212bab69d4ec623cefaec73",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xaba524ac37db09c3b212bab69d4ec623cefaec73",
+   "block": 25772201,
+   "to": "0xaba524ac37db09c3b212bab69d4ec623cefaec73",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xaba524ac37db09c3b212bab69d4ec623cefaec73)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000aba524ac37db09c3b212bab69d4ec623cefaec73",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xb03a15f087ddeae2c88c659ba24dcca8f8609e13",
+   "block": 25772201,
+   "to": "0xb03a15f087ddeae2c88c659ba24dcca8f8609e13",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xb03a15f087ddeae2c88c659ba24dcca8f8609e13",
+   "block": 25772201,
+   "to": "0xb03a15f087ddeae2c88c659ba24dcca8f8609e13",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xb03a15f087ddeae2c88c659ba24dcca8f8609e13)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000b03a15f087ddeae2c88c659ba24dcca8f8609e13",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5",
+   "block": 25772201,
+   "to": "0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5",
+   "block": 25772201,
+   "to": "0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000c970f6ae512b4550549eb12f6d7e83a366e4a5d5",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xcb45405e4ec86e64c39820789b591ec33c460473",
+   "block": 25772201,
+   "to": "0xcb45405e4ec86e64c39820789b591ec33c460473",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xcb45405e4ec86e64c39820789b591ec33c460473",
+   "block": 25772201,
+   "to": "0xcb45405e4ec86e64c39820789b591ec33c460473",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xcb45405e4ec86e64c39820789b591ec33c460473)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000cb45405e4ec86e64c39820789b591ec33c460473",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9",
+   "block": 25772201,
+   "to": "0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9",
+   "block": 25772201,
+   "to": "0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000dd216589b39dcc6a4d697720aa76dd0b1fde1fc9",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xe53aaf695bc50007a60fcd997181222636b6dc6f",
+   "block": 25772201,
+   "to": "0xe53aaf695bc50007a60fcd997181222636b6dc6f",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xe53aaf695bc50007a60fcd997181222636b6dc6f",
+   "block": 25772201,
+   "to": "0xe53aaf695bc50007a60fcd997181222636b6dc6f",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xe53aaf695bc50007a60fcd997181222636b6dc6f)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000e53aaf695bc50007a60fcd997181222636b6dc6f",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xf0b97ef86a1c491fd794fb7853b8c87c05d26004",
+   "block": 25772201,
+   "to": "0xf0b97ef86a1c491fd794fb7853b8c87c05d26004",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xf0b97ef86a1c491fd794fb7853b8c87c05d26004",
+   "block": 25772201,
+   "to": "0xf0b97ef86a1c491fd794fb7853b8c87c05d26004",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xf0b97ef86a1c491fd794fb7853b8c87c05d26004)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000f0b97ef86a1c491fd794fb7853b8c87c05d26004",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+   "block": 25772201,
+   "to": "0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+   "block": 25772201,
+   "to": "0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000f289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97",
+   "block": 25772201,
+   "to": "0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97",
+   "block": 25772201,
+   "to": "0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000f4f7d306811a705b8708ba4e4aa5c50dd6130d97",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xf70f8aaa9f837a5eb963036243178e81b26ceeb0",
+   "block": 25772201,
+   "to": "0xf70f8aaa9f837a5eb963036243178e81b26ceeb0",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xf70f8aaa9f837a5eb963036243178e81b26ceeb0",
+   "block": 25772201,
+   "to": "0xf70f8aaa9f837a5eb963036243178e81b26ceeb0",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xf70f8aaa9f837a5eb963036243178e81b26ceeb0)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000f70f8aaa9f837a5eb963036243178e81b26ceeb0",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0",
+   "block": 25772201,
+   "to": "0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0",
+   "block": 25772201,
+   "to": "0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000f95eda8bd59cfdb5f20620bbff9dc905f82efba0",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getNodeDepositBalance()@0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+   "block": 25772201,
+   "to": "0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+   "data": "0x74ca6bf2",
+   "reverted": true
+  },
+  {
+   "label": "getNodeFee()@0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+   "block": 25772201,
+   "to": "0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+   "data": "0xe7150134",
+   "reverted": true
+  },
+  {
+   "label": "getMinipoolExists(0xfede54fd2c4838bbb43c9d130d642d81d0d4c381)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0x606bb62e000000000000000000000000fede54fd2c4838bbb43c9d130d642d81d0d4c381",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getMinipoolCount()",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0xae4d0bed",
+   "result": "0x000000000000000000000000000000000000000000000000000000000000a54d"
+  },
+  {
+   "label": "getMinipoolAt(0)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0xeff7319f0000000000000000000000000000000000000000000000000000000000000000",
+   "result": "0x00000000000000000000000056b678c9be79dbf30b19f7361aeb5c7bcb973916"
+  },
+  {
+   "label": "getNodeDepositBalance()@minipool 0",
+   "block": 25772201,
+   "to": "0x56b678c9be79dbf30b19f7361aeb5c7bcb973916",
+   "data": "0x74ca6bf2",
+   "result": "0x0000000000000000000000000000000000000000000000006f05b59d3b200000"
+  },
+  {
+   "label": "getNodeFee()@minipool 0",
+   "block": 25772201,
+   "to": "0x56b678c9be79dbf30b19f7361aeb5c7bcb973916",
+   "data": "0xe7150134",
+   "result": "0x00000000000000000000000000000000000000000000000001f161421c8e0000"
+  },
+  {
+   "label": "getMinipoolAt(21158)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0xeff7319f00000000000000000000000000000000000000000000000000000000000052a6",
+   "result": "0x0000000000000000000000005077d219441e0b1e09d7f27d47c2616b09168697"
+  },
+  {
+   "label": "getNodeDepositBalance()@minipool 21158",
+   "block": 25772201,
+   "to": "0x5077d219441e0b1e09d7f27d47c2616b09168697",
+   "data": "0x74ca6bf2",
+   "result": "0x0000000000000000000000000000000000000000000000006f05b59d3b200000"
+  },
+  {
+   "label": "getNodeFee()@minipool 21158",
+   "block": 25772201,
+   "to": "0x5077d219441e0b1e09d7f27d47c2616b09168697",
+   "data": "0xe7150134",
+   "result": "0x00000000000000000000000000000000000000000000000001f161421c8e0000"
+  },
+  {
+   "label": "getMinipoolAt(42316)",
+   "block": 25772201,
+   "to": "0xe54b8c641fd96de5d6747f47c19964c6b824d62c",
+   "data": "0xeff7319f000000000000000000000000000000000000000000000000000000000000a54c",
+   "result": "0x0000000000000000000000003b7fe9305625d77d99532eb52c72ef8023c422fb"
+  },
+  {
+   "label": "getNodeDepositBalance()@minipool 42316",
+   "block": 25772201,
+   "to": "0x3b7fe9305625d77d99532eb52c72ef8023c422fb",
+   "data": "0x74ca6bf2",
+   "result": "0x0000000000000000000000000000000000000000000000006f05b59d3b200000"
+  },
+  {
+   "label": "getNodeFee()@minipool 42316",
+   "block": 25772201,
+   "to": "0x3b7fe9305625d77d99532eb52c72ef8023c422fb",
+   "data": "0xe7150134",
+   "result": "0x00000000000000000000000000000000000000000000000000b1a2bc2ec50000"
+  },
+  {
+   "label": "getVoterShare()",
+   "block": 25772201,
+   "to": "0x67fd03a5095197d1ad1f932bc55e022c420b1153",
+   "data": "0x9f12e7d4",
+   "result": "0x000000000000000000000000000000000000000000000000013fbe85edc90000"
+  },
+  {
+   "label": "getNodeShare()",
+   "block": 25772201,
+   "to": "0x67fd03a5095197d1ad1f932bc55e022c420b1153",
+   "data": "0x372d054b",
+   "result": "0x00000000000000000000000000000000000000000000000000b1a2bc2ec50000"
+  },
+  {
+   "label": "getProtocolDAOShare()",
+   "block": 25772201,
+   "to": "0x67fd03a5095197d1ad1f932bc55e022c420b1153",
+   "data": "0xbe81ac08",
+   "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "label": "getCurrentVoterShare()",
+   "block": 25772201,
+   "to": "0x9d9708da8e0200dd8dd9ad09e0aaf184ad260842",
+   "data": "0xaea63ecd",
+   "result": "0x000000000000000000000000000000000000000000000000013fbe85edc90000"
+  },
+  {
+   "label": "rocketVault.balanceOf(rocketRewardsPool)",
+   "block": 25772216,
+   "to": "0x3bdc69c4e5e13e52a65f5583c23efb9636b469d6",
+   "data": "0x35ee5f8700000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000011726f636b657452657761726473506f6f6c000000000000000000000000000000",
+   "result": "0x000000000000000000000000000000000000000000000000340b9904c5003146"
+  },
+  {
+   "label": "getPendingVoterShare()",
+   "block": 25772216,
+   "to": "0xcba5951fc706fc783b7c142dae8576ebe29c41fd",
+   "data": "0xf96fef66",
+   "result": "0x000000000000000000000000000000000000000000000000340b9904c5003146"
+  }
+ ],
+ "logs": [
+  {
+   "label": "RewardsDistributed, any emitter",
+   "address": null,
+   "topics": [
+    "0xdfc66b0192dcfa0b3073892ad434e2714583b8afbf55182f82177b18d735a746"
+   ],
+   "from": 24416500,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "address",
+    "data"
+   ],
+   "rows": [
+    [
+     24591125,
+     977,
+     "0xb05c99aa73f8c384f2cf9234aa0d5e53aeeb3b24b00959bcb996100d0114334c",
+     "0x34558f6ec05f91773b7d269f50ce0bbec4403760",
+     "0x00000000000000000000000000000000000000000000000161ebd1842bc386e5000000000000000000000000000000000000000000000001667f8de47676a0000000000000000000000000000000000000000000000000000000000000001410000000000000000000000000000000000000000000000000000000000000136800000000000000000000000000000000000000000000000000000000000013a8"
+    ],
+    [
+     24641985,
+     928,
+     "0xc09ab76d484c422863d72741ccc5c93a817a59016fc4047f428bd312687d4294",
+     "0x34558f6ec05f91773b7d269f50ce0bbec4403760",
+     "0x0000000000000000000000000000000000000000000000014ad18c4a4402363000000000000000000000000000000000000000000000000163396fe82625500000000000000000000000000000000000000000000000000000000000000011fd00000000000000000000000000000000000000000000000000000000000012d4000000000000000000000000000000000000000000000000000000000000143c"
+    ],
+    [
+     24699754,
+     460,
+     "0xaa033cd41e6dac4d7929b625452383599799c08be6ec5dec47f86daa1af20141",
+     "0x34558f6ec05f91773b7d269f50ce0bbec4403760",
+     "0x0000000000000000000000000000000000000000000000019bc715ca7302b154000000000000000000000000000000000000000000000001d6a9e77ea461d0000000000000000000000000000000000000000000000000000000000000001589000000000000000000000000000000000000000000000000000000000000123600000000000000000000000000000000000000000000000000000000000014da"
+    ],
+    [
+     25265100,
+     1215,
+     "0x660eef42913ecd5be7a6f4c373203e323ee15ce7d221827c63197a9f5f424fa5",
+     "0x34558f6ec05f91773b7d269f50ce0bbec4403760",
+     "0x0000000000000000000000000000000000000000000000021738c366a8efca60000000000000000000000000000000000000000000000003229a2197a396e8000000000000000000000000000000000000000000000000000000000000001ad50000000000000000000000000000000000000000000000000000000000000f94000000000000000000000000000000000000000000000000000000000000177c"
+    ],
+    [
+     25365013,
+     250,
+     "0xda37812b41965b8fb76b0294fce4fb6dde5a3164d1b5912848d0cf7d9ffb782e",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x000000000000000000000000000000000000000000000000006ab0127ead0e200000000000000000000000000000000000000000000000000031c9a23b1d8f2000000000000000000000000000000000000000000000000001dbbf9c6dc51ec00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a37abff"
+    ],
+    [
+     25389428,
+     463,
+     "0xaa3fcb69dd3eff209d92f2dff78e7a7657a49846b2924c7cf40a02e6accc29ce",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x0000000000000000000000000000000000000000000000000014352076a79dfa00000000000000000000000000000000000000000000000000096e20375f49b8000000000000000000000000000000000000000000000000005a1c504a004eaa0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a3c29a7"
+    ],
+    [
+     25405882,
+     67,
+     "0x5cec3e2033524b37bdfe28fe88121ead1d3ad464787e8956b97dcc03078bf4f0",
+     "0x85aae9b1b4016e46c1e23761f14d2fb768a868ba",
+     "0x000000000000000000000000000000000000000000000000000537355e9dd67000000000000000000000000000000000000000000000000000026f18e7e341f00000000000000000000000000000000000000000000000000017420a6eed59a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a3f3037"
+    ],
+    [
+     25435078,
+     429,
+     "0xb66c5fa6a6c5847fc47aa2ea5a26c238a2a6dc67826b3e80b722badec13b8663",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x00000000000000000000000000000000000000000000000001f3ca62ddc0734300000000000000000000000000000000000000000000000000e93c504559cf6300000000000000000000000000000000000000000000000008b4b21b7a3dbdb50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a448e1f"
+    ],
+    [
+     25448752,
+     884,
+     "0x085d764024edca274913985872e3a119816d83a75cc354d36dc5eecf9b4bc494",
+     "0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+     "0x000000000000000000000000000000000000000000000000001605025aa1a190000000000000000000000000000000000000000000000000000a469ab2d3f610000000000000000000000000000000000000000000000000006230e2acccf6600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a471247"
+    ],
+    [
+     25451988,
+     2253,
+     "0x2e24b0d82aa98a604ff47d3a8242d6a96608318af2260ecb39ccc6c3f9c9dc1e",
+     "0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+     "0x000000000000000000000000000000000000000000000000002d2d2353804500000000000000000000000000000000000000000000000000001515107c4ced0000000000000000000000000000000000000000000000000000c973f2dca62e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a47aaff"
+    ],
+    [
+     25454735,
+     608,
+     "0x36410732fb4ae63e1288d29f41048714327bec93346616f3fe289c1481cdfde4",
+     "0x001026c70491f0bfd836b8ae2d05dba2fea553b3",
+     "0x00000000000000000000000000000000000000000000000003775cbcbcbce2dd000000000000000000000000000000000000000000000000019e1a35f1ad7af00000000000000000000000000000000000000000000000000f74fa753e40cfa00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a482c2f"
+    ],
+    [
+     25478384,
+     425,
+     "0xb22794ee8b388674391d69f0301fceacfe4fb0ac8f6bbfc125be17b44157f153",
+     "0x3993a11d14b39a816e122e04575d867eb5fa2f14",
+     "0x0000000000000000000000000000000000000000000000000063f63bff758470000000000000000000000000000000000000000000000000002ea61bffbf5ff000000000000000000000000000000000000000000000000001bdc17d52ebcda00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a4c853b"
+    ],
+    [
+     25481837,
+     207,
+     "0x9916fda63e4c564962e666e752da9b2186978c99b7ca3f1f310ac1de931a1aa1",
+     "0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0",
+     "0x0000000000000000000000000000000000000000000000000068f1c25ce6fea00000000000000000000000000000000000000000000000000030f95ab3e343a000000000000000000000000000000000000000000000000001d3f962b6ed69c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a4d27bf"
+    ],
+    [
+     25489825,
+     233,
+     "0x7657d86a881273b4bbce4abdd32d8b7dc3c81665a85d4e11c0f6fd28b80bbbd2",
+     "0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049",
+     "0x0000000000000000000000000000000000000000000000000027d0c2d1f20e900000000000000000000000000000000000000000000000000012949f2ec64b1000000000000000000000000000000000000000000000000000b18c29f7d894600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a4e9f67"
+    ],
+    [
+     25496278,
+     750,
+     "0xec6be1628e8e9ddd505c01dcf8f6a49b623e4b97e98b352a69b34cb8a0d751fd",
+     "0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73",
+     "0x00000000000000000000000000000000000000000000000001f2946b09e01a8000000000000000000000000000000000000000000000000000e8aba96b022e8000000000000000000000000000000000000000000000000008af4be11af867000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a4fceeb"
+    ],
+    [
+     25503949,
+     514,
+     "0xb8bc9969f04726a08827dbf56ae24a15b788480b44d92c41559c0ccb2b7d32a6",
+     "0x3fe49eae720d868e878bc227e3b5edcdedbf46f4",
+     "0x00000000000000000000000000000000000000000000000003b08c5dc7b16c4000000000000000000000000000000000000000000000000001b8ca09a174ee400000000000000000000000000000000000000000000000001073fc5c06cf1d800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a513817"
+    ],
+    [
+     25518228,
+     231,
+     "0xb9afc85a2fa01342b0f1e656427325a12cb94397a2f233406860dd73bb432b18",
+     "0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+     "0x0000000000000000000000000000000000000000000000000022a1b2dadbc9900000000000000000000000000000000000000000000000000010295377335e10000000000000000000000000000000000000000000000000009a6e72e4ce66600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a53d7e7"
+    ],
+    [
+     25519293,
+     517,
+     "0x97c56f837c8aea2721e1a87537d788a05fd764c795aac59a270f1ac3beefd32a",
+     "0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97",
+     "0x000000000000000000000000000000000000000000000000029e00509a3d93d00000000000000000000000000000000000000000000000000138aad047fa9a500000000000000000000000000000000000000000000000000babb58d5a7717e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a5409df"
+    ],
+    [
+     25523751,
+     1247,
+     "0xfb49ec48d074f57e0baf5a3a34dcaef15702c7b427ebf8e30c27b260b764d52c",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x0000000000000000000000000000000000000000000000000367bfd272e0a3020000000000000000000000000000000000000000000000000196d0fbcf35a1660000000000000000000000000000000000000000000000000f2f5b2d4a395b9d0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a54dbf7"
+    ],
+    [
+     25531135,
+     53,
+     "0xb4ce2b7b424be9d578fbff216e659355626dc5cda264bf6989ed235bc28a8b4d",
+     "0x34558f6ec05f91773b7d269f50ce0bbec4403760",
+     "0x000000000000000000000000000000000000000000000004a5079db7fcae21d700000000000000000000000000000000000000000000000f61d3f4b3b028800000000000000000000000000000000000000000000000000000000000000038f200000000000000000000000000000000000000000000000000000000000008fb0000000000000000000000000000000000000000000000000000000000001e15"
+    ],
+    [
+     25532608,
+     495,
+     "0xc1e999a00accf2ed38fffa9f4a323410515ca07e22261d50223c70155e079d5c",
+     "0xe53aaf695bc50007a60fcd997181222636b6dc6f",
+     "0x000000000000000000000000000000000000000000000000001bb8222cf39ef0000000000000000000000000000000000000000000000000000cef876a4f8e70000000000000000000000000000000000000000000000000007b9b7fbef834a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a567c97"
+    ],
+    [
+     25536126,
+     299,
+     "0x46f7e0f58127c374bbc284f29b09c2e9a769e514e10a079a987ad0bfb33709d7",
+     "0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+     "0x000000000000000000000000000000000000000000000000000031a16b77a9a0000000000000000000000000000000000000000000000000000017293226c6a00000000000000000000000000000000000000000000000000000dd50c2c7dbc00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a57223f"
+    ],
+    [
+     25559331,
+     614,
+     "0xc2147e74b219081d584c13435e48ad27d8b40b360647561c74eb5870fb610fe4",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x00000000000000000000000000000000000000000000000000025a3e28619fc40000000000000000000000000000000000000000000000000001190bf0b6175b000000000000000000000000000000000000000000000000000a7d8e8a5a34830000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a5b655b"
+    ],
+    [
+     25567128,
+     52,
+     "0x49b947ca949a7c571386d16eeb9c6aad8d84e2c485d0bdefb5470728d848caa0",
+     "0xaabc622455e489f27ffe18697bb6f09c8fee7287",
+     "0x000000000000000000000000000000000000000000000000001bc86b41723f90000000000000000000000000000000000000000000000000000cf720fc688410000000000000000000000000000000000000000000000000007be41ec13c0a600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a5cd46f"
+    ],
+    [
+     25578512,
+     216,
+     "0xa2b17c83d043a9a1ce10ae693ae0715c3c7c4747a3518d1831b1d961e4dc5597",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x00000000000000000000000000000000000000000000000002525c3e48bda1e300000000000000000000000000000000000000000000000001155e3f330329690000000000000000000000000000000000000000000000000a5a682303e552d40000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a5eec43"
+    ],
+    [
+     25579800,
+     123,
+     "0xa7deef13e91a933d1248e47dba56df875e92673e3c42a021219f57e8dc4626cf",
+     "0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+     "0x0000000000000000000000000000000000000000000000000067fb286137bb87000000000000000000000000000000000000000000000000003086460b3c244f00000000000000000000000000000000000000000000000001cfadb9c0b0776b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a5f28eb"
+    ],
+    [
+     25581110,
+     476,
+     "0x798e744c007d5f143c9e348f0711c7e28504ef78d31b430904c1538454af58e2",
+     "0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+     "0x000000000000000000000000000000000000000000000000004af44c73dacec00000000000000000000000000000000000000000000000000022fa8a13eea4c0000000000000000000000000000000000000000000000000014e3d99303db4800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a5f6677"
+    ],
+    [
+     25583651,
+     251,
+     "0x846b306c0d295234e20aae484fa29b20cdd18f6901077226f6c7a9fc82556d30",
+     "0x39c3911cad928028a40e7ae65bbcab292f56e4a5",
+     "0x000000000000000000000000000000000000000000000000655413c728b1d54e0000000000000000000000000000000000000000000000002f495e90240eb8e0000000000000000000000000000000000000000000000001c3d9879a3c1ae6980000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a5fddff"
+    ],
+    [
+     25588662,
+     248,
+     "0x654df6f0be17f31c334f4bca2aa4a6545c30403c180e1a3aa2e0c732851e4ba0",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x0000000000000000000000000000000000000000000000000002439afd0c1cf800000000000000000000000000000000000000000000000000010e7b8727c940000000000000000000000000000000000000000000000000000a189c60d183100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a60c9f7"
+    ],
+    [
+     25595559,
+     165,
+     "0x92f7f1dbe6db92f3c43dbad6e5cd8eaec71d30b513ae826098909a577943046c",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x0000000000000000000000000000000000000000000000000002e5bb6d8fa00600000000000000000000000000000000000000000000000000015a244431f557000000000000000000000000000000000000000000000000000ceb936f32b69b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a620f0b"
+    ],
+    [
+     25612397,
+     1836,
+     "0x5bcc87773f8f811131ed8c6c924dde6135835d97585f012ddd047979321b9298",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x000000000000000000000000000000000000000000000000000ea840133188810000000000000000000000000000000000000000000000000006d70cd5c1c83b00000000000000000000000000000000000000000000000000415c41c1ad79590000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6526ab"
+    ],
+    [
+     25612407,
+     569,
+     "0xd0300070e63d0ab30141536f081e56453f31803c22216e7933eb811946b36639",
+     "0x410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+     "0x00000000000000000000000000000000000000000000000004e11c06341c22d00000000000000000000000000000000000000000000000000246eaf1d40d215000000000000000000000000000000000000000000000000015c21a5c232821e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a652723"
+    ],
+    [
+     25621310,
+     603,
+     "0xb8cd57ed47bde0e94b5d6bd29de95ef3fdb365661555f57ada7ec56cdbbb08c5",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x000000000000000000000000000000000000000000000000000932b543b55c8300000000000000000000000000000000000000000000000000044add1f98e6e700000000000000000000000000000000000000000000000000290440f50a65890000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a66c973"
+    ],
+    [
+     25627938,
+     1061,
+     "0xf75e25a481f0450af0f80004a5919789782e68971e948389e87f64f78db428ad",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x00000000000000000000000000000000000000000000000000069f640c0a2fa70000000000000000000000000000000000000000000000000003172eb049052b000000000000000000000000000000000000000000000000001d882fe9d631680000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a68015b"
+    ],
+    [
+     25638938,
+     127,
+     "0xbdd8df856009c5fe659ac82515c7d0392124610d523081c5b7ee4a72dd1b51b2",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x00000000000000000000000000000000000000000000000003208efebbcd399e0000000000000000000000000000000000000000000000000175981079c62bf40000000000000000000000000000000000000000000000000df1e5f2c48215cb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6a06e7"
+    ],
+    [
+     25639536,
+     1486,
+     "0xad43d5ed6f6e2bd97792aaf1fab60503854b723852c0923c1e87871c0793181f",
+     "0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5",
+     "0x0000000000000000000000000000000000000000000000000047b744f98af830000000000000000000000000000000000000000000000000002177a8b8b851b0000000000000000000000000000000000000000000000000013fccbe018bf0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6a2313"
+    ],
+    [
+     25644450,
+     143,
+     "0x9b70d4d06476331b3093640361ed4f9b723c7a43723d67b9a04ebf9171369790",
+     "0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+     "0x0000000000000000000000000000000000000000000000000084b3a001bf2550000000000000000000000000000000000000000000000000003ded6ccd9d77d0000000000000000000000000000000000000000000000000024fc048905278e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6b09ef"
+    ],
+    [
+     25644899,
+     382,
+     "0xe3fe8673eb46535b7e680e782e8eb56b239d45d1cdd957d05669ac1a012a3716",
+     "0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924",
+     "0x000000000000000000000000000000000000000000000000035569651985c4c0000000000000000000000000000000000000000000000000018e42403f1c4ac00000000000000000000000000000000000000000000000000edd95825b0e58800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6b1f07"
+    ],
+    [
+     25647148,
+     85,
+     "0x0f648b175f02ed6b5b28bd0e6b80b8195a201d725cbd4c99071ace349a0ee463",
+     "0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+     "0x000000000000000000000000000000000000000000000000000fcda1cc92a09000000000000000000000000000000000000000000000000000075ff62c446d1000000000000000000000000000000000000000000000000000467885a6ffa0600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6b88c7"
+    ],
+    [
+     25647957,
+     131,
+     "0xa5ec24725bfaf1a470a04bbc92d6c8d9e446db434e9c4e92f9dbc0dfa6e33ce5",
+     "0xb03a15f087ddeae2c88c659ba24dcca8f8609e13",
+     "0x000000000000000000000000000000000000000000000000004ab9de72dc31600000000000000000000000000000000000000000000000000022df45ad116c60000000000000000000000000000000000000000000000000014d390b9234b6400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6baf13"
+    ],
+    [
+     25648236,
+     288,
+     "0x194599fd212baea6ff1e4abfbb97ffbb1b3928f1f58e1349450ae2866297142d",
+     "0x001026c70491f0bfd836b8ae2d05dba2fea553b3",
+     "0x000000000000000000000000000000000000000000000000098da93f964c78ee00000000000000000000000000000000000000000000000004754efb8a67f42a0000000000000000000000000000000000000000000000002a99d6472a8c00b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6bbc3f"
+    ],
+    [
+     25649919,
+     803,
+     "0x10be3c4ff1dbab0cbc700c52f2cefc52817d9eacbef95d9a96b2a94226c6c370",
+     "0x8f74e925a69b5a4639323e70ff07ea22b3072f04",
+     "0x00000000000000000000000000000000000000000000000002077cca09a6e10000000000000000000000000000000000000000000000000000f26d6f59d66900000000000000000000000000000000000000000000000000090c877d5a7296000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6c0b8f"
+    ],
+    [
+     25651755,
+     540,
+     "0xae6a693bc6e2ab4eac30041049500a4317f3a31cbb78a8c910e6950ea0f99bea",
+     "0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+     "0x0000000000000000000000000000000000000000000000000059c600cf99a1200000000000000000000000000000000000000000000000000029e4ef4fd03a20000000000000000000000000000000000000000000000000019052b5de3780c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6c61db"
+    ],
+    [
+     25662091,
+     796,
+     "0xfa97161592b291f7f4cd14783db67f1f990ec6e8e30aa7dd30dc054ab7185851",
+     "0x410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+     "0x0000000000000000000000000000000000000000000000000148dc4f84d25880000000000000000000000000000000000000000000000000009977e0d7955c8000000000000000000000000000000000000000000000000005ba7980ef933b000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6e47cf"
+    ],
+    [
+     25662093,
+     1065,
+     "0x384ba5d0ebd6581dc31fb86aa87583a14fad713d4779827f24ecad3b8d77a432",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x0000000000000000000000000000000000000000000000000001a00df763db430000000000000000000000000000000000000000000000000000c228a6a610fc00000000000000000000000000000000000000000000000000073f4b8dc114190000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6e47e7"
+    ],
+    [
+     25662281,
+     498,
+     "0xde157dbc92ef0bc5ce50dce277ed112828d3ea8082d34fdc9c8ec120a48b2159",
+     "0xf0b97ef86a1c491fd794fb7853b8c87c05d26004",
+     "0x00000000000000000000000000000000000000000000000000238fb2dea9e5e0000000000000000000000000000000000000000000000000001098648a0b04e0000000000000000000000000000000000000000000000000009e93c0b54cd9400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6e50c3"
+    ],
+    [
+     25662286,
+     711,
+     "0x149c727d55b9bfe33c5e16369bf708b7edcbbc35adb6b84201e14ef5f824d192",
+     "0x543dba54e98feb402dc11a4ad476c9ab892e81dc",
+     "0x0000000000000000000000000000000000000000000000000b42dc7a856944a0000000000000000000000000000000000000000000000000054155d2c6cab9a000000000000000000000000000000000000000000000000032376cfa8802edc00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6e50ff"
+    ],
+    [
+     25662383,
+     575,
+     "0xe1ccab3fa7c16e8d67963360ac1c78566a927e16570464975348776adb80b279",
+     "0x46e5cd357cd6dac27c707906e2cc886fbce1674b",
+     "0x0000000000000000000000000000000000000000000000000053303eb18d48780000000000000000000000000000000000000000000000000026d23f63ec99490000000000000000000000000000000000000000000000000172f57a2c9bf19e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6e558b"
+    ],
+    [
+     25668925,
+     334,
+     "0x3027ec3452b302be7dcc33e40ea9f9a4267f630db8cfd03d21edcee7474449e6",
+     "0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9",
+     "0x000000000000000000000000000000000000000000000000004cd5833f7b7f200000000000000000000000000000000000000000000000000023db1b1da0082000000000000000000000000000000000000000000000000001569f74e23214c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a6f8917"
+    ],
+    [
+     25675223,
+     160,
+     "0xfe0ed35b8229b186ae7cb4abe2bc61e0fcea6f3e8cba3795b6b918b37358d57e",
+     "0xa8ae9700f19230ca8beb04bb6ecd17f205d50618",
+     "0x00000000000000000000000000000000000000000000000003ba2b7673d2195000000000000000000000000000000000000000000000000001bd477b8b620bd0000000000000000000000000000000000000000000000000109ee3f1de8c70e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a70b17b"
+    ],
+    [
+     25675228,
+     390,
+     "0xe5fdb73fd0fca52d0a2a13c725409849a82487caa36ada31e655cb4fa1b3a092",
+     "0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+     "0x0000000000000000000000000000000000000000000000000063b715f0698b80000000000000000000000000000000000000000000000000002e88a3d697a78000000000000000000000000000000000000000000000000001bca7e4ad375d000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a70b1b7"
+    ],
+    [
+     25683881,
+     53,
+     "0x06aaa65d22067febd4796ab132fa4df84396868eb24a315fe6ef6284027c95bb",
+     "0x28f4b296ca87682fb1254033121d685feaa7537a",
+     "0x00000000000000000000000000000000000000000000000000b994951240dcb000000000000000000000000000000000000000000000000000569aabf7739a30000000000000000000000000000000000000000000000000033b8d15e73433200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a72484f"
+    ],
+    [
+     25698451,
+     16,
+     "0x1c086631ff38d343de277d841a53313be0a07dbb7071236d82f4b4681d856243",
+     "0x39c3911cad928028a40e7ae65bbcab292f56e4a5",
+     "0x000000000000000000000000000000000000000000000000420539dbb7e276080000000000000000000000000000000000000000000000001ecf3d2244bf03e00000000000000000000000000000000000000000000000012666f2d5ad5a25100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a74f557"
+    ],
+    [
+     25699027,
+     253,
+     "0xa09d072d8cfc9d7b06637b4226871de898df64357c4669ade3e4c0a4fe319c79",
+     "0xf70f8aaa9f837a5eb963036243178e81b26ceeb0",
+     "0x000000000000000000000000000000000000000000000000002c81ff35c0f2f00000000000000000000000000000000000000000000000000014c532d4d1827000000000000000000000000000000000000000000000000000c678c946ee6ca00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a751057"
+    ],
+    [
+     25716175,
+     121,
+     "0x4ba168384c6cb2fbea320eb51b453ef614fa8de9c4f6b67e12ae036ebbd22a85",
+     "0xaba524ac37db09c3b212bab69d4ec623cefaec73",
+     "0x000000000000000000000000000000000000000000000000008a410702f4e190000000000000000000000000000000000000000000000000004084bf01613610000000000000000000000000000000000000000000000000026882af628476600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a7837ab"
+    ],
+    [
+     25743224,
+     126,
+     "0x1d7f7f9634a2e118d1c6cf16dfc0ad1333e067a9b3ddb2bf4004dd0aa33a2232",
+     "0xcb45405e4ec86e64c39820789b591ec33c460473",
+     "0x000000000000000000000000000000000000000000000000024abb97f06438000000000000000000000000000000000000000000000000000111cf02a361f8000000000000000000000000000000000000000000000000000a3864c3e052d0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a7d3143"
+    ],
+    [
+     25750479,
+     120,
+     "0x20f2600525a2d96fa759358f27f49f3aea21c09196c2d95c4d1f3f3f2cc74e06",
+     "0x3cb664484946227a0e6e7dafd930dbfe3b86fb11",
+     "0x00000000000000000000000000000000000000000000000000da974853375e2000000000000000000000000000000000000000000000000000660254f3a25f2000000000000000000000000000000000000000000000000003cec0f2df2bfec00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a7e8653"
+    ],
+    [
+     25763380,
+     18,
+     "0x0d645e16156cbade9eb34a5a91a8a821bf95588ececb7ccd91e008331c4b184e",
+     "0x2a5552663e53a6b807c3615a625496f265cc0774",
+     "0x00000000000000000000000000000000000000000000000007594b49f22ae169000000000000000000000000000000000000000000000000036defef4ee0cf9700000000000000000000000000000000000000000000000020c52d996380a3310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006a80e5a3"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x001026c70491f0bfd836b8ae2d05dba2fea553b3",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000001026c70491f0bfd836b8ae2d05dba2fea553b3"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25454735,
+     606,
+     "0x36410732fb4ae63e1288d29f41048714327bec93346616f3fe289c1481cdfde4",
+     "0x0000000000000000000000000000000000000000000000000f74fa753e40cfa0000000000000000000000000000000000000000000000000000000006a482c2f"
+    ],
+    [
+     25648236,
+     286,
+     "0x194599fd212baea6ff1e4abfbb97ffbb1b3928f1f58e1349450ae2866297142d",
+     "0x0000000000000000000000000000000000000000000000002a99d6472a8c00b0000000000000000000000000000000000000000000000000000000006a6bbc3f"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x28f4b296ca87682fb1254033121d685feaa7537a",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x00000000000000000000000028f4b296ca87682fb1254033121d685feaa7537a"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25683881,
+     51,
+     "0x06aaa65d22067febd4796ab132fa4df84396868eb24a315fe6ef6284027c95bb",
+     "0x000000000000000000000000000000000000000000000000033b8d15e7343320000000000000000000000000000000000000000000000000000000006a72484f"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x2a5552663e53a6b807c3615a625496f265cc0774",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000002a5552663e53a6b807c3615a625496f265cc0774"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25365013,
+     248,
+     "0xda37812b41965b8fb76b0294fce4fb6dde5a3164d1b5912848d0cf7d9ffb782e",
+     "0x00000000000000000000000000000000000000000000000001dbbf9c6dc51ec0000000000000000000000000000000000000000000000000000000006a37abff"
+    ],
+    [
+     25389428,
+     461,
+     "0xaa3fcb69dd3eff209d92f2dff78e7a7657a49846b2924c7cf40a02e6accc29ce",
+     "0x000000000000000000000000000000000000000000000000005a1c504a004eaa000000000000000000000000000000000000000000000000000000006a3c29a7"
+    ],
+    [
+     25435078,
+     427,
+     "0xb66c5fa6a6c5847fc47aa2ea5a26c238a2a6dc67826b3e80b722badec13b8663",
+     "0x00000000000000000000000000000000000000000000000008b4b21b7a3dbdb5000000000000000000000000000000000000000000000000000000006a448e1f"
+    ],
+    [
+     25523751,
+     1245,
+     "0xfb49ec48d074f57e0baf5a3a34dcaef15702c7b427ebf8e30c27b260b764d52c",
+     "0x0000000000000000000000000000000000000000000000000f2f5b2d4a395b9d000000000000000000000000000000000000000000000000000000006a54dbf7"
+    ],
+    [
+     25559331,
+     612,
+     "0xc2147e74b219081d584c13435e48ad27d8b40b360647561c74eb5870fb610fe4",
+     "0x000000000000000000000000000000000000000000000000000a7d8e8a5a3483000000000000000000000000000000000000000000000000000000006a5b655b"
+    ],
+    [
+     25578512,
+     214,
+     "0xa2b17c83d043a9a1ce10ae693ae0715c3c7c4747a3518d1831b1d961e4dc5597",
+     "0x0000000000000000000000000000000000000000000000000a5a682303e552d4000000000000000000000000000000000000000000000000000000006a5eec43"
+    ],
+    [
+     25588662,
+     246,
+     "0x654df6f0be17f31c334f4bca2aa4a6545c30403c180e1a3aa2e0c732851e4ba0",
+     "0x000000000000000000000000000000000000000000000000000a189c60d18310000000000000000000000000000000000000000000000000000000006a60c9f7"
+    ],
+    [
+     25595559,
+     163,
+     "0x92f7f1dbe6db92f3c43dbad6e5cd8eaec71d30b513ae826098909a577943046c",
+     "0x000000000000000000000000000000000000000000000000000ceb936f32b69b000000000000000000000000000000000000000000000000000000006a620f0b"
+    ],
+    [
+     25612397,
+     1834,
+     "0x5bcc87773f8f811131ed8c6c924dde6135835d97585f012ddd047979321b9298",
+     "0x00000000000000000000000000000000000000000000000000415c41c1ad7959000000000000000000000000000000000000000000000000000000006a6526ab"
+    ],
+    [
+     25621310,
+     601,
+     "0xb8cd57ed47bde0e94b5d6bd29de95ef3fdb365661555f57ada7ec56cdbbb08c5",
+     "0x00000000000000000000000000000000000000000000000000290440f50a6589000000000000000000000000000000000000000000000000000000006a66c973"
+    ],
+    [
+     25627938,
+     1059,
+     "0xf75e25a481f0450af0f80004a5919789782e68971e948389e87f64f78db428ad",
+     "0x000000000000000000000000000000000000000000000000001d882fe9d63168000000000000000000000000000000000000000000000000000000006a68015b"
+    ],
+    [
+     25638938,
+     125,
+     "0xbdd8df856009c5fe659ac82515c7d0392124610d523081c5b7ee4a72dd1b51b2",
+     "0x0000000000000000000000000000000000000000000000000df1e5f2c48215cb000000000000000000000000000000000000000000000000000000006a6a06e7"
+    ],
+    [
+     25662093,
+     1063,
+     "0x384ba5d0ebd6581dc31fb86aa87583a14fad713d4779827f24ecad3b8d77a432",
+     "0x00000000000000000000000000000000000000000000000000073f4b8dc11419000000000000000000000000000000000000000000000000000000006a6e47e7"
+    ],
+    [
+     25763380,
+     16,
+     "0x0d645e16156cbade9eb34a5a91a8a821bf95588ececb7ccd91e008331c4b184e",
+     "0x00000000000000000000000000000000000000000000000020c52d996380a331000000000000000000000000000000000000000000000000000000006a80e5a3"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x2bf8800f5ba6c5663d2c5783c80732675195f5f1",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000002bf8800f5ba6c5663d2c5783c80732675195f5f1"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25536126,
+     297,
+     "0x46f7e0f58127c374bbc284f29b09c2e9a769e514e10a079a987ad0bfb33709d7",
+     "0x0000000000000000000000000000000000000000000000000000dd50c2c7dbc0000000000000000000000000000000000000000000000000000000006a57223f"
+    ],
+    [
+     25579800,
+     121,
+     "0xa7deef13e91a933d1248e47dba56df875e92673e3c42a021219f57e8dc4626cf",
+     "0x00000000000000000000000000000000000000000000000001cfadb9c0b0776b000000000000000000000000000000000000000000000000000000006a5f28eb"
+    ],
+    [
+     25651755,
+     538,
+     "0xae6a693bc6e2ab4eac30041049500a4317f3a31cbb78a8c910e6950ea0f99bea",
+     "0x000000000000000000000000000000000000000000000000019052b5de3780c0000000000000000000000000000000000000000000000000000000006a6c61db"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x3993a11d14b39a816e122e04575d867eb5fa2f14",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000003993a11d14b39a816e122e04575d867eb5fa2f14"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25478384,
+     423,
+     "0xb22794ee8b388674391d69f0301fceacfe4fb0ac8f6bbfc125be17b44157f153",
+     "0x00000000000000000000000000000000000000000000000001bdc17d52ebcda0000000000000000000000000000000000000000000000000000000006a4c853b"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x39c3911cad928028a40e7ae65bbcab292f56e4a5",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x00000000000000000000000039c3911cad928028a40e7ae65bbcab292f56e4a5"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25583651,
+     249,
+     "0x846b306c0d295234e20aae484fa29b20cdd18f6901077226f6c7a9fc82556d30",
+     "0x000000000000000000000000000000000000000000000001c3d9879a3c1ae698000000000000000000000000000000000000000000000000000000006a5fddff"
+    ],
+    [
+     25698451,
+     14,
+     "0x1c086631ff38d343de277d841a53313be0a07dbb7071236d82f4b4681d856243",
+     "0x0000000000000000000000000000000000000000000000012666f2d5ad5a2510000000000000000000000000000000000000000000000000000000006a74f557"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x3cb664484946227a0e6e7dafd930dbfe3b86fb11",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000003cb664484946227a0e6e7dafd930dbfe3b86fb11"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25750479,
+     118,
+     "0x20f2600525a2d96fa759358f27f49f3aea21c09196c2d95c4d1f3f3f2cc74e06",
+     "0x00000000000000000000000000000000000000000000000003cec0f2df2bfec0000000000000000000000000000000000000000000000000000000006a7e8653"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x3ceea4a4d077c24eaa0a24765b3f23143cc57bb9",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000003ceea4a4d077c24eaa0a24765b3f23143cc57bb9"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25581110,
+     474,
+     "0x798e744c007d5f143c9e348f0711c7e28504ef78d31b430904c1538454af58e2",
+     "0x000000000000000000000000000000000000000000000000014e3d99303db480000000000000000000000000000000000000000000000000000000006a5f6677"
+    ],
+    [
+     25647148,
+     83,
+     "0x0f648b175f02ed6b5b28bd0e6b80b8195a201d725cbd4c99071ace349a0ee463",
+     "0x00000000000000000000000000000000000000000000000000467885a6ffa060000000000000000000000000000000000000000000000000000000006a6b88c7"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x3fe49eae720d868e878bc227e3b5edcdedbf46f4",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000003fe49eae720d868e878bc227e3b5edcdedbf46f4"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25503949,
+     512,
+     "0xb8bc9969f04726a08827dbf56ae24a15b788480b44d92c41559c0ccb2b7d32a6",
+     "0x0000000000000000000000000000000000000000000000001073fc5c06cf1d80000000000000000000000000000000000000000000000000000000006a513817"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x410a22b5c662b9e3a03dca5672c06ac8f6506b36",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000410a22b5c662b9e3a03dca5672c06ac8f6506b36"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25612407,
+     567,
+     "0xd0300070e63d0ab30141536f081e56453f31803c22216e7933eb811946b36639",
+     "0x00000000000000000000000000000000000000000000000015c21a5c232821e0000000000000000000000000000000000000000000000000000000006a652723"
+    ],
+    [
+     25662091,
+     794,
+     "0xfa97161592b291f7f4cd14783db67f1f990ec6e8e30aa7dd30dc054ab7185851",
+     "0x00000000000000000000000000000000000000000000000005ba7980ef933b00000000000000000000000000000000000000000000000000000000006a6e47cf"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x46e5cd357cd6dac27c707906e2cc886fbce1674b",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x00000000000000000000000046e5cd357cd6dac27c707906e2cc886fbce1674b"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25662383,
+     573,
+     "0xe1ccab3fa7c16e8d67963360ac1c78566a927e16570464975348776adb80b279",
+     "0x0000000000000000000000000000000000000000000000000172f57a2c9bf19e000000000000000000000000000000000000000000000000000000006a6e558b"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x543dba54e98feb402dc11a4ad476c9ab892e81dc",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000543dba54e98feb402dc11a4ad476c9ab892e81dc"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25662286,
+     709,
+     "0x149c727d55b9bfe33c5e16369bf708b7edcbbc35adb6b84201e14ef5f824d192",
+     "0x00000000000000000000000000000000000000000000000032376cfa8802edc0000000000000000000000000000000000000000000000000000000006a6e50ff"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x6394c9e9e2d5f2a14eafa5614b8254a4a7c0a924",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000006394c9e9e2d5f2a14eafa5614b8254a4a7c0a924"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25644899,
+     380,
+     "0xe3fe8673eb46535b7e680e782e8eb56b239d45d1cdd957d05669ac1a012a3716",
+     "0x0000000000000000000000000000000000000000000000000edd95825b0e5880000000000000000000000000000000000000000000000000000000006a6b1f07"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x7c83b68b2998eb3aaf5715da9ea77fc817bc6a73",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000007c83b68b2998eb3aaf5715da9ea77fc817bc6a73"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25496278,
+     748,
+     "0xec6be1628e8e9ddd505c01dcf8f6a49b623e4b97e98b352a69b34cb8a0d751fd",
+     "0x00000000000000000000000000000000000000000000000008af4be11af86700000000000000000000000000000000000000000000000000000000006a4fceeb"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x85aae9b1b4016e46c1e23761f14d2fb768a868ba",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x00000000000000000000000085aae9b1b4016e46c1e23761f14d2fb768a868ba"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25405882,
+     65,
+     "0x5cec3e2033524b37bdfe28fe88121ead1d3ad464787e8956b97dcc03078bf4f0",
+     "0x0000000000000000000000000000000000000000000000000017420a6eed59a0000000000000000000000000000000000000000000000000000000006a3f3037"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x8f74e925a69b5a4639323e70ff07ea22b3072f04",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000008f74e925a69b5a4639323e70ff07ea22b3072f04"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25649919,
+     801,
+     "0x10be3c4ff1dbab0cbc700c52f2cefc52817d9eacbef95d9a96b2a94226c6c370",
+     "0x000000000000000000000000000000000000000000000000090c877d5a729600000000000000000000000000000000000000000000000000000000006a6c0b8f"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0x9b58c444689a7a3b80b1a3b9f60fb2439c8e2049",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000009b58c444689a7a3b80b1a3b9f60fb2439c8e2049"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25489825,
+     231,
+     "0x7657d86a881273b4bbce4abdd32d8b7dc3c81665a85d4e11c0f6fd28b80bbbd2",
+     "0x00000000000000000000000000000000000000000000000000b18c29f7d89460000000000000000000000000000000000000000000000000000000006a4e9f67"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xa8ae9700f19230ca8beb04bb6ecd17f205d50618",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000a8ae9700f19230ca8beb04bb6ecd17f205d50618"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25675223,
+     158,
+     "0xfe0ed35b8229b186ae7cb4abe2bc61e0fcea6f3e8cba3795b6b918b37358d57e",
+     "0x000000000000000000000000000000000000000000000000109ee3f1de8c70e0000000000000000000000000000000000000000000000000000000006a70b17b"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xaabc622455e489f27ffe18697bb6f09c8fee7287",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000aabc622455e489f27ffe18697bb6f09c8fee7287"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25567128,
+     50,
+     "0x49b947ca949a7c571386d16eeb9c6aad8d84e2c485d0bdefb5470728d848caa0",
+     "0x000000000000000000000000000000000000000000000000007be41ec13c0a60000000000000000000000000000000000000000000000000000000006a5cd46f"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xaba524ac37db09c3b212bab69d4ec623cefaec73",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000aba524ac37db09c3b212bab69d4ec623cefaec73"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25716175,
+     119,
+     "0x4ba168384c6cb2fbea320eb51b453ef614fa8de9c4f6b67e12ae036ebbd22a85",
+     "0x000000000000000000000000000000000000000000000000026882af62847660000000000000000000000000000000000000000000000000000000006a7837ab"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xb03a15f087ddeae2c88c659ba24dcca8f8609e13",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000b03a15f087ddeae2c88c659ba24dcca8f8609e13"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25647957,
+     129,
+     "0xa5ec24725bfaf1a470a04bbc92d6c8d9e446db434e9c4e92f9dbc0dfa6e33ce5",
+     "0x000000000000000000000000000000000000000000000000014d390b9234b640000000000000000000000000000000000000000000000000000000006a6baf13"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xc970f6ae512b4550549eb12f6d7e83a366e4a5d5",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000c970f6ae512b4550549eb12f6d7e83a366e4a5d5"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25639536,
+     1484,
+     "0xad43d5ed6f6e2bd97792aaf1fab60503854b723852c0923c1e87871c0793181f",
+     "0x000000000000000000000000000000000000000000000000013fccbe018bf020000000000000000000000000000000000000000000000000000000006a6a2313"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xcb45405e4ec86e64c39820789b591ec33c460473",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000cb45405e4ec86e64c39820789b591ec33c460473"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25743224,
+     124,
+     "0x1d7f7f9634a2e118d1c6cf16dfc0ad1333e067a9b3ddb2bf4004dd0aa33a2232",
+     "0x0000000000000000000000000000000000000000000000000a3864c3e052d000000000000000000000000000000000000000000000000000000000006a7d3143"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xdd216589b39dcc6a4d697720aa76dd0b1fde1fc9",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000dd216589b39dcc6a4d697720aa76dd0b1fde1fc9"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25668925,
+     332,
+     "0x3027ec3452b302be7dcc33e40ea9f9a4267f630db8cfd03d21edcee7474449e6",
+     "0x00000000000000000000000000000000000000000000000001569f74e23214c0000000000000000000000000000000000000000000000000000000006a6f8917"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xe53aaf695bc50007a60fcd997181222636b6dc6f",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000e53aaf695bc50007a60fcd997181222636b6dc6f"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25532608,
+     493,
+     "0xc1e999a00accf2ed38fffa9f4a323410515ca07e22261d50223c70155e079d5c",
+     "0x000000000000000000000000000000000000000000000000007b9b7fbef834a0000000000000000000000000000000000000000000000000000000006a567c97"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xf0b97ef86a1c491fd794fb7853b8c87c05d26004",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000f0b97ef86a1c491fd794fb7853b8c87c05d26004"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25662281,
+     496,
+     "0xde157dbc92ef0bc5ce50dce277ed112828d3ea8082d34fdc9c8ec120a48b2159",
+     "0x000000000000000000000000000000000000000000000000009e93c0b54cd940000000000000000000000000000000000000000000000000000000006a6e50c3"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xf289f43e8c1c8b9441b4d288b44f6e73f3719a40",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000f289f43e8c1c8b9441b4d288b44f6e73f3719a40"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25448752,
+     882,
+     "0x085d764024edca274913985872e3a119816d83a75cc354d36dc5eecf9b4bc494",
+     "0x000000000000000000000000000000000000000000000000006230e2acccf660000000000000000000000000000000000000000000000000000000006a471247"
+    ],
+    [
+     25675228,
+     388,
+     "0xe5fdb73fd0fca52d0a2a13c725409849a82487caa36ada31e655cb4fa1b3a092",
+     "0x00000000000000000000000000000000000000000000000001bca7e4ad375d00000000000000000000000000000000000000000000000000000000006a70b1b7"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xf4f7d306811a705b8708ba4e4aa5c50dd6130d97",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000f4f7d306811a705b8708ba4e4aa5c50dd6130d97"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25519293,
+     515,
+     "0x97c56f837c8aea2721e1a87537d788a05fd764c795aac59a270f1ac3beefd32a",
+     "0x0000000000000000000000000000000000000000000000000babb58d5a7717e0000000000000000000000000000000000000000000000000000000006a5409df"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xf70f8aaa9f837a5eb963036243178e81b26ceeb0",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000f70f8aaa9f837a5eb963036243178e81b26ceeb0"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25699027,
+     251,
+     "0xa09d072d8cfc9d7b06637b4226871de898df64357c4669ade3e4c0a4fe319c79",
+     "0x00000000000000000000000000000000000000000000000000c678c946ee6ca0000000000000000000000000000000000000000000000000000000006a751057"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xf95eda8bd59cfdb5f20620bbff9dc905f82efba0",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000f95eda8bd59cfdb5f20620bbff9dc905f82efba0"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25481837,
+     205,
+     "0x9916fda63e4c564962e666e752da9b2186978c99b7ca3f1f310ac1de931a1aa1",
+     "0x00000000000000000000000000000000000000000000000001d3f962b6ed69c0000000000000000000000000000000000000000000000000000000006a4d27bf"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from 0xfede54fd2c4838bbb43c9d130d642d81d0d4c381",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x000000000000000000000000fede54fd2c4838bbb43c9d130d642d81d0d4c381"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25451988,
+     2251,
+     "0x2e24b0d82aa98a604ff47d3a8242d6a96608318af2260ecb39ccc6c3f9c9dc1e",
+     "0x00000000000000000000000000000000000000000000000000c973f2dca62e00000000000000000000000000000000000000000000000000000000006a47aaff"
+    ],
+    [
+     25518228,
+     229,
+     "0xb9afc85a2fa01342b0f1e656427325a12cb94397a2f233406860dd73bb432b18",
+     "0x000000000000000000000000000000000000000000000000009a6e72e4ce6660000000000000000000000000000000000000000000000000000000006a53d7e7"
+    ],
+    [
+     25644450,
+     141,
+     "0x9b70d4d06476331b3093640361ed4f9b723c7a43723d67b9a04ebf9171369790",
+     "0x000000000000000000000000000000000000000000000000024fc048905278e0000000000000000000000000000000000000000000000000000000006a6b09ef"
+    ]
+   ]
+  },
+  {
+   "label": "rETH EtherDeposited from minipool 42316",
+   "address": "0xae78736cd615f374d3085123a210448e74fc6393",
+   "topics": [
+    "0xef51b4c870b8b0100eae2072e91db01222a303072af3728e58c9d4d2da33127f",
+    "0x0000000000000000000000003b7fe9305625d77d99532eb52c72ef8023c422fb"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     24464951,
+     49,
+     "0xef031e18a906da524c1b88e68e122a577d8d675af727681c419f90d77ba2baf0",
+     "0x0000000000000000000000000000000000000000000000000016b12d73d332a00000000000000000000000000000000000000000000000000000000069923d17"
+    ],
+    [
+     24699204,
+     21,
+     "0x2dc6602f8768779df6dc95c1ce3f39279fb340baed8376cf85dd615fa51b3f67",
+     "0x00000000000000000000000000000000000000000000000000a5c460392e53200000000000000000000000000000000000000000000000000000000069bd5483"
+    ],
+    [
+     24743851,
+     91,
+     "0x2f1dcb72a4e1e1314ca869ba2d23e0230a9c17c0bfd8ddb3eec5e4ea96495783",
+     "0x0000000000000000000000000000000000000000000000000028547406c5ebc00000000000000000000000000000000000000000000000000000000069c58a1b"
+    ],
+    [
+     24863081,
+     181,
+     "0xcc9039d1e1145f98ad45a4488bf2ce7a0fcd3eafe85e7927a38abad7ce49fd3d",
+     "0x000000000000000000000000000000000000000000000000004ef57c2ff0ef200000000000000000000000000000000000000000000000000000000069db740f"
+    ],
+    [
+     24915021,
+     55,
+     "0xb06375ca4ad9fc906c60587e0f9c31d7a59a2acedcee3218704c748877341ae9",
+     "0x0000000000000000000000000000000000000000000000000026d613bc0a01a00000000000000000000000000000000000000000000000000000000069e4fd73"
+    ],
+    [
+     25099535,
+     899,
+     "0x97b10c51085215888146a5ed67c9b51814f81e106d046757014bc1f077fefe00",
+     "0x000000000000000000000000000000000000000000000000007443f084f07800000000000000000000000000000000000000000000000000000000006a06e1d3"
+    ],
+    [
+     25257947,
+     103,
+     "0x5accade4824d716dfe14d18d226004257d0095cb30ce0b2d3ea4070ca2735c83",
+     "0x0000000000000000000000000000000000000000000000000071358a5e7837c0000000000000000000000000000000000000000000000000000000006a23ffa7"
+    ],
+    [
+     25463260,
+     168,
+     "0x28d2768ad83141f4613a5570e3e9fa32405bc58c60f9dde9a782b171156702eb",
+     "0x000000000000000000000000000000000000000000000000006edd6aeff11c00000000000000000000000000000000000000000000000000000000006a49bdab"
+    ],
+    [
+     25466494,
+     365,
+     "0xa207ed7dc8965ae79fdf946d1f8a6345b56b99dbd6dc732389df3ee123689a65",
+     "0x000000000000000000000000000000000000000000000000002482fbf4876620000000000000000000000000000000000000000000000000000000006a4a5603"
+    ],
+    [
+     25695055,
+     60,
+     "0x8c6f985414f6ff5505acc659d111c6db0c33f2af33be50495629326ae119f971",
+     "0x000000000000000000000000000000000000000000000000009032a0ec553de0000000000000000000000000000000000000000000000000000000006a7455df"
+    ],
+    [
+     25736097,
+     533,
+     "0xcb1ca0280ace1c6bb966014234b1e78a1199e0df6e1c9255878a93edf3a0ca19",
+     "0x0000000000000000000000000000000000000000000000000024127d76f40860000000000000000000000000000000000000000000000000000000006a7be1c7"
+    ]
+   ]
+  },
+  {
+   "label": "rocketVault EtherDeposited by rocketRewardsPool",
+   "address": "0x3bdc69c4e5e13e52a65f5583c23efb9636b469d6",
+   "topics": [
+    "0xbf25d6cb74c97a403cfab1c4c0abc9ffe3edd964de9924de0565f5ffe3d6ca79",
+    "0x35566c1b2d3d4e8c13ee36aa3a81e542975338992ac5c8b4f0d381209235a6cf"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25365013,
+     249,
+     "0xda37812b41965b8fb76b0294fce4fb6dde5a3164d1b5912848d0cf7d9ffb782e",
+     "0x0000000000000000000000000000000000000000000000000031c9a23b1d8f20000000000000000000000000000000000000000000000000000000006a37abff"
+    ],
+    [
+     25389428,
+     462,
+     "0xaa3fcb69dd3eff209d92f2dff78e7a7657a49846b2924c7cf40a02e6accc29ce",
+     "0x00000000000000000000000000000000000000000000000000096e20375f49b8000000000000000000000000000000000000000000000000000000006a3c29a7"
+    ],
+    [
+     25405882,
+     66,
+     "0x5cec3e2033524b37bdfe28fe88121ead1d3ad464787e8956b97dcc03078bf4f0",
+     "0x00000000000000000000000000000000000000000000000000026f18e7e341f0000000000000000000000000000000000000000000000000000000006a3f3037"
+    ],
+    [
+     25435078,
+     428,
+     "0xb66c5fa6a6c5847fc47aa2ea5a26c238a2a6dc67826b3e80b722badec13b8663",
+     "0x00000000000000000000000000000000000000000000000000e93c504559cf63000000000000000000000000000000000000000000000000000000006a448e1f"
+    ],
+    [
+     25448752,
+     883,
+     "0x085d764024edca274913985872e3a119816d83a75cc354d36dc5eecf9b4bc494",
+     "0x000000000000000000000000000000000000000000000000000a469ab2d3f610000000000000000000000000000000000000000000000000000000006a471247"
+    ],
+    [
+     25451988,
+     2252,
+     "0x2e24b0d82aa98a604ff47d3a8242d6a96608318af2260ecb39ccc6c3f9c9dc1e",
+     "0x000000000000000000000000000000000000000000000000001515107c4ced00000000000000000000000000000000000000000000000000000000006a47aaff"
+    ],
+    [
+     25454735,
+     607,
+     "0x36410732fb4ae63e1288d29f41048714327bec93346616f3fe289c1481cdfde4",
+     "0x000000000000000000000000000000000000000000000000019e1a35f1ad7af0000000000000000000000000000000000000000000000000000000006a482c2f"
+    ],
+    [
+     25478384,
+     424,
+     "0xb22794ee8b388674391d69f0301fceacfe4fb0ac8f6bbfc125be17b44157f153",
+     "0x000000000000000000000000000000000000000000000000002ea61bffbf5ff0000000000000000000000000000000000000000000000000000000006a4c853b"
+    ],
+    [
+     25481837,
+     206,
+     "0x9916fda63e4c564962e666e752da9b2186978c99b7ca3f1f310ac1de931a1aa1",
+     "0x0000000000000000000000000000000000000000000000000030f95ab3e343a0000000000000000000000000000000000000000000000000000000006a4d27bf"
+    ],
+    [
+     25489825,
+     232,
+     "0x7657d86a881273b4bbce4abdd32d8b7dc3c81665a85d4e11c0f6fd28b80bbbd2",
+     "0x0000000000000000000000000000000000000000000000000012949f2ec64b10000000000000000000000000000000000000000000000000000000006a4e9f67"
+    ],
+    [
+     25496278,
+     749,
+     "0xec6be1628e8e9ddd505c01dcf8f6a49b623e4b97e98b352a69b34cb8a0d751fd",
+     "0x00000000000000000000000000000000000000000000000000e8aba96b022e80000000000000000000000000000000000000000000000000000000006a4fceeb"
+    ],
+    [
+     25503949,
+     513,
+     "0xb8bc9969f04726a08827dbf56ae24a15b788480b44d92c41559c0ccb2b7d32a6",
+     "0x00000000000000000000000000000000000000000000000001b8ca09a174ee40000000000000000000000000000000000000000000000000000000006a513817"
+    ],
+    [
+     25518228,
+     230,
+     "0xb9afc85a2fa01342b0f1e656427325a12cb94397a2f233406860dd73bb432b18",
+     "0x0000000000000000000000000000000000000000000000000010295377335e10000000000000000000000000000000000000000000000000000000006a53d7e7"
+    ],
+    [
+     25519293,
+     516,
+     "0x97c56f837c8aea2721e1a87537d788a05fd764c795aac59a270f1ac3beefd32a",
+     "0x0000000000000000000000000000000000000000000000000138aad047fa9a50000000000000000000000000000000000000000000000000000000006a5409df"
+    ],
+    [
+     25523751,
+     1246,
+     "0xfb49ec48d074f57e0baf5a3a34dcaef15702c7b427ebf8e30c27b260b764d52c",
+     "0x0000000000000000000000000000000000000000000000000196d0fbcf35a166000000000000000000000000000000000000000000000000000000006a54dbf7"
+    ],
+    [
+     25532608,
+     494,
+     "0xc1e999a00accf2ed38fffa9f4a323410515ca07e22261d50223c70155e079d5c",
+     "0x000000000000000000000000000000000000000000000000000cef876a4f8e70000000000000000000000000000000000000000000000000000000006a567c97"
+    ],
+    [
+     25536126,
+     298,
+     "0x46f7e0f58127c374bbc284f29b09c2e9a769e514e10a079a987ad0bfb33709d7",
+     "0x000000000000000000000000000000000000000000000000000017293226c6a0000000000000000000000000000000000000000000000000000000006a57223f"
+    ],
+    [
+     25559331,
+     613,
+     "0xc2147e74b219081d584c13435e48ad27d8b40b360647561c74eb5870fb610fe4",
+     "0x0000000000000000000000000000000000000000000000000001190bf0b6175b000000000000000000000000000000000000000000000000000000006a5b655b"
+    ],
+    [
+     25567128,
+     51,
+     "0x49b947ca949a7c571386d16eeb9c6aad8d84e2c485d0bdefb5470728d848caa0",
+     "0x000000000000000000000000000000000000000000000000000cf720fc688410000000000000000000000000000000000000000000000000000000006a5cd46f"
+    ],
+    [
+     25578512,
+     215,
+     "0xa2b17c83d043a9a1ce10ae693ae0715c3c7c4747a3518d1831b1d961e4dc5597",
+     "0x00000000000000000000000000000000000000000000000001155e3f33032969000000000000000000000000000000000000000000000000000000006a5eec43"
+    ],
+    [
+     25579800,
+     122,
+     "0xa7deef13e91a933d1248e47dba56df875e92673e3c42a021219f57e8dc4626cf",
+     "0x000000000000000000000000000000000000000000000000003086460b3c244f000000000000000000000000000000000000000000000000000000006a5f28eb"
+    ],
+    [
+     25581110,
+     475,
+     "0x798e744c007d5f143c9e348f0711c7e28504ef78d31b430904c1538454af58e2",
+     "0x0000000000000000000000000000000000000000000000000022fa8a13eea4c0000000000000000000000000000000000000000000000000000000006a5f6677"
+    ],
+    [
+     25583651,
+     250,
+     "0x846b306c0d295234e20aae484fa29b20cdd18f6901077226f6c7a9fc82556d30",
+     "0x0000000000000000000000000000000000000000000000002f495e90240eb8e0000000000000000000000000000000000000000000000000000000006a5fddff"
+    ],
+    [
+     25588662,
+     247,
+     "0x654df6f0be17f31c334f4bca2aa4a6545c30403c180e1a3aa2e0c732851e4ba0",
+     "0x00000000000000000000000000000000000000000000000000010e7b8727c940000000000000000000000000000000000000000000000000000000006a60c9f7"
+    ],
+    [
+     25595559,
+     164,
+     "0x92f7f1dbe6db92f3c43dbad6e5cd8eaec71d30b513ae826098909a577943046c",
+     "0x00000000000000000000000000000000000000000000000000015a244431f557000000000000000000000000000000000000000000000000000000006a620f0b"
+    ],
+    [
+     25612397,
+     1835,
+     "0x5bcc87773f8f811131ed8c6c924dde6135835d97585f012ddd047979321b9298",
+     "0x0000000000000000000000000000000000000000000000000006d70cd5c1c83b000000000000000000000000000000000000000000000000000000006a6526ab"
+    ],
+    [
+     25612407,
+     568,
+     "0xd0300070e63d0ab30141536f081e56453f31803c22216e7933eb811946b36639",
+     "0x0000000000000000000000000000000000000000000000000246eaf1d40d2150000000000000000000000000000000000000000000000000000000006a652723"
+    ],
+    [
+     25621310,
+     602,
+     "0xb8cd57ed47bde0e94b5d6bd29de95ef3fdb365661555f57ada7ec56cdbbb08c5",
+     "0x00000000000000000000000000000000000000000000000000044add1f98e6e7000000000000000000000000000000000000000000000000000000006a66c973"
+    ],
+    [
+     25627938,
+     1060,
+     "0xf75e25a481f0450af0f80004a5919789782e68971e948389e87f64f78db428ad",
+     "0x0000000000000000000000000000000000000000000000000003172eb049052b000000000000000000000000000000000000000000000000000000006a68015b"
+    ],
+    [
+     25638938,
+     126,
+     "0xbdd8df856009c5fe659ac82515c7d0392124610d523081c5b7ee4a72dd1b51b2",
+     "0x0000000000000000000000000000000000000000000000000175981079c62bf4000000000000000000000000000000000000000000000000000000006a6a06e7"
+    ],
+    [
+     25639536,
+     1485,
+     "0xad43d5ed6f6e2bd97792aaf1fab60503854b723852c0923c1e87871c0793181f",
+     "0x000000000000000000000000000000000000000000000000002177a8b8b851b0000000000000000000000000000000000000000000000000000000006a6a2313"
+    ],
+    [
+     25644450,
+     142,
+     "0x9b70d4d06476331b3093640361ed4f9b723c7a43723d67b9a04ebf9171369790",
+     "0x000000000000000000000000000000000000000000000000003ded6ccd9d77d0000000000000000000000000000000000000000000000000000000006a6b09ef"
+    ],
+    [
+     25644899,
+     381,
+     "0xe3fe8673eb46535b7e680e782e8eb56b239d45d1cdd957d05669ac1a012a3716",
+     "0x000000000000000000000000000000000000000000000000018e42403f1c4ac0000000000000000000000000000000000000000000000000000000006a6b1f07"
+    ],
+    [
+     25647148,
+     84,
+     "0x0f648b175f02ed6b5b28bd0e6b80b8195a201d725cbd4c99071ace349a0ee463",
+     "0x00000000000000000000000000000000000000000000000000075ff62c446d10000000000000000000000000000000000000000000000000000000006a6b88c7"
+    ],
+    [
+     25647957,
+     130,
+     "0xa5ec24725bfaf1a470a04bbc92d6c8d9e446db434e9c4e92f9dbc0dfa6e33ce5",
+     "0x0000000000000000000000000000000000000000000000000022df45ad116c60000000000000000000000000000000000000000000000000000000006a6baf13"
+    ],
+    [
+     25648236,
+     287,
+     "0x194599fd212baea6ff1e4abfbb97ffbb1b3928f1f58e1349450ae2866297142d",
+     "0x00000000000000000000000000000000000000000000000004754efb8a67f42a000000000000000000000000000000000000000000000000000000006a6bbc3f"
+    ],
+    [
+     25649919,
+     802,
+     "0x10be3c4ff1dbab0cbc700c52f2cefc52817d9eacbef95d9a96b2a94226c6c370",
+     "0x00000000000000000000000000000000000000000000000000f26d6f59d66900000000000000000000000000000000000000000000000000000000006a6c0b8f"
+    ],
+    [
+     25651755,
+     539,
+     "0xae6a693bc6e2ab4eac30041049500a4317f3a31cbb78a8c910e6950ea0f99bea",
+     "0x0000000000000000000000000000000000000000000000000029e4ef4fd03a20000000000000000000000000000000000000000000000000000000006a6c61db"
+    ],
+    [
+     25662091,
+     795,
+     "0xfa97161592b291f7f4cd14783db67f1f990ec6e8e30aa7dd30dc054ab7185851",
+     "0x000000000000000000000000000000000000000000000000009977e0d7955c80000000000000000000000000000000000000000000000000000000006a6e47cf"
+    ],
+    [
+     25662093,
+     1064,
+     "0x384ba5d0ebd6581dc31fb86aa87583a14fad713d4779827f24ecad3b8d77a432",
+     "0x0000000000000000000000000000000000000000000000000000c228a6a610fc000000000000000000000000000000000000000000000000000000006a6e47e7"
+    ],
+    [
+     25662281,
+     497,
+     "0xde157dbc92ef0bc5ce50dce277ed112828d3ea8082d34fdc9c8ec120a48b2159",
+     "0x000000000000000000000000000000000000000000000000001098648a0b04e0000000000000000000000000000000000000000000000000000000006a6e50c3"
+    ],
+    [
+     25662286,
+     710,
+     "0x149c727d55b9bfe33c5e16369bf708b7edcbbc35adb6b84201e14ef5f824d192",
+     "0x000000000000000000000000000000000000000000000000054155d2c6cab9a0000000000000000000000000000000000000000000000000000000006a6e50ff"
+    ],
+    [
+     25662383,
+     574,
+     "0xe1ccab3fa7c16e8d67963360ac1c78566a927e16570464975348776adb80b279",
+     "0x0000000000000000000000000000000000000000000000000026d23f63ec9949000000000000000000000000000000000000000000000000000000006a6e558b"
+    ],
+    [
+     25668925,
+     333,
+     "0x3027ec3452b302be7dcc33e40ea9f9a4267f630db8cfd03d21edcee7474449e6",
+     "0x0000000000000000000000000000000000000000000000000023db1b1da00820000000000000000000000000000000000000000000000000000000006a6f8917"
+    ],
+    [
+     25675223,
+     159,
+     "0xfe0ed35b8229b186ae7cb4abe2bc61e0fcea6f3e8cba3795b6b918b37358d57e",
+     "0x00000000000000000000000000000000000000000000000001bd477b8b620bd0000000000000000000000000000000000000000000000000000000006a70b17b"
+    ],
+    [
+     25675228,
+     389,
+     "0xe5fdb73fd0fca52d0a2a13c725409849a82487caa36ada31e655cb4fa1b3a092",
+     "0x000000000000000000000000000000000000000000000000002e88a3d697a780000000000000000000000000000000000000000000000000000000006a70b1b7"
+    ],
+    [
+     25683881,
+     52,
+     "0x06aaa65d22067febd4796ab132fa4df84396868eb24a315fe6ef6284027c95bb",
+     "0x00000000000000000000000000000000000000000000000000569aabf7739a30000000000000000000000000000000000000000000000000000000006a72484f"
+    ],
+    [
+     25698451,
+     15,
+     "0x1c086631ff38d343de277d841a53313be0a07dbb7071236d82f4b4681d856243",
+     "0x0000000000000000000000000000000000000000000000001ecf3d2244bf03e0000000000000000000000000000000000000000000000000000000006a74f557"
+    ],
+    [
+     25699027,
+     252,
+     "0xa09d072d8cfc9d7b06637b4226871de898df64357c4669ade3e4c0a4fe319c79",
+     "0x0000000000000000000000000000000000000000000000000014c532d4d18270000000000000000000000000000000000000000000000000000000006a751057"
+    ],
+    [
+     25716175,
+     120,
+     "0x4ba168384c6cb2fbea320eb51b453ef614fa8de9c4f6b67e12ae036ebbd22a85",
+     "0x000000000000000000000000000000000000000000000000004084bf01613610000000000000000000000000000000000000000000000000000000006a7837ab"
+    ],
+    [
+     25743224,
+     125,
+     "0x1d7f7f9634a2e118d1c6cf16dfc0ad1333e067a9b3ddb2bf4004dd0aa33a2232",
+     "0x0000000000000000000000000000000000000000000000000111cf02a361f800000000000000000000000000000000000000000000000000000000006a7d3143"
+    ],
+    [
+     25750479,
+     119,
+     "0x20f2600525a2d96fa759358f27f49f3aea21c09196c2d95c4d1f3f3f2cc74e06",
+     "0x00000000000000000000000000000000000000000000000000660254f3a25f20000000000000000000000000000000000000000000000000000000006a7e8653"
+    ],
+    [
+     25763380,
+     17,
+     "0x0d645e16156cbade9eb34a5a91a8a821bf95588ececb7ccd91e008331c4b184e",
+     "0x000000000000000000000000000000000000000000000000036defef4ee0cf97000000000000000000000000000000000000000000000000000000006a80e5a3"
+    ]
+   ]
+  },
+  {
+   "label": "rocketVault EtherWithdrawn by rocketRewardsPool",
+   "address": "0x3bdc69c4e5e13e52a65f5583c23efb9636b469d6",
+   "topics": [
+    "0xfc06bd2dc22238bad571c0432cfc04aee3d074be8cd974c9a9151e99df57e72b",
+    "0x35566c1b2d3d4e8c13ee36aa3a81e542975338992ac5c8b4f0d381209235a6cf"
+   ],
+   "from": 0,
+   "to": 25772216,
+   "fields": [
+    "blockNumber",
+    "logIndex",
+    "transactionHash",
+    "data"
+   ],
+   "rows": [
+    [
+     25443278,
+     82,
+     "0x1d28f420eeebb0bd81049d174f16e87e44f86cbc974bb8baa211e26b927bd6ba",
+     "0x0000000000000000000000000000000000000000000000000126e32b9fb9ea2b000000000000000000000000000000000000000000000000000000006a46103b"
+    ],
+    [
+     25644076,
+     64,
+     "0x253c0017235faa64d9026e6b09a2bb68db6ba03c3c8f625f8dd8ba9584c6ab11",
+     "0x0000000000000000000000000000000000000000000000003c6cb5aa156cb0d1000000000000000000000000000000000000000000000000000000006a6af867"
+    ]
+   ]
+  }
+ ],
+ "public": {
+  "pr_8833": {
+   "merged_at": "2026-08-18T13:59:31Z",
+   "merge_commit_sha": "3e95b56aa1acaa5463cd2de2731cd8c42b23ec4c",
+   "parent_sha": "4443428033a0976868020d6b0ac5c53b7ca45e54",
+   "body_closes_8812": true,
+   "body_cites_78_23_eth": true
+  },
+  "issue_8812": {
+   "state": "closed",
+   "state_reason": "completed",
+   "closed_at": "2026-08-18T13:59:33Z"
+  },
+  "adapter_before_fix": {
+   "sha256": "c2f711fb408db2f9b773a2001582f52a8ac5d272e8579905db6c2c8a006a0fc0",
+   "calls_getNodeDepositBalance": true,
+   "calls_getNodeFee": true,
+   "permit_failure": true,
+   "skips_when_either_is_null": true,
+   "subtracts_24_and_16_eth": true,
+   "reads_megapool_exists_flag": false,
+   "reads_rewards_distributed_of_megapools": false
+  },
+  "adapter_after_fix": {
+   "sha256": "6770b996f0c5ec5cfc957a6215be46699df3f7cdb876838cc39114c31958f4cf",
+   "calls_getNodeDepositBalance": true,
+   "calls_getNodeFee": true,
+   "permit_failure": true,
+   "skips_when_either_is_null": true,
+   "subtracts_24_and_16_eth": true,
+   "reads_megapool_exists_flag": true,
+   "reads_rewards_distributed_of_megapools": true
+  },
+  "pr_2765": {
+   "merged_at": "2025-04-03T12:15:24Z",
+   "adapter_status": "added",
+   "adds_getNodeFee": true,
+   "adds_zero_revenue": false
+  },
+  "pr_3519": {
+   "merged_at": "2025-06-22T16:39:19Z",
+   "adapter_status": "modified",
+   "adds_getNodeFee": false,
+   "adds_zero_revenue": true
+  }
+ }
+}
