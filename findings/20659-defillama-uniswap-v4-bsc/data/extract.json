@@ -1,0 +1,87 @@
+{
+  "source": "DefiLlama, https://defillama.com",
+  "what": "The figures used in DefiLlama-Adapters#20659, with their timestamps, copied from three DefiLlama API responses served on 2026-08-24. The complete responses are not included.",
+  "corrected": "DefiLlama has since corrected this history; the endpoints now serve different values for these dates.",
+  "permission": "Included with DefiLlama's permission, given by email on 2026-10-21, for an extract of the figures used in the report, credited and linked.",
+  "responses": {
+    "protocol": {
+      "request": "GET https://api.llama.fi/protocol/uniswap-v4",
+      "points": {
+        "chainTvls": {
+          "Binance": {
+            "tvl": [
+              {
+                "date": 1787356800,
+                "totalLiquidityUSD": 40118209
+              },
+              {
+                "date": 1787443200,
+                "totalLiquidityUSD": 4854351010
+              },
+              {
+                "date": 1787532719,
+                "totalLiquidityUSD": 5750137253
+              }
+            ]
+          },
+          "Ethereum": {
+            "tvl": [
+              {
+                "date": 1787532719,
+                "totalLiquidityUSD": 639212959
+              }
+            ]
+          }
+        }
+      }
+    },
+    "dexs": {
+      "request": "GET https://api.llama.fi/summary/dexs/uniswap-v4?dataType=dailyVolume&excludeTotalDataChartBreakdown=false",
+      "points": {
+        "totalDataChartBreakdown": [
+          [
+            1787356800,
+            {
+              "BSC": {
+                "Uniswap V4": 185751332
+              }
+            }
+          ],
+          [
+            1787443200,
+            {
+              "BSC": {
+                "Uniswap V4": 202309984
+              }
+            }
+          ],
+          [
+            1787529600,
+            {
+              "BSC": {
+                "Uniswap V4": 198805372
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "chain_tvl": {
+      "request": "GET https://api.llama.fi/v2/historicalChainTvl/BSC",
+      "points": [
+        {
+          "date": 1787356800,
+          "tvl": 5572347044
+        },
+        {
+          "date": 1787443200,
+          "tvl": 10354714716
+        },
+        {
+          "date": 1787529600,
+          "tvl": 11269650247
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "about": "Values kept only as results. No raw response was saved for these, so they are checked for consistency here, not re-derived. Each group names where the number comes from.",
+  "sources": {
+    "run": "Original measurement run, started 2026-08-24T03:11:53Z; the timestamp in its result file is taken when the run starts, before any data is fetched. On-chain reads in that run used the `latest` tag; the block number stored with them is the head read just before them.",
+    "issue": "Text of DefiLlama/DefiLlama-Adapters#20659, posted 2026-08-24T03:57:30Z. Values re-read just before posting; the responses were not saved."
+  },
+  "token": {
+    "address": "0xac531eb26ca1d21b85126de8fb87e80e09002dcf",
+    "chain": "bsc",
+    "pool_manager": "0x28e2ea090877bf75740558f6bfb36a5ffee9e9df",
+    "decimals": 18
+  },
+  "prices": {
+    "coins_llama_at_issue": {
+      "source": "issue",
+      "price_usd": 0.04465620903964393,
+      "confidence": 0.99,
+      "request": "https://coins.llama.fi/prices/current/bsc:0xac531eb26ca1d21b85126de8fb87e80e09002dcf"
+    },
+    "coins_llama_at_run": {
+      "source": "run",
+      "price_usd": 0.044776851939538655,
+      "confidence": 0.99,
+      "request": "https://coins.llama.fi/prices/current/bsc:0xac531eb26ca1d21b85126de8fb87e80e09002dcf"
+    },
+    "geckoterminal_at_run": {
+      "source": "run",
+      "price_usd": 1.774178705e-10,
+      "fdv_usd": 2124.7690193581,
+      "volume_24h_usd": 1.0603592597,
+      "request": "https://api.geckoterminal.com/api/v2/networks/bsc/tokens/0xac531eb26ca1d21b85126de8fb87e80e09002dcf"
+    },
+    "coingecko_the_sandbox_at_issue": {
+      "source": "issue",
+      "price_usd": 0.04474,
+      "request": "unknown"
+    },
+    "coins_llama_pegged_sand_at_run": {
+      "source": "run",
+      "price_usd": null,
+      "confidence": null,
+      "request": "https://coins.llama.fi/prices/current/bsc:0x67b725d7e342d7b611fa85e859df9697d9378b2e",
+      "note": "the response contained no price for this address"
+    }
+  },
+  "enumeration": {
+    "source": "run",
+    "method": "alchemy_getTokenBalances on the BSC PoolManager, paginated until no pageKey was returned (726 pages); each non-zero balance priced with coins.llama.fi",
+    "block": "not tied to one block: 726 pages read with `latest`",
+    "tokens_nonzero": 72101,
+    "tokens_priced": 2383,
+    "total_priced_usd": 5674885441,
+    "top_token": {
+      "address": "0xac531eb26ca1d21b85126de8fb87e80e09002dcf",
+      "usd": 5632836336
+    }
+  },
+  "remaining_holdings_listed_in_issue": {
+    "source": "issue",
+    "block": "not tied to one block (from the enumeration); the issue places it at block 117,739,591 (erratum E2)",
+    "amounts": {
+      "USDT": 12374053,
+      "USDC": 1138807,
+      "WBNB": 290.11,
+      "BTCB": 3.57
+    }
+  },
+  "major_token_baskets": {
+    "bsc": {
+      "source": "run",
+      "head_block_before_reads": 117733791,
+      "assets": "BNB, USDT, USDC, WBNB, BTCB, ETH, FDUSD, CAKE, USD1",
+      "total_usd": 16716497.202037409,
+      "balances_read_with": "latest, right after the head read",
+      "price_source": "coins.llama.fi/prices/current for each token address, and coingecko:binancecoin for the native asset, at run time",
+      "read_time": "2026-08-24, shortly after 03:11:53Z; exact time not recorded"
+    },
+    "ethereum": {
+      "source": "run",
+      "pool_manager": "0x000000000004444c5dc75cB358380D2e3dE08A90",
+      "head_block_before_reads": 25822262,
+      "assets": "ETH, WETH, USDC, USDT, WBTC, DAI, wstETH, cbBTC, USDS",
+      "total_usd": 413083022.84684235,
+      "balances_read_with": "latest, right after the head read",
+      "price_source": "coins.llama.fi/prices/current for each token address, and coingecko:ethereum for the native asset, at run time",
+      "read_time": "2026-08-24, shortly after 03:11:53Z; exact time not recorded"
+    }
+  }
+}

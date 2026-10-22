@@ -1,0 +1,59 @@
+{
+  "case": "DefiLlama/DefiLlama-Adapters#20659",
+  "about": "SHA-256 shows a file is unchanged since this manifest was written. It does not show the file was fetched correctly; the provenance fields say where each file came from, and 'unknown' where that is not known.",
+  "files": [
+    {
+      "path": "data/extract.json",
+      "kind": "extract",
+      "source": "DefiLlama API (https://defillama.com)",
+      "request": "see derived_from",
+      "fetched_at": "2026-08-24, after the run started at 03:11:53Z and before its first RPC call; per-file time not recorded",
+      "notes": "The figures the report uses, with their timestamps, copied from the three full responses in derived_from. The full responses are not published: DefiLlama allowed this extract, not the complete responses. Their SHA-256 and size are listed so that anyone holding them can run reproduce.py --check-extract <dir>. The run's private log records the same SHA-256 at fetch time; that log is not public, so treat this as the author's statement. Public support: issue #20659, posted the same morning, cites these values.",
+      "derived_from": [
+        {
+          "key": "protocol",
+          "file": "llama_protocol_uniswap-v4.json",
+          "request": "GET https://api.llama.fi/protocol/uniswap-v4",
+          "sha256": "7656bc4341f9694d131f00c47a61bcbe48ad8c4654577cef70bfd0ac67e0a40d",
+          "bytes": 415976
+        },
+        {
+          "key": "dexs",
+          "file": "llama_dexs_uniswap-v4_dailyVolume.json",
+          "request": "GET https://api.llama.fi/summary/dexs/uniswap-v4?dataType=dailyVolume&excludeTotalDataChartBreakdown=false",
+          "sha256": "48d503f6a14a42d64a3a9f83b69714a62ee5d41452347d6493ad0d3b1d915bce",
+          "bytes": 284106
+        },
+        {
+          "key": "chain_tvl",
+          "file": "llama_chaintvl_bsc.json",
+          "request": "GET https://api.llama.fi/v2/historicalChainTvl/BSC",
+          "sha256": "53f3f4e5a1818c7d6096e8c103c1c43640b6f85a85ce5217c73178f9baddc4a0",
+          "bytes": 78821
+        }
+      ],
+      "sha256": "d1f2e9344d37043cb83f13c894de396deabc631fdfa9f96a1d46fbecd4b113c6",
+      "bytes": 2340
+    },
+    {
+      "path": "data/recorded.json",
+      "kind": "recorded",
+      "source": "results kept from the original run and from the issue text",
+      "request": "see per-value fields",
+      "fetched_at": "2026-08-24",
+      "notes": "No raw responses exist for these values.",
+      "sha256": "e992b0cbc2ed623485b02963332a068bc9831d53cbf5db2eed501d22218706d4",
+      "bytes": 3859
+    },
+    {
+      "path": "data/live_snapshot.json",
+      "kind": "snapshot",
+      "source": "BSC archive node (endpoint not recorded), coins.llama.fi, api.llama.fi, GitHub API and raw.githubusercontent.com",
+      "request": "live_verify.py --write",
+      "fetched_at": "see checked_at_utc in the file",
+      "notes": "Written by live_verify.py --write; re-check with live_verify.py --check given any BSC archive endpoint.",
+      "sha256": "af11465db144df196f04bf71214acb73cdf1865b681b3704de05b1214f73d1e8",
+      "bytes": 2773
+    }
+  ]
+}

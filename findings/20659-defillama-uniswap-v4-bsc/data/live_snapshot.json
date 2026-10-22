@@ -1,0 +1,93 @@
+{
+  "archive_checks": {
+    "future_block_returns_error": true,
+    "pool_manager_code_at_block_1_empty": true,
+    "pool_manager_code_bytes_at_block": 24009
+  },
+  "blocks": {
+    "117733791": {
+      "hash": "0xaa5a9bca28b11bb3a5355fed397c3f746c46c1ac99cc7f671dbb3cfd49a840b0",
+      "pegged_sand": {
+        "name": "The Sandbox",
+        "total_supply": 18132974.09867822
+      },
+      "pool_manager_major_balances": {
+        "BTCB": 3.50152895504985,
+        "USDC": 1092087.7710320123,
+        "USDT": 12374190.079753574,
+        "WBNB": 383.8364878200418
+      },
+      "timestamp_utc": "2026-08-24T03:11:56Z",
+      "token": {
+        "decimals": 18,
+        "name": "SAND",
+        "pool_manager_balance": 125410226751.91876,
+        "symbol": "SAND",
+        "total_supply": 11976071028505.969
+      }
+    },
+    "117739591": {
+      "hash": "0x1155f6b771f4c50daae673fad38186e0b8b5c31c14f11a4068d073af226ed35d",
+      "pegged_sand": {
+        "name": "The Sandbox",
+        "total_supply": 18132974.09867822
+      },
+      "pool_manager_major_balances": {
+        "BTCB": 3.583739026462207,
+        "USDC": 1101875.6444670742,
+        "USDT": 12232586.46703973,
+        "WBNB": 366.5528999316439
+      },
+      "timestamp_utc": "2026-08-24T03:55:26Z",
+      "token": {
+        "decimals": 18,
+        "name": "SAND",
+        "pool_manager_balance": 125410226751.91876,
+        "symbol": "SAND",
+        "total_supply": 11976071028505.969
+      }
+    }
+  },
+  "checked_at_utc": "2026-10-21T07:54:12Z",
+  "public": {
+    "adapter": {
+      "before_fix": {
+        "bsc_blacklist_entries": 5,
+        "commit": "a4b0919f20e270b0d6fdb142363296e3465c7c3b",
+        "ethereum_blacklists_blotix_and_safemoney": true,
+        "sha256": "83b3df4319131e7f722471729103a59761d0e21c0e1f68fb1f5a9a3e142b39fa",
+        "token_blacklisted": false
+      },
+      "fix_20690": {
+        "bsc_blacklist_entries": 6,
+        "commit": "5a90cdeaf0362862cadafcf6b38241a024f915be",
+        "ethereum_blacklists_blotix_and_safemoney": true,
+        "sha256": "987ceb931a3c3489ac709899539119f54a14b497429d8893d4981a3a746ab7cc",
+        "token_blacklisted": true
+      }
+    },
+    "coins_llama_current": {
+      "pegged_sand": {
+        "coins": {}
+      },
+      "token": {
+        "coins": {}
+      }
+    },
+    "defillama_bsc_tvl_now": {
+      "2026-08-22": 42573861,
+      "2026-08-23": 40247851,
+      "2026-08-24": 42685030
+    },
+    "issue_20659": {
+      "closed_at": "2026-08-25T22:12:56Z",
+      "state": "closed",
+      "state_reason": "completed"
+    },
+    "pr_20690": {
+      "merge_commit_sha": "5a90cdeaf0362862cadafcf6b38241a024f915be",
+      "merged_at": "2026-08-25T22:15:43Z"
+    }
+  },
+  "rpc": "archive endpoint supplied via BSC_ARCHIVE_RPC (URL not recorded)"
+}
