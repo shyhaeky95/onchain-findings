@@ -30,13 +30,13 @@ Each row puts the report's own wording ("stated") next to what the evidence give
 
 | Evidence | Rows | What it rests on |
 |---|---|---|
-| Extract of saved API responses | R1–R5, R7 | Ten figures, with their timestamps, copied from three DefiLlama API responses saved on 2026-08-24 (see Data below). Shown as RECORDED: the complete responses are not published, and the endpoints now serve the corrected history, so nothing here re-derives these figures. |
+| Extract of saved API responses | R1–R5, R7 | Ten figures, with their timestamps, copied from three DefiLlama API responses saved on 2026-08-24 (see Data below). Shown as RECORDED: the complete responses are not published, so nothing here re-derives these figures. For R1–R3 the endpoint now serves the corrected history (O3). |
 | Re-read at block, 2026-10-21 snapshot | L1–L5 | Token name, supply and PoolManager balances read at blocks 117,739,591 and 117,733,791 through an archive node on 2026-10-21. `reproduce.py` reads the stored snapshot, not the chain; re-run `live_verify.py --check` with your own endpoint to test it. Block hashes are stored so the blocks can be checked on any explorer. |
 | Public sources as of 2026-10-21 (snapshot) | L6, L7, O1–O4 | The adapter source at two commits, the GitHub issue and PR, and what `coins.llama.fi` and the DefiLlama API served that day. O rows describe the state after the fix; they are not claims of the report. |
 | Arithmetic | R6, A1–A9 | Products and ratios of the rows above and of recorded inputs. An arithmetic row is only as strong as its weakest input. |
 | Recorded | C1–C5 | Prices and the token enumeration, kept only as results. The figures the report states are fixed in `reproduce.py` from the issue text, and the recorded copies are checked against them. |
 
-Current result for the report's statements: **12 match (4 re-read, 2 public-source, 6 arithmetic), 5 errata, 11 recorded only.** Post-fix observations: 4. Fail: 0.
+Current result for the report's statements: **12 match (4 re-read, 2 public-source, 6 arithmetic), 5 errata, 11 recorded only.** Post-fix observations: 4. Fail: 0. Four of the arithmetic matches (A3, A4, A5, A7) use only recorded inputs, so they check the report's arithmetic, not its facts.
 
 ## Errata
 
@@ -50,7 +50,7 @@ The reproduction found five places where the report's text is not supported by t
 
 ## Limits
 
-- **The DefiLlama figures rest on the author's statement.** They are an extract; the three complete responses are not published (see Data), and the endpoints now serve the corrected history, so the August figures cannot be fetched again. `MANIFEST.json` lists each response's SHA-256 and size, and `python3 reproduce.py --check-extract <dir>` rebuilds `data/extract.json` from responses with those hashes and compares it byte for byte; the author's copies pass. The original run's log, which is private, records the same SHA-256 at fetch time. Public support: the report, posted the same morning, cites the same figures.
+- **The DefiLlama figures rest on the author's statement.** They are an extract; the three complete responses are not published (see Data). The protocol endpoint now serves the corrected BSC TVL (O3), so R1–R3 cannot be fetched again; the volume and chain-TVL endpoints were not re-checked. `MANIFEST.json` lists each response's SHA-256 and size, and `python3 reproduce.py --check-extract <dir>` rebuilds `data/extract.json` from responses with those hashes and compares it byte for byte; the author's copies pass. The original run's log, which is private, records the same SHA-256 at fetch time. Public support: the report, posted the same morning, cites the same figures.
 - **Timing.** The "2026-08-24" TVL point carries the timestamp 00:51:59Z, about three hours before block 117,739,591 (03:55:26Z); the report's opening sentence sets the two side by side. The volume response was fetched before 03:12Z on 08-24, so its "08-24" point cannot be a full day. The report's "over those same three dates" pairs volume and TVL by DefiLlama's day labels only.
 - **No raw RPC responses from August.** The original run read balances with the `latest` tag and stored the head block read just before (117,733,791). Its result file is timestamped 03:11:53Z because that timestamp is taken when the run starts; the head block itself is from 03:11:56Z. The L rows were re-read at fixed blocks on 2026-10-21 instead.
 - **The enumeration cannot be re-run from saved data.** Only its totals were kept.
@@ -68,10 +68,12 @@ The reproduction found five places where the report's text is not supported by t
 | `data/live_snapshot.json` | Output of `live_verify.py --write` on 2026-10-21 |
 | `MANIFEST.json` | SHA-256, size and provenance of every data file |
 
-**Source: [DefiLlama](https://defillama.com).** This case includes 15 DefiLlama figures: the ten in `data/extract.json`, the two `coins.llama.fi` prices in `data/recorded.json` and the three later TVL values in `data/live_snapshot.json`. They are included with DefiLlama's permission, given by email on 2026-10-21, for an extract of the figures used in the report, credited and linked. The complete API responses are not included. The enumeration and basket totals in `data/recorded.json` are the author's sums, priced with `coins.llama.fi`. To reproduce from the source, query the endpoints directly:
+**Source: [DefiLlama](https://defillama.com).** This case includes 15 figures read from DefiLlama endpoints: the ten in `data/extract.json`, the two `coins.llama.fi` prices in `data/recorded.json` and the three later TVL values in `data/live_snapshot.json`. They are included with DefiLlama's permission, given by email on 2026-10-21, for an extract of the figures used in the report, credited and linked. The complete API responses are not included. The enumeration and basket totals in `data/recorded.json` are the author's sums, priced with `coins.llama.fi`. To reproduce from the source, query the endpoints directly:
 
 - [`api.llama.fi/protocol/uniswap-v4`](https://api.llama.fi/protocol/uniswap-v4) (R1–R3, R7)
 - [`api.llama.fi/summary/dexs/uniswap-v4?dataType=dailyVolume&excludeTotalDataChartBreakdown=false`](https://api.llama.fi/summary/dexs/uniswap-v4?dataType=dailyVolume&excludeTotalDataChartBreakdown=false) (R4)
 - [`api.llama.fi/v2/historicalChainTvl/BSC`](https://api.llama.fi/v2/historicalChainTvl/BSC) (R5)
 
-DefiLlama has since corrected this history, so these endpoints no longer return the figures above for 2026-08-22 to 08-24 (O3). Rights in the data remain with DefiLlama; the MIT license covers the code only.
+DefiLlama has since corrected this history. On 2026-10-21 the first endpoint served about $40M a day of uniswap-v4 TVL on BSC for 2026-08-22 to 08-24 (O3), not the figures above; the other two endpoints were not re-checked. Rights in the data remain with DefiLlama; the MIT license covers the code only.
+
+**Other sources.** The price, FDV and 24-hour volume in C2 are [GeckoTerminal](https://www.geckoterminal.com)'s, read from `api.geckoterminal.com` during the original run. C5 is [CoinGecko](https://www.coingecko.com)'s price for The Sandbox, cited in the report as `coingecko:the-sandbox`. The request that returned it was not recorded; that key format is the one `coins.llama.fi` uses, so C5 may be a sixteenth figure served by DefiLlama.

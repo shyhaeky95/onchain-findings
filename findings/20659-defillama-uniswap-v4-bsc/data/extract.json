@@ -1,7 +1,7 @@
 {
   "source": "DefiLlama, https://defillama.com",
   "what": "The figures used in DefiLlama-Adapters#20659, with their timestamps, copied from three DefiLlama API responses served on 2026-08-24. The complete responses are not included.",
-  "corrected": "DefiLlama has since corrected this history; the endpoints now serve different values for these dates.",
+  "corrected": "DefiLlama has since corrected this history. On 2026-10-21 the protocol endpoint served about $40M a day of uniswap-v4 TVL on BSC for 2026-08-22 to 08-24 (row O3); the volume and chain-TVL endpoints were not re-checked.",
   "permission": "Included with DefiLlama's permission, given by email on 2026-10-21, for an extract of the figures used in the report, credited and linked.",
   "responses": {
     "protocol": {

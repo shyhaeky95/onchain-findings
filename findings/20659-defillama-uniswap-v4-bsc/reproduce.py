@@ -69,7 +69,9 @@ ABOUT = {
     "source": "DefiLlama, https://defillama.com",
     "what": "The figures used in DefiLlama-Adapters#20659, with their timestamps, copied from three DefiLlama "
             "API responses served on 2026-08-24. The complete responses are not included.",
-    "corrected": "DefiLlama has since corrected this history; the endpoints now serve different values for these dates.",
+    "corrected": "DefiLlama has since corrected this history. On 2026-10-21 the protocol endpoint served about $40M a "
+                 "day of uniswap-v4 TVL on BSC for 2026-08-22 to 08-24 (row O3); the volume and chain-TVL endpoints "
+                 "were not re-checked.",
     "permission": "Included with DefiLlama's permission, given by email on 2026-10-21, for an extract of the "
                   "figures used in the report, credited and linked.",
 }
@@ -219,8 +221,8 @@ def results(case=CASE):
     tvl24 = bsc["2026-08-24"]
     r = Rows()
 
-    # R: DefiLlama figures from the extract. Kept values: the full responses are not published and the
-    # endpoints now serve the corrected history, so nothing here re-derives them.
+    # R: DefiLlama figures from the extract. Kept values: the full responses are not published, so nothing
+    # here re-derives them (for R1-R3 the endpoint now serves the corrected history, O3).
     for i, d in enumerate(DATES, 1):
         r.recorded(f"R{i}", f"uniswap-v4 BSC TVL on {d}", REPORT["tvl"][d], bsc.get(d), EXTRACTED,
                    bsc.get(d) == REPORT["tvl"][d])
