@@ -207,6 +207,49 @@ class TestRpc(unittest.TestCase):
             logs = rpc.logs(None, ["0xt0"], 0, 99)
         self.assertEqual([l["blockNumber"] for l in logs], list(range(100)))
 
+    def test_dead_endpoint_fails_at_once(self):
+        # No answer at all is not a refused range: halving 2^20 blocks would retry it 21 times and hide the cause.
+        # One eth_getLogs and one eth_blockNumber, each with its retries, then the error.
+        import urllib.error
+        rpc = evm.Rpc("http://x", pause=0)
+        with mock.patch.object(evm, "_post", side_effect=urllib.error.URLError("refused")) as post:
+            with self.assertRaises(evm.ReaderError) as err:
+                rpc.logs(None, ["0xt0"], 0, 2 ** 20 - 1)
+        self.assertEqual(post.call_count, 2 * rpc.tries)
+        self.assertIn("URLError", str(err.exception))
+
+    def test_rate_limit_is_not_halved(self):
+        rpc = evm.Rpc("http://x", pause=0)
+        with mock.patch.object(rpc, "raw", return_value={"error": {"code": 429, "message": "Too many requests"}}) as raw:
+            with self.assertRaises(evm.ReaderError) as err:
+                rpc.logs(None, ["0xt0"], 0, 2 ** 20 - 1)
+        self.assertEqual(raw.call_count, 2 * rpc.tries)
+        self.assertIn("rate limited", str(err.exception))
+
+    def test_slow_range_on_a_live_endpoint_is_halved(self):
+        # A client timeout on a heavy range looks like a dead endpoint; the endpoint still answers a cheap call.
+        import socket
+        rpc = evm.Rpc("http://x", pause=0)
+
+        def post(url, body):
+            if body["method"] == "eth_blockNumber":
+                return {"result": "0x64"}
+            lo, hi = int(body["params"][0]["fromBlock"], 16), int(body["params"][0]["toBlock"], 16)
+            if hi - lo > 10:
+                raise socket.timeout("timed out")
+            return {"result": [raw_log(b) for b in range(lo, hi + 1)]}
+        with mock.patch.object(evm, "_post", side_effect=post):
+            logs = rpc.logs(None, ["0xt0"], 0, 99)
+        self.assertEqual([l["blockNumber"] for l in logs], list(range(100)))
+
+    def test_refusal_keeps_the_endpoint_reason(self):
+        rpc = evm.Rpc("http://x", pause=0)
+        with mock.patch.object(rpc, "raw", return_value={"error": {"code": -32602, "message": "invalid topic"}}):
+            with self.assertRaises(evm.ReaderError) as err:
+                rpc.logs(None, ["0xt0"], 0, 7)
+        self.assertIn("refused or capped at block 0", str(err.exception))
+        self.assertIn("invalid topic", str(err.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

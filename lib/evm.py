@@ -149,6 +149,10 @@ class ReaderError(Exception):
     """A read that did not give an answer (as opposed to a call that reverted)."""
 
 
+class NoReply(ReaderError):
+    """No usable answer through every retry: transport failures or rate limits, as opposed to a refused request."""
+
+
 TRANSPORT_ERRORS = (urllib.error.URLError, http.client.HTTPException, socket.timeout, TimeoutError, ConnectionError,
                     json.JSONDecodeError)
 THROTTLE_WORDS = ("rate limit", "rate-limit", "ratelimit", "rate exceeded", "too many requests", "capacity", "timeout", "timed out")
@@ -180,7 +184,7 @@ class Rpc:
             except TRANSPORT_ERRORS as e:
                 last = e
                 time.sleep(self.pause * (i + 1))
-        raise ReaderError(f"{method}: {type(last).__name__}")
+        raise NoReply(f"{method}: {type(last).__name__}")
 
     def request(self, method, params):
         for i in range(self.tries):
@@ -192,7 +196,7 @@ class Rpc:
                 time.sleep(self.pause * (i + 1))
                 continue
             raise ReaderError(f"{method}: {str(error.get('message', ''))[:120]}")
-        raise ReaderError(f"{method}: rate limited")
+        raise NoReply(f"{method}: rate limited")
 
     def block(self, number):
         b = self.request("eth_getBlockByNumber", [hex(number), False])
@@ -213,23 +217,33 @@ class Rpc:
                 time.sleep(self.pause * (i + 1))
                 continue
             raise ReaderError(f"eth_call {to}: {str(error.get('message', ''))[:120]}")
-        raise ReaderError(f"eth_call {to}: rate limited")
+        raise NoReply(f"eth_call {to}: rate limited")
 
     CAP = 10000  # many endpoints truncate at this many results; treat a full answer as possibly cut
 
     def logs(self, address, topics, lo, hi):
-        """eth_getLogs over [lo, hi], halving the range whenever the endpoint refuses it or returns a full page."""
+        """eth_getLogs over [lo, hi], halving the range whenever the endpoint refuses it or returns a full page.
+        A range that gets no answer is halved only if the endpoint still answers eth_blockNumber (a heavy range
+        can time out); if it does not, the endpoint is down or throttled and that is raised at once."""
         flt = {"fromBlock": hex(lo), "toBlock": hex(hi), "topics": topics}
         if address:
             flt["address"] = address
+        rows = refused = None
         try:
             rows = self.request("eth_getLogs", [flt])
-        except ReaderError:
-            rows = None
+        except NoReply as e:
+            try:
+                self.request("eth_blockNumber", [])
+            except NoReply as down:
+                raise NoReply(f"no answer from the endpoint ({e}; {down})") from e
+            refused = e
+        except ReaderError as e:
+            refused = e
         if rows is not None and len(rows) < self.CAP:
             return [normalize_log(x) for x in rows]
         if lo == hi:
-            raise ReaderError(f"eth_getLogs refused or capped at block {lo}")
+            why = refused if rows is None else f"{len(rows)} logs in one block"
+            raise ReaderError(f"eth_getLogs refused or capped at block {lo} ({why})")
         mid = (lo + hi) // 2
         return self.logs(address, topics, lo, mid) + self.logs(address, topics, mid + 1, hi)
 
