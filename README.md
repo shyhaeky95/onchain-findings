@@ -1,17 +1,17 @@
 # onchain-findings
 
-Reproductions of data errors I reported to public crypto data projects. Each case keeps its inputs, or an extract of them where a provider allows only that, checks them against a manifest, recomputes the numbers in the report, and labels how strong each piece of evidence is.
+Reproducible checks of crypto data errors and of public project statements, against on-chain data, public sources or project APIs. Each case keeps its inputs, or an extract of them where a provider allows only that, checks them against a manifest, recomputes the numbers in the report or finding, and labels how strong each piece of evidence is.
 
-Code and text here are drafted by an AI agent, which also runs the checks; I review the results and decide what is published. The scripts exist so you don't have to trust either of us: they recompute or re-read every figure they can and label the rest as recorded.
+Code and text here are drafted by an AI agent, which also runs the checks; I review the results and decide what is published. The scripts let you check the arithmetic and the comparisons without relying on our calculations: they recompute or re-read every figure they can and label the rest as recorded. Inputs that cannot be fetched again still rest on the recorded capture.
 
 ## Evidence levels
 
 | Level | Meaning |
 |---|---|
-| **Reproduced** | Recomputed here from saved raw inputs listed in the case manifest. |
-| **Extract** | Figures copied from saved responses that are not published here, because the provider allowed only an extract. The manifest lists each response's SHA-256, so anyone holding the response can check the extract; for everyone else the figures are shown as `RECORDED`. |
+| **Reproduced** | Recomputed here from saved raw inputs listed in the case manifest. This checks the calculation from those inputs; where they cannot be fetched again, it does not authenticate the capture. |
+| **Extract** | Figures copied from saved responses that are not published here, because the provider allowed only an extract or permission to publish the response was not sought. The manifest lists each response's SHA-256, so anyone holding the response can check the extract; for everyone else the figures are shown as `RECORDED`. |
 | **Re-read at block (snapshot)** | Read again at the stated block; the result is committed with its date, and the case's `live_verify.py --check` repeats the read for anyone with an archive node. Calls go to an archive node. In the Ethereum cases, logs were read through the Etherscan API v2, keeping only on-chain fields; `live_verify.py` can read them with `eth_getLogs` from your own node instead. |
-| **Public sources as of a date (snapshot)** | What an API, a repository or a GitHub thread showed on that date. |
+| **Public sources as of a date (snapshot)** | What an API, a repository or a GitHub thread showed on that date. A row on such a source counts as `MATCH` only where the case's `live_verify.py --check` reads the source again (at the same commit or block where it has one); where the source is kept only as a capture record, the row is `RECORDED`. |
 | **Arithmetic** | Computed from the rows above; only as strong as its weakest input. |
 | **Recorded** | Only the result was kept at the time, or only the report's own text remains; the raw response was not kept. |
 
@@ -19,11 +19,21 @@ Each row is `MATCH` (the evidence supports the report), `ERRATUM` (the report's 
 
 ## Cases
 
+### Data errors reported upstream
+
 | Case | Report | Upstream outcome | Result |
 |---|---|---|---|
 | [Uniswap v4 TVL on BSC](findings/20659-defillama-uniswap-v4-bsc/) | [DefiLlama-Adapters#20659](https://github.com/DefiLlama/DefiLlama-Adapters/issues/20659) | No price returned as of 2026-10-21; [#20690](https://github.com/DefiLlama/DefiLlama-Adapters/pull/20690) merged | 12 match · 5 errata · 11 recorded · 4 observed · 0 fail |
 | [Rocket Pool megapool deposits](findings/8812-defillama-rocketpool-megapools/) | [dimension-adapters#8812](https://github.com/DefiLlama/dimension-adapters/issues/8812) | Fixed in [#8833](https://github.com/DefiLlama/dimension-adapters/pull/8833), merged 2026-08-18 | 22 match · 0 errata · 1 recorded · 3 observed · 0 fail |
 | [SKY buybacks and the Atlas burn clause](findings/306-sky-atlas-burn/) | [next-gen-atlas#306](https://github.com/sky-ecosystem/next-gen-atlas/issues/306) | Answered: burned in a later executive vote; spells burned 10/55 of the buybacks on 2026-09-13 and 2026-10-12 | 17 match · 1 erratum · 1 recorded · 5 observed · 0 fail |
+
+### Public statements checked against the data
+
+The result column counts the case's own rows; it does not grade the statement.
+
+| Case | Statement | What the data shows | Rows of the case |
+|---|---|---|---|
+| [HYPE in the Assistance Fund](findings/hyperliquid-assistance-fund-supply/) | Hyper Foundation and Hyperliquid docs: the fund's HYPE is burned, *"removing the tokens permanently from the circulating and total supply"* ([proposal](https://x.com/HyperFND/status/2001127850754367525), 2025-12-17; [result](https://x.com/HyperFND/status/2003684257949188396), 2025-12-24; [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees), read 2026-11-27) | On 2026-11-26 Hyperliquid's Info API left the fund out of `circulatingSupply`; if its `totalSupply` is the genesis total less what has been taken out, with nothing added (the model stated in the case), it still counted at least 48,016,408.09 of the fund's 49,345,806.71 HYPE | 6 match · 7 recorded · 0 fail |
 
 ## Run
 
@@ -33,11 +43,12 @@ Python 3.9 or later, standard library only.
 python3 findings/20659-defillama-uniswap-v4-bsc/reproduce.py
 python3 findings/8812-defillama-rocketpool-megapools/reproduce.py
 python3 findings/306-sky-atlas-burn/reproduce.py
+python3 findings/hyperliquid-assistance-fund-supply/reproduce.py
 python3 -m unittest discover -s tests
 ```
 
-`reproduce.py` runs offline. Each case's `live_verify.py --check` re-reads the on-chain facts through an archive endpoint you provide (`BSC_ARCHIVE_RPC` or `ETH_ARCHIVE_RPC`; the Ethereum cases also take `ETHERSCAN_API_KEY` for wide log ranges). The Ethereum cases share [`lib/evm.py`](lib/evm.py): Keccak-256, ABI encoding and the two log readers.
+`reproduce.py` runs offline. Each case's `live_verify.py --check` re-reads the on-chain facts through an archive endpoint you provide (`BSC_ARCHIVE_RPC` or `ETH_ARCHIVE_RPC`; the Ethereum cases also take `ETHERSCAN_API_KEY` for wide log ranges). The Ethereum cases share [`lib/evm.py`](lib/evm.py): Keccak-256, ABI encoding and the two log readers. The Hyperliquid case reads Hyperliquid's public Info API and needs no key; those queries take no historical block or timestamp, so its `live_verify.py --check` checks the relations the finding rests on against the current state rather than repeating the saved read.
 
 ## Data and license
 
-A case includes data from a provider only as far as the provider allows, and credits and links the source (see each case). The Uniswap v4 case includes an extract of ten DefiLlama figures, not the complete API responses. The Rocket Pool and Sky cases keep only Ethereum chain data, read at fixed blocks, and facts about public pages, with short quotations linked to their source. Rights in that data remain with its providers; the MIT license in [LICENSE](LICENSE) covers the code only.
+A case includes data from a provider only as far as the provider allows, and credits and links the source (see each case). The Uniswap v4 case includes an extract of ten DefiLlama figures, not the complete API responses. The Rocket Pool and Sky cases keep only Ethereum chain data, read at fixed blocks, and facts about public pages, with short quotations linked to their source. The Hyperliquid case keeps two responses of Hyperliquid's public Info API as returned, two CoinGecko fields credited to CoinGecko, and short quotations of two X posts and two docs pages, linked. Rights in that data remain with its providers; the MIT license in [LICENSE](LICENSE) covers the code only.

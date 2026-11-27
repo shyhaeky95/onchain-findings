@@ -1,0 +1,167 @@
+{
+ "about": "Facts about public sources as captured. The X posts, the CoinGecko response and the documentation page are not copied here: each is linked, its quoted sentences or fields are stored with where they were found, and each response is listed by SHA-256. Written by extract.py.",
+ "captured_utc": {
+  "info": "2026-11-26T09:56:10Z",
+  "x_posts": "2026-11-26T09:55:27Z to 09:55:53Z",
+  "coingecko": "2026-11-26T09:56:11Z",
+  "docs": "2026-11-27T05:51:13Z",
+  "hip1": "2026-11-27T06:45:04Z"
+ },
+ "x_posts": [
+  {
+   "label": "proposal",
+   "id": "2001127850754367525",
+   "url": "https://x.com/HyperFND/status/2001127850754367525",
+   "readers": {
+    "syndication": {
+     "endpoint": "cdn.syndication.twimg.com/tweet-result",
+     "account": "HyperFND",
+     "created_at": "2025-12-17T03:10:33.000Z",
+     "text_chars": 279,
+     "response_sha256": "631a73c88333860fb2806053f87297b7cadaa2d3c90577964e7a1a689a67c780"
+    },
+    "fxtwitter": {
+     "endpoint": "api.fxtwitter.com",
+     "account": "HyperFND",
+     "created_at": "Wed Dec 17 03:10:33 +0000 2025",
+     "text_chars": 1156,
+     "response_sha256": "d2547d525e0cda1be53a48e7223a8ec5f8c281a32e260aceac248032734d2d73"
+    }
+   },
+   "quotes": [
+    {
+     "text": "The Hyper Foundation is proposing a validator vote to formally recognize the Assistance Fund HYPE as burned, removing the tokens permanently from the circulating and total supply.",
+     "found_by": {
+      "syndication": true,
+      "fxtwitter": true
+     }
+    },
+    {
+     "text": "Similar to the zero address, the Assistance Fund system address has never had a private key with control over its funds.",
+     "found_by": {
+      "syndication": false,
+      "fxtwitter": true
+     }
+    },
+    {
+     "text": "By voting “Yes,” validators agree to treat the Assistance Fund HYPE as burned.",
+     "found_by": {
+      "syndication": false,
+      "fxtwitter": true
+     }
+    },
+    {
+     "text": "No onchain action is required, as the tokens are already in a system address with no private key.",
+     "found_by": {
+      "syndication": false,
+      "fxtwitter": true
+     }
+    },
+    {
+     "text": "This vote is binding social consensus to never authorize a protocol upgrade to access this address.",
+     "found_by": {
+      "syndication": false,
+      "fxtwitter": true
+     }
+    }
+   ]
+  },
+  {
+   "label": "result",
+   "id": "2003684257949188396",
+   "url": "https://x.com/HyperFND/status/2003684257949188396",
+   "readers": {
+    "syndication": {
+     "endpoint": "cdn.syndication.twimg.com/tweet-result",
+     "account": "HyperFND",
+     "created_at": "2025-12-24T04:28:48.000Z",
+     "text_chars": 258,
+     "response_sha256": "701276dd210c6a53b67e524c08beb16b06966e6c7db47fe5b866eb4fee24b46d"
+    },
+    "fxtwitter": {
+     "endpoint": "api.fxtwitter.com",
+     "account": "HyperFND",
+     "created_at": "Wed Dec 24 04:28:48 +0000 2025",
+     "text_chars": 258,
+     "response_sha256": "ed3df54a488467ff4b919c336db2ec0ae58fe3c402099f5c3ef22640572567fd"
+    }
+   },
+   "quotes": [
+    {
+     "text": "HYPE in the Assistance Fund system address of 0xfefefefefefefefefefefefefefefefefefefefe has been formally recognized as burned.",
+     "found_by": {
+      "syndication": true,
+      "fxtwitter": true
+     }
+    },
+    {
+     "text": "The governance vote was based on stake-weighted consensus, with 85% of stake voting for burning, 7% against, and 8% abstaining.",
+     "found_by": {
+      "syndication": true,
+      "fxtwitter": true
+     }
+    }
+   ]
+  }
+ ],
+ "docs": [
+  {
+   "label": "fees",
+   "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees",
+   "title": "Fees | Hyperliquid Docs",
+   "captured_utc": "2026-11-27T05:51:13Z",
+   "response_sha256": "82c7e184f8b449ed23ebb41df4414a13b67f8d98144d5681ac2dfadb7a1f2fae",
+   "quotes": [
+    {
+     "text": "HYPE in the assistance fund is burned, removing the tokens permanently from the circulating and total supply.",
+     "found": true
+    }
+   ]
+  },
+  {
+   "label": "hip1",
+   "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-1-native-token-standard",
+   "title": "HIP-1: Native token standard | Hyperliquid Docs",
+   "captured_utc": "2026-11-27T06:45:04Z",
+   "response_sha256": "ff73bfd9eef10087e70699df28d041117797ecb2d018a345c9e547c87c71f30b",
+   "quotes": [
+    {
+     "text": "maxSupply : the maximum and initial supply.",
+     "found": true
+    },
+    {
+     "text": "The supply may decrease over time due to spot order book fees or future burn mechanisms.",
+     "found": true
+    }
+   ]
+  }
+ ],
+ "coingecko": {
+  "page": "https://www.coingecko.com/en/coins/hyperliquid",
+  "request": "GET https://api.coingecko.com/api/v3/coins/hyperliquid",
+  "fields": {
+   "market_data.total_supply": "949784555.3706763",
+   "last_updated": "2026-11-26T09:54:54.000Z"
+  },
+  "response_sha256": "aa92b216fb4b1b24104bb2ce3e4bd09bf61500332927c03699baa87d1f664b82",
+  "response_published": false
+ },
+ "info": {
+  "endpoint": "https://api.hyperliquid.xyz/info",
+  "captured_utc": "2026-11-26T09:56:10Z",
+  "requests": {
+   "data/info_tokenDetails_HYPE.json.gz": {
+    "type": "tokenDetails",
+    "tokenId": "0x0d01dc56dcaaca66ad901c959b4011ec"
+   },
+   "data/info_spotClearinghouseState_AF.json": {
+    "type": "spotClearinghouseState",
+    "user": "0xfefefefefefefefefefefefefefefefefefefefe"
+   }
+  },
+  "response_sha256": {
+   "data/info_tokenDetails_HYPE.json.gz": "e50f339b7e76e1e646ff7ce7b610f91601a2660d21e25e77f766ef3fb060a374",
+   "data/info_spotClearinghouseState_AF.json": "eb9019c62b65813a01d620999e7a10f5c4a7ad526aee6aa6e16ae9da97eb9ee2"
+  }
+ }
+}

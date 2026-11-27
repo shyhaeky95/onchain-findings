@@ -1,0 +1,36 @@
+{
+  "case": "Hyperliquid Assistance Fund: the governance burn and the Info API's totalSupply",
+  "about": "SHA-256 shows a file is unchanged since this manifest was written. It does not show the file was fetched correctly; the provenance fields say where each file came from.",
+  "files": [
+    {
+      "path": "data/info_tokenDetails_HYPE.json.gz",
+      "kind": "raw",
+      "source": "Hyperliquid Info API, POST https://api.hyperliquid.xyz/info {\"type\": \"tokenDetails\", \"tokenId\": \"0x0d01dc56dcaaca66ad901c959b4011ec\"}",
+      "request": "one read, saved as returned and gzipped here (mtime 0)",
+      "fetched_at": "2026-11-26T09:56:10Z",
+      "notes": "The uncompressed response is 5,203,717 bytes; its SHA-256 is in data/public_sources.json (info.response_sha256). Its genesis balance list (94,023 entries) is used by row G1. The public Info queries take no historical block or timestamp, so the response cannot be fetched again for this moment.",
+      "sha256": "2a322f0bec82720e2e0b1b741f3a5685304b6f9cdebb99d81c37137fabcc2849",
+      "bytes": 2493657
+    },
+    {
+      "path": "data/info_spotClearinghouseState_AF.json",
+      "kind": "raw",
+      "source": "Hyperliquid Info API, POST https://api.hyperliquid.xyz/info {\"type\": \"spotClearinghouseState\", \"user\": \"0xfefefefefefefefefefefefefefefefefefefefe\"}",
+      "request": "one read, saved as returned",
+      "fetched_at": "2026-11-26T09:56:10Z (same run as tokenDetails)",
+      "notes": "Spot balances of the Assistance Fund address; only the HYPE entry is used.",
+      "sha256": "eb9019c62b65813a01d620999e7a10f5c4a7ad526aee6aa6e16ae9da97eb9ee2",
+      "bytes": 2992
+    },
+    {
+      "path": "data/public_sources.json",
+      "kind": "facts",
+      "source": "X posts read through cdn.syndication.twimg.com and api.fxtwitter.com; the Fees and HIP-1 pages of the Hyperliquid docs; CoinGecko API v3 /coins/hyperliquid (two fields copied as text)",
+      "request": "written by extract.py from the saved responses; the X, docs and CoinGecko responses themselves are not published",
+      "fetched_at": "see captured_utc in the file",
+      "notes": "Each X post is stored as its link, the sentences quoted in README.md and which reader returned them, with the SHA-256 of each reader's response; each docs page as its link, title, the quoted sentences (searched in the page's visible text) and the page's SHA-256; CoinGecko as total_supply and last_updated, with the SHA-256 of the full response.",
+      "sha256": "a9ff04cd3e8264f7a13fc2c2009a1153725075fb5f76392243899f05c04bbb1f",
+      "bytes": 5625
+    }
+  ]
+}
