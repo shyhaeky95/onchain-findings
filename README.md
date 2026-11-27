@@ -33,7 +33,7 @@ The result column counts the case's own rows; it does not grade the statement.
 
 | Case | Statement | What the data shows | Rows of the case |
 |---|---|---|---|
-| [HYPE in the Assistance Fund](findings/hyperliquid-assistance-fund-supply/) | Hyper Foundation and Hyperliquid docs: the fund's HYPE is burned, *"removing the tokens permanently from the circulating and total supply"* ([proposal](https://x.com/HyperFND/status/2001127850754367525), 2025-12-17; [result](https://x.com/HyperFND/status/2003684257949188396), 2025-12-24; [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees), read 2026-11-27) | On 2026-11-26 Hyperliquid's Info API left the fund out of `circulatingSupply`; if its `totalSupply` is the genesis total less what has been taken out, with nothing added (the model stated in the case), it still counted at least 48,016,408.09 of the fund's 49,345,806.71 HYPE | 6 match · 7 recorded · 0 fail |
+| [HYPE in the Assistance Fund](findings/hyperliquid-assistance-fund-supply/) | Hyper Foundation and Hyperliquid docs: the fund's HYPE is burned, *"removing the tokens permanently from the circulating and total supply"* ([proposal](https://x.com/HyperFND/status/2001127850754367525), 2025-12-17; [result](https://x.com/HyperFND/status/2003684257949188396), 2025-12-24; [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees), read 2026-11-27) | On 2026-11-26, Hyperliquid's Info API excluded the fund from `circulatingSupply`; under the supply-accounting model stated in the case (genesis supply minus deductions, with no subsequent additions), its `totalSupply` still counted at least 48,016,408.09 of the fund's 49,345,806.71 HYPE | 6 match · 7 recorded · 0 fail |
 
 ## Run
 
